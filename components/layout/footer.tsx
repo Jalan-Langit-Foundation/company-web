@@ -1,5 +1,6 @@
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import {
   SITE_CONFIG,
@@ -19,12 +20,16 @@ export function Footer() {
           <div className="flex flex-col gap-4 lg:col-span-4 lg:pr-6">
             <Link
               href="/"
-              className="inline-flex items-center text-base sm:text-lg font-bold tracking-wider uppercase font-['Poppins',sans-serif] transition-opacity hover:opacity-90 w-fit focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB6D6] rounded-md"
+              className="inline-flex items-center transition-transform duration-200 hover:opacity-90 w-fit focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB6D6] rounded-md"
               aria-label="Beranda Yayasan Jalan Langit"
             >
-              <span className="text-white">JALAN</span>
-              <span className="text-[#6EB6D6]">LANGIT</span>
-              <span className="text-white ml-1.5">FOUNDATION</span>
+              <Image
+                src="/images/logo-footer.png"
+                alt="Logo Jalan Langit Foundation"
+                width={200}
+                height={54}
+                className="h-12 sm:h-14 w-auto object-contain"
+              />
             </Link>
 
             <p className="text-sm leading-relaxed text-[#A0A0A0] max-w-sm">
@@ -57,10 +62,10 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Sisi Kanan: 3 Kolom Navigasi (Program, Organisasi, Kontak) dengan Gap Seragam */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-10 lg:col-span-8">
+          {/* Sisi Kanan: 3 Kolom Navigasi (Program, Organisasi, Kontak) - 2 Baris di Mobile */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 lg:gap-10 lg:col-span-8">
             {/* Kolom 2: Program */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 col-span-1">
               <h4 className="text-xs font-bold tracking-widest text-white uppercase font-['Poppins',sans-serif]">
                 PROGRAM
               </h4>
@@ -79,7 +84,7 @@ export function Footer() {
             </div>
 
             {/* Kolom 3: Organisasi */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 col-span-1">
               <h4 className="text-xs font-bold tracking-widest text-white uppercase font-['Poppins',sans-serif]">
                 ORGANISASI
               </h4>
@@ -97,8 +102,8 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Kolom 4: Kontak */}
-            <div className="flex flex-col gap-4">
+            {/* Kolom 4: Kontak (Baris ke-2 di Mobile) */}
+            <div className="flex flex-col gap-4 col-span-2 sm:col-span-1">
               <h4 className="text-xs font-bold tracking-widest text-white uppercase font-['Poppins',sans-serif]">
                 KONTAK
               </h4>
@@ -122,9 +127,14 @@ export function Footer() {
                   </a>
                 </li>
                 <li>
-                  <span className="text-[#A0A0A0] leading-relaxed inline-block">
-                    {SITE_CONFIG.contact.address}
-                  </span>
+                  <a
+                    href={SITE_CONFIG.contact.address.mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#A0A0A0] hover:text-[#6EB6D6] transition-colors leading-relaxed inline-block"
+                  >
+                    {SITE_CONFIG.contact.address.text}
+                  </a>
                 </li>
               </ul>
             </div>

@@ -16,12 +16,25 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [activeDropdown, setActiveDropdown] = React.useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = React.useState<Record<string, boolean>>({});
+  const navRef = React.useRef<HTMLElement | null>(null);
 
   // Close menus on route change
   React.useEffect(() => {
     setIsOpen(false);
     setActiveDropdown(null);
   }, [pathname]);
+
+  // Handle click outside to close desktop dropdown
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setActiveDropdown(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   // Handle scroll effect for elevation
   React.useEffect(() => {
@@ -37,6 +50,10 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const toggleDropdown = (href: string) => {
+    setActiveDropdown((prev) => (prev === href ? null : href));
+  };
+
   const toggleMobileSubmenu = (href: string) => {
     setMobileExpanded((prev) => ({
       ...prev,
@@ -46,6 +63,7 @@ export function Navbar() {
 
   return (
     <header
+      ref={navRef}
       className={cn(
         "sticky top-0 z-50 w-full bg-white transition-shadow duration-300",
         isScrolled
@@ -86,22 +104,18 @@ export function Navbar() {
                 const isMenuOpen = activeDropdown === item.href;
 
                 return (
-                  <li
-                    key={item.href}
-                    className="relative h-full flex items-center"
-                    onMouseEnter={() => setActiveDropdown(item.href)}
-                    onMouseLeave={() => setActiveDropdown(null)}
-                  >
-                    <Link
-                      href={item.href}
+                  <li key={item.href} className="relative h-full flex items-center">
+                    <button
+                      type="button"
+                      onClick={() => toggleDropdown(item.href)}
                       className={cn(
-                        "inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 font-['Poppins',sans-serif] leading-none py-2 px-1",
+                        "inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 font-['Poppins',sans-serif] leading-none py-2 px-1 cursor-pointer select-none bg-transparent border-0",
                         "hover:text-[#3C95C8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3C95C8] rounded-md",
-                        isActive ? "text-[#3C95C8]" : "text-[#555555]"
+                        isActive || isMenuOpen ? "text-[#3C95C8]" : "text-[#555555]"
                       )}
                       aria-expanded={isMenuOpen}
                       aria-haspopup="true"
-                      aria-current={isActive ? "page" : undefined}
+                      aria-label={`Buka menu ${item.label}`}
                     >
                       <span className="inline-block leading-none">{item.label}</span>
                       <ChevronDown
@@ -111,7 +125,7 @@ export function Navbar() {
                         )}
                         aria-hidden="true"
                       />
-                    </Link>
+                    </button>
 
                     {/* Desktop Dropdown Panel (Sejajar Kiri Navlink & Tepat di Bawah Navbar) */}
                     <div
@@ -130,18 +144,19 @@ export function Navbar() {
                             <Link
                               key={child.href}
                               href={child.href}
+                              onClick={() => setActiveDropdown(null)}
                               className={cn(
                                 "flex flex-col px-3.5 py-2.5 rounded-xl transition-colors group",
                                 isChildActive
                                   ? "bg-[#EAF5FB]"
-                                  : "hover:bg-[#EAF5FB]/70"
+                                  : "hover:bg-[#EAF5FB]"
                               )}
                             >
                               <span
                                 className={cn(
                                   "text-sm font-medium transition-colors font-['Poppins',sans-serif]",
                                   isChildActive
-                                    ? "text-[#3C95C8] font-semibold"
+                                    ? "text-[#3C95C8]"
                                     : "text-[#2C2C2C] group-hover:text-[#3C95C8]"
                                 )}
                               >
@@ -188,7 +203,7 @@ export function Navbar() {
                 size="md"
                 href={SITE_CONFIG.contact.donationUrl}
                 external
-                leftIcon={<Heart className="w-4 h-4 fill-white/20" />}
+                leftIcon={<Heart className="w-4 h-4 fill-white text-white" />}
                 className="shadow-sm hover:shadow-md transition-all font-semibold"
               >
                 Donasi Sekarang
@@ -200,8 +215,8 @@ export function Navbar() {
               type="button"
               onClick={() => setIsOpen(!isOpen)}
               className={cn(
-                "inline-flex md:hidden items-center justify-center p-2 rounded-xl text-[#555555]",
-                "hover:text-[#3C95C8] hover:bg-[#EAF5FB] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3C95C8]"
+                "inline-flex md:hidden items-center justify-center p-0 bg-transparent border-0 text-[#555555]",
+                "hover:text-[#3C95C8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3C95C8] rounded-md cursor-pointer"
               )}
               aria-expanded={isOpen}
               aria-label={isOpen ? "Tutup menu navigasi" : "Buka menu navigasi"}
@@ -214,15 +229,19 @@ export function Navbar() {
             </button>
           </div>
         </div>
+      </Container>
 
-        {/* Mobile Navigation Drawer / Dropdown */}
-        <div
-          className={cn(
-            "md:hidden overflow-hidden transition-all duration-300 ease-in-out border-t border-slate-100",
-            isOpen ? "max-h-[80vh] overflow-y-auto pb-6 pt-4 opacity-100" : "max-h-0 py-0 opacity-0 pointer-events-none"
-          )}
-        >
-          <ul className="flex flex-col gap-1.5 list-none m-0 p-0">
+      {/* Mobile Navigation Drawer / Dropdown (Overlay Menimpa Layer Bawah) */}
+      <div
+        className={cn(
+          "absolute left-0 top-full w-full bg-white shadow-xl border-b border-slate-100 md:hidden transition-all duration-200 ease-in-out z-50",
+          isOpen
+            ? "opacity-100 translate-y-0 pointer-events-auto visible"
+            : "opacity-0 -translate-y-2 pointer-events-none invisible"
+        )}
+      >
+        <Container size="xl" className="py-4 max-h-[calc(100vh-4rem)] overflow-y-auto">
+          <ul className="flex flex-col gap-1 list-none m-0 p-0">
             {NAVBAR_LINKS.map((item) => {
               const hasChildren = Boolean(item.children && item.children.length > 0);
               const isActive =
@@ -237,37 +256,30 @@ export function Navbar() {
 
                 return (
                   <li key={item.href} className="flex flex-col">
-                    <div className="flex items-center justify-between">
-                      <Link
-                        href={item.href}
+                    <button
+                      type="button"
+                      onClick={() => toggleMobileSubmenu(item.href)}
+                      className={cn(
+                        "flex items-center justify-between w-full px-3 py-2 rounded-md text-sm font-medium transition-colors font-['Poppins',sans-serif] text-left bg-transparent border-0 cursor-pointer",
+                        isActive || isExpanded
+                          ? "text-[#3C95C8]"
+                          : "text-[#555555] hover:text-[#3C95C8]"
+                      )}
+                      aria-expanded={isExpanded}
+                    >
+                      <span>{item.label}</span>
+                      <ChevronDown
                         className={cn(
-                          "flex-1 px-4 py-2.5 rounded-xl text-base font-medium transition-colors font-['Poppins',sans-serif]",
-                          isActive
-                            ? "text-[#3C95C8] font-semibold"
-                            : "text-[#555555] hover:text-[#3C95C8]"
+                          "w-3.5 h-3.5 transition-transform duration-200 opacity-75",
+                          isExpanded ? "rotate-180 text-[#3C95C8]" : ""
                         )}
-                      >
-                        {item.label}
-                      </Link>
-                      <button
-                        type="button"
-                        onClick={() => toggleMobileSubmenu(item.href)}
-                        className="p-2.5 text-[#555555] hover:text-[#3C95C8] focus:outline-none"
-                        aria-label={`Toggle submenu ${item.label}`}
-                      >
-                        <ChevronDown
-                          className={cn(
-                            "w-4 h-4 transition-transform duration-200",
-                            isExpanded ? "rotate-180 text-[#3C95C8]" : ""
-                          )}
-                        />
-                      </button>
-                    </div>
+                      />
+                    </button>
 
                     {/* Mobile Submenu Items */}
                     <div
                       className={cn(
-                        "overflow-hidden transition-all duration-200 pl-4 flex flex-col gap-1 border-l-2 border-[#3C95C8]/20 ml-4",
+                        "overflow-hidden transition-all duration-200 pl-3 flex flex-col gap-0.5 border-l-2 border-[#3C95C8]/20 ml-3.5 my-0.5",
                         isExpanded ? "max-h-96 py-1 opacity-100" : "max-h-0 py-0 opacity-0"
                       )}
                     >
@@ -278,16 +290,17 @@ export function Navbar() {
                           <Link
                             key={child.href}
                             href={child.href}
+                            onClick={() => setIsOpen(false)}
                             className={cn(
-                              "px-3 py-2 rounded-lg text-sm transition-colors font-['Poppins',sans-serif]",
+                              "px-2.5 py-1.5 rounded-sm text-xs font-medium transition-colors font-['Poppins',sans-serif]",
                               isChildActive
-                                ? "bg-[#EAF5FB] text-[#3C95C8] font-semibold"
+                                ? "bg-[#EAF5FB] text-[#3C95C8]"
                                 : "text-[#555555] hover:bg-slate-50 hover:text-[#3C95C8]"
                             )}
                           >
                             <div>{child.label}</div>
                             {child.description && (
-                              <div className="text-xs text-[#888888] font-normal font-['Lato',sans-serif]">
+                              <div className="text-[11px] text-[#888888] font-normal font-['Lato',sans-serif] mt-0.5">
                                 {child.description}
                               </div>
                             )}
@@ -303,11 +316,12 @@ export function Navbar() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
+                    onClick={() => setIsOpen(false)}
                     className={cn(
-                      "flex items-center px-4 py-2.5 rounded-xl text-base font-medium transition-colors font-['Poppins',sans-serif]",
+                      "flex items-center px-3 py-2 text-sm font-medium transition-colors font-['Poppins',sans-serif]",
                       isActive
-                        ? "bg-[#EAF5FB] text-[#3C95C8]"
-                        : "text-[#555555] hover:bg-slate-50 hover:text-[#3C95C8]"
+                        ? "text-[#3C95C8]"
+                        : "text-[#555555] hover:text-[#3C95C8]"
                     )}
                     aria-current={isActive ? "page" : undefined}
                   >
@@ -318,21 +332,20 @@ export function Navbar() {
             })}
           </ul>
 
-          <div className="mt-4 pt-3 border-t border-slate-100 px-1">
+          <div className="mt-3 pt-2.5 border-t border-slate-100 px-1">
             <Button
               variant="primary"
-              size="md"
+              size="sm"
               href={SITE_CONFIG.contact.donationUrl}
               external
-              leftIcon={<Heart className="w-4 h-4 fill-white/20" />}
-              rightIcon={<ExternalLink className="w-3.5 h-3.5 opacity-70" />}
-              className="w-full justify-center shadow-sm font-semibold py-3"
+              leftIcon={<Heart className="w-3.5 h-3.5 fill-white text-white" />}
+              className="w-full justify-center shadow-sm font-semibold py-2.5 text-xs"
             >
               Donasi Sekarang
             </Button>
           </div>
-        </div>
-      </Container>
+        </Container>
+      </div>
     </header>
   );
 }

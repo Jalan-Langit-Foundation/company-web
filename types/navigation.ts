@@ -15,7 +15,10 @@ export interface SocialLink {
 
 export interface FoundationContact {
   email: string;
-  address: string;
+  address: {
+    text: string;
+    mapsUrl: string;
+  };
   instagram: {
     handle: string;
     url: string;

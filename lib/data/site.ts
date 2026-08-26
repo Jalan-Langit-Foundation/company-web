@@ -8,7 +8,10 @@ export const SITE_CONFIG = {
     "NGO Muslim Indonesia yang berfokus menghadirkan dampak kebaikan berkelanjutan melalui optimalisasi dana sosial kemanusiaan.",
   contact: {
     email: "jalanlangitfoundation@gmail.com",
-    address: "Jl. Saturnus Tengah I No.1, Manjahlega, Rancasari, Bandung 40286",
+    address: {
+      text: "Jl. Saturnus Tengah I No.1, Manjahlega, Rancasari, Bandung 40286",
+      mapsUrl: "https://maps.app.goo.gl/bPVZ75H55M8tGzzk8",
+    },
     instagram: {
       handle: "@jalanlangit.official",
       url: "https://instagram.com/jalanlangit.official",
@@ -27,9 +30,9 @@ export const SITE_CONFIG = {
       isExternal: true,
     },
     {
-      name: "Website",
-      href: "/",
-      isExternal: false,
+      name: "Alamat",
+      href: "https://maps.app.goo.gl/bPVZ75H55M8tGzzk8",
+      isExternal: true,
     },
   ],
 };

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins, Lato } from "next/font/google";
-import { Navbar, Footer } from "@/components/layout";
+import { Navbar, Footer, FloatingCtaBar } from "@/components/layout";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -40,6 +40,7 @@ export default function RootLayout({
         <Navbar />
         <div className="flex-1">{children}</div>
         <Footer />
+        <FloatingCtaBar />
       </body>
     </html>
   );
