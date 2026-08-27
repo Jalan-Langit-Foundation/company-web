@@ -6,7 +6,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Heart, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Container } from "@/components/ui/container";
 import { NAVBAR_LINKS, SITE_CONFIG } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
@@ -73,7 +72,7 @@ export function Navbar() {
           : "shadow-[0_1px_3px_rgba(0,0,0,0.06)] border-b border-slate-100"
       )}
     >
-      <Container size="xl" as="nav" aria-label="Navigasi Utama">
+      <nav aria-label="Navigasi Utama" className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
           {/* Sisi Kiri: Logo */}
           <Link
@@ -231,7 +230,7 @@ export function Navbar() {
             </button>
           </div>
         </div>
-      </Container>
+      </nav>
 
       {/* Mobile Navigation Drawer / Dropdown (Overlay Menimpa Layer Bawah) */}
       <div
@@ -242,7 +241,7 @@ export function Navbar() {
             : "opacity-0 -translate-y-2 pointer-events-none invisible"
         )}
       >
-        <Container size="xl" className="py-4 max-h-[calc(100vh-4rem)] overflow-y-auto">
+        <div className="w-full px-4 py-4 max-h-[calc(100vh-4rem)] overflow-y-auto">
           <ul className="flex flex-col gap-1 list-none m-0 p-0">
             {NAVBAR_LINKS.map((item) => {
               const hasChildren = Boolean(item.children && item.children.length > 0);
@@ -346,7 +345,7 @@ export function Navbar() {
               Donasi Sekarang
             </Button>
           </div>
-        </Container>
+        </div>
       </div>
     </header>
   );
