@@ -28,7 +28,7 @@ export function HeroSection() {
     <section
       id="hero"
       aria-label="Hero Utama"
-      className="relative w-full overflow-hidden bg-[#3C95C8] pt-16 pb-24 sm:pt-20 sm:pb-28 lg:pt-24 lg:pb-32 text-white transition-colors duration-300 min-h-[580px] lg:min-h-[640px] flex items-center"
+      className="relative w-full overflow-hidden bg-[#3C95C8] py-12 sm:pt-20 sm:pb-28 lg:pt-24 lg:pb-32 text-white transition-colors duration-300 min-h-[500px] sm:min-h-[580px] lg:min-h-[640px] flex items-center"
     >
       {/* Background Slideshow with Crossfade Fade In / Fade Out */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -66,20 +66,20 @@ export function HeroSection() {
       </div>
 
       <Container size="xl" className="relative z-10">
-        <div className="max-w-lg lg:max-w-[500px] xl:max-w-[540px]">
+        <div className="max-w-lg lg:max-w-[500px] xl:max-w-[540px] mx-auto sm:mx-0">
           {/* Kolom Konten: Eyebrow, Headline, Supporting Copy, Dual CTA */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col items-center sm:items-start gap-6 text-center sm:text-left">
             {/* Header Block: Badge & Headline/Copy */}
-            <div className="flex flex-col gap-3 sm:gap-3.5">
+            <div className="flex flex-col items-center sm:items-start gap-3 sm:gap-3.5 w-full">
               {/* Eyebrow Badge (Pita Putih / Rope Ribbon) */}
-              <div className="flex items-center -ml-1">
+              <div className="flex items-center justify-center sm:justify-start sm:-ml-1">
                 <Badge variant="rope" size="md">
                   NGO Muslim Indonesia · Est. 2022
                 </Badge>
               </div>
 
               {/* Headline & Copy Sesuai HOMEPAGE.md */}
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col items-center sm:items-start gap-4">
                 <h1 className="text-fluid-3xl font-bold tracking-tight text-white font-['Poppins',sans-serif] leading-tight drop-shadow-sm">
                   Bergandengan,
                   <br />
@@ -87,14 +87,14 @@ export function HeroSection() {
                   <br />
                   Kebaikan
                 </h1>
-                <p className="text-fluid-base leading-relaxed text-white/95 font-['Lato',sans-serif] max-w-[340px] sm:max-w-[440px] lg:max-w-[480px] drop-shadow-xs">
+                <p className="text-fluid-base leading-relaxed text-white/95 font-['Lato',sans-serif] max-w-[340px] sm:max-w-[440px] lg:max-w-[480px] drop-shadow-xs mx-auto sm:mx-0">
                   {SITE_CONFIG.description}
                 </p>
               </div>
             </div>
 
             {/* Dual CTA Button */}
-            <div className="flex flex-wrap items-center gap-3.5 pt-0.5">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3.5 pt-0.5 w-full sm:w-auto">
               <Button
                 variant="white"
                 size="lg"
