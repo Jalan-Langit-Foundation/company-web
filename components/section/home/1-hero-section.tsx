@@ -6,7 +6,6 @@ import { ArrowRight, Handshake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Container } from "@/components/ui/container";
-import { ScrollIndicator } from "@/components/ui/scroll-indicator";
 import { SITE_CONFIG } from "@/lib/data";
 import { HERO_CONFIG } from "@/lib/data/homepage";
 import { cn } from "@/lib/utils";
@@ -29,7 +28,7 @@ export function HeroSection() {
     <section
       id="hero"
       aria-label="Hero Utama"
-      className="relative w-full overflow-hidden bg-[#3C95C8] py-12 sm:pt-20 sm:pb-28 lg:pt-24 lg:pb-32 text-white transition-colors duration-300 min-h-[500px] sm:min-h-[580px] lg:min-h-[640px] flex items-center"
+      className="relative w-full overflow-hidden bg-[#3C95C8] py-12 sm:py-16 lg:py-20 text-white transition-colors duration-300 min-h-[calc(100vh-4rem)] min-h-[calc(100dvh-4rem)] flex items-center"
     >
       {/* Background Slideshow with Crossfade Fade In / Fade Out */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -118,11 +117,6 @@ export function HeroSection() {
           </div>
         </div>
       </Container>
-
-      {/* Scroll Down Indicator Component */}
-      <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-10 hidden sm:block">
-        <ScrollIndicator targetId="impact-snapshot" label="Scroll" variant="white" />
-      </div>
     </section>
   );
 }
