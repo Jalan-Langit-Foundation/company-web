@@ -12,24 +12,34 @@ export const NAVBAR_LINKS: NavLink[] = [
         description: "Daftar seluruh program dan inisiatif kebaikan",
       },
       {
+        label: "#LangitBox",
+        href: "/programs/langit-box",
+        description: "Pangan & nutrisi santri, yatim, dan dhuafa",
+      },
+      {
+        label: "#LangitScholarship",
+        href: "/programs/langit-scholarship",
+        description: "Beasiswa dan pembinaan generasi Qur’ani",
+      },
+      {
+        label: "#SERASI",
+        href: "/programs/serasi",
+        description: "Sehari Bersama Santri, event rekreasi edukatif",
+      },
+      {
         label: "#HadiahKebahagiaan",
         href: "/programs/hadiah-kebahagiaan",
-        description: "Bantuan kebahagiaan untuk anak yatim dan dhuafa",
+        description: "Paket sembako bagi pejuang nafkah jalanan",
       },
       {
-        label: "#LangitkanIlmu",
-        href: "/programs/langitkan-ilmu",
-        description: "Beasiswa dan sarana pendidikan pelosok",
+        label: "#Zakat",
+        href: "/programs/zakat",
+        description: "Optimalisasi penyaluran dana zakat berdaya",
       },
       {
-        label: "#TemuKebaikan",
-        href: "/programs/temu-kebaikan",
-        description: "Aksi kemanusiaan tanggap darurat dan logistik",
-      },
-      {
-        label: "#PeduliSesama",
-        href: "/programs/peduli-sesama",
-        description: "Pemberdayaan sosial & ekonomi umat",
+        label: "#JalanLangitPeduli",
+        href: "/programs/jalan-langit-peduli",
+        description: "Aksi kemanusiaan tanggap darurat & bencana",
       },
     ],
   },
@@ -63,17 +73,20 @@ export const NAVBAR_LINKS: NavLink[] = [
 ];
 
 export const FOOTER_PROGRAM_LINKS: NavLink[] = [
+  { label: "#LangitBox", href: "/programs#langit-box" },
+  { label: "#LangitScholarship", href: "/programs#langit-scholarship" },
+  { label: "#SERASI", href: "/programs#serasi" },
   { label: "#HadiahKebahagiaan", href: "/programs#hadiah-kebahagiaan" },
-  { label: "#LangitkanIlmu", href: "/programs#langitkan-ilmu" },
-  { label: "#TemuKebaikan", href: "/programs#temu-kebaikan" },
-  { label: "#PeduliSesama", href: "/programs#peduli-sesama" },
+  { label: "#Zakat", href: "/programs#zakat" },
+  { label: "#JalanLangitPeduli", href: "/programs#jalan-langit-peduli" },
 ];
 
 export const FOOTER_ORGANIZATION_LINKS: NavLink[] = [
   { label: "Profil Yayasan", href: "/about" },
-  { label: "Visi, Misi & Nilai", href: "/about#visi-misi" },
-  { label: "Struktur Pengurus", href: "/about#pengurus" },
-  { label: "Legalitas & Akuntabilitas", href: "/about#legalitas" },
-  { label: "Laporan & Transparansi", href: "/about#laporan" },
-  { label: "Mitra Kolaborasi", href: "/about#mitra" },
+  { label: "Perjalanan Kami", href: "/about#perjalanan-kami" },
+  { label: "Visi & Misi", href: "/about#visi-misi" },
+  { label: "Core Values LANGIT", href: "/about#core-values" },
+  { label: "Kontribusi SDGs", href: "/about#sdgs" },
+  { label: "Legalitas Resmi", href: "/about#legalitas" },
 ];
+
