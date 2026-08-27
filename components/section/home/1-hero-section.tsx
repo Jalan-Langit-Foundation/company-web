@@ -1,0 +1,127 @@
+"use client";
+
+import * as React from "react";
+import Image from "next/image";
+import { ArrowRight, Handshake } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Container } from "@/components/ui/container";
+import { ScrollIndicator } from "@/components/ui/scroll-indicator";
+import { SITE_CONFIG, HERO_CONFIG } from "@/lib/data";
+import { cn } from "@/lib/utils";
+
+export function HeroSection() {
+  const [currentSlideIndex, setCurrentSlideIndex] = React.useState(0);
+
+  // Auto-play slideshow dengan animasi crossfade halus
+  React.useEffect(() => {
+    if (!HERO_CONFIG.slides || HERO_CONFIG.slides.length <= 1) return;
+
+    const timer = setInterval(() => {
+      setCurrentSlideIndex((prev) => (prev + 1) % HERO_CONFIG.slides.length);
+    }, HERO_CONFIG.intervalMs || 5000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <section
+      id="hero"
+      aria-label="Hero Utama"
+      className="relative w-full overflow-hidden bg-[#3C95C8] pt-16 pb-24 sm:pt-20 sm:pb-28 lg:pt-24 lg:pb-32 text-white transition-colors duration-300 min-h-[580px] lg:min-h-[640px] flex items-center"
+    >
+      {/* Background Slideshow with Crossfade Fade In / Fade Out */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {HERO_CONFIG.slides.map((slide, index) => {
+          const isActive = index === currentSlideIndex;
+          return (
+            <div
+              key={slide.id || index}
+              className={cn(
+                "absolute inset-0 transition-opacity duration-1000 ease-in-out",
+                isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+              )}
+            >
+              <Image
+                src={slide.src}
+                alt={slide.alt}
+                fill
+                priority={index === 0}
+                className="object-cover object-right-top lg:object-center brightness-95"
+                sizes="100vw"
+              />
+            </div>
+          );
+        })}
+
+        {/* Gradasi Halus: Primary Blue di sisi kiri fade out beralih mulus ke foto di sisi kanan */}
+        {/* Lapisan Desktop (Horizontal Left-to-Right Fade) */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#3C95C8] from-10% via-[#3C95C8]/95 via-40% lg:via-48% to-transparent to-85% hidden sm:block z-20" />
+
+        {/* Lapisan Mobile (Vertical Top-to-Bottom Fade) */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#3C95C8] via-[#3C95C8]/85 via-50% to-[#3C95C8]/60 sm:hidden z-20" />
+
+        {/* Soft Ambient Top Glow Accent */}
+        <div className="absolute -top-20 -left-20 w-96 h-96 bg-[#6EB6D6]/35 rounded-full blur-3xl pointer-events-none z-20" />
+      </div>
+
+      <Container size="xl" className="relative z-10">
+        <div className="max-w-lg lg:max-w-[500px] xl:max-w-[540px]">
+          {/* Kolom Konten: Eyebrow, Headline, Supporting Copy, Dual CTA */}
+          <div className="flex flex-col gap-6">
+            {/* Header Block: Badge & Headline/Copy */}
+            <div className="flex flex-col gap-3 sm:gap-3.5">
+              {/* Eyebrow Badge (Pita Putih / Rope Ribbon) */}
+              <div className="flex items-center -ml-1">
+                <Badge variant="rope" size="md">
+                  NGO Muslim Indonesia · Est. 2022
+                </Badge>
+              </div>
+
+              {/* Headline & Copy Sesuai HOMEPAGE.md */}
+              <div className="flex flex-col gap-4">
+                <h1 className="text-fluid-3xl font-bold tracking-tight text-white font-['Poppins',sans-serif] leading-tight drop-shadow-sm">
+                  Bergandengan,
+                  <br />
+                  Langitkan
+                  <br />
+                  Kebaikan
+                </h1>
+                <p className="text-fluid-base leading-relaxed text-white/95 font-['Lato',sans-serif] max-w-[340px] sm:max-w-[440px] lg:max-w-[480px] drop-shadow-xs">
+                  {SITE_CONFIG.description}
+                </p>
+              </div>
+            </div>
+
+            {/* Dual CTA Button */}
+            <div className="flex flex-wrap items-center gap-3.5 pt-0.5">
+              <Button
+                variant="white"
+                size="lg"
+                href="/programs"
+                rightIcon={<ArrowRight className="w-4 h-4 text-[#3C95C8]" />}
+                className="shadow-lg hover:shadow-xl transition-all font-bold text-[#3C95C8] hover:bg-[#EAF5FB]"
+              >
+                Lihat Program
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                href="/contact"
+                leftIcon={<Handshake className="w-4 h-4 text-white" />}
+                className="font-semibold text-white border-white/70 hover:bg-white/15 hover:border-white hover:text-white"
+              >
+                Berkolaborasi
+              </Button>
+            </div>
+          </div>
+        </div>
+      </Container>
+
+      {/* Scroll Down Indicator Component */}
+      <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-10 hidden sm:block">
+        <ScrollIndicator targetId="impact-snapshot" label="Scroll" variant="white" />
+      </div>
+    </section>
+  );
+}

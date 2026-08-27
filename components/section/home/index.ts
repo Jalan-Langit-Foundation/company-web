@@ -1,0 +1,9 @@
+export { HeroSection } from "./1-hero-section";
+export { ImpactSnapshotSection } from "./2-impact-snapshot-section";
+export { AboutTeaserSection } from "./3-about-teaser-section";
+export { ContributionAreasSection } from "./4-contribution-areas-section";
+export { ProgramsHighlightSection } from "./5-programs-highlight-section";
+export { ImpactStorySection } from "./6-impact-story-section";
+export { CollaborationSection } from "./7-collaboration-section";
+export { LatestNewsSection } from "./8-latest-news-section";
+export { ClosingCtaSection } from "./9-closing-cta-section";

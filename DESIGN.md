@@ -140,7 +140,7 @@ Label status semantik dan indikator kategori.
 #### Props:
 | Prop | Tipe | Default | Keterangan |
 | :--- | :--- | :--- | :--- |
-| `variant` | `"primary"` \| `"secondary"` \| `"brand"` \| `"outline"` \| `"success"` \| `"warning"` \| `"destructive"` \| `"neutral"` | `"primary"` | Warna & konteks semantik |
+| `variant` | `"primary"` \| `"secondary"` \| `"brand"` \| `"white"` \| `"rope"` \| `"outline"` \| `"success"` \| `"warning"` \| `"destructive"` \| `"neutral"` | `"primary"` | Warna & style bentuk badge (termasuk varian pita 3D `"rope"`) |
 | `size` | `"sm"` \| `"md"` \| `"lg"` | `"md"` | Ukuran teks & padding badge |
 | `dot` | `boolean` | `false` | Menampilkan indikator titik berkedip (*pulsing dot*) |
 | `dotColor` | `string` | `undefined` | Kustomisasi warna titik indikator |
