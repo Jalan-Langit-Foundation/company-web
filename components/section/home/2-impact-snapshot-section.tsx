@@ -85,23 +85,55 @@ export function ImpactSnapshotSection() {
       id="impact-snapshot"
       aria-label="Ringkasan Dampak Kebaikan"
       className={cn(
-        "relative w-full overflow-hidden py-10 sm:py-12 lg:py-14",
+        "relative w-full overflow-hidden py-8 sm:py-10 lg:py-14",
         "bg-[linear-gradient(110deg,#F6FAFD_0%,#FFFFFF_30%,#EDF7FD_50%,#FFFFFF_70%,#F6FAFD_100%)]",
         "animate-gradient-flow",
         "border-y border-[#6EB6D6]/15 shadow-[0_2px_12px_rgba(60,149,200,0.03)]"
       )}
     >
-      <Container size="xl" className="relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-8 gap-x-4 lg:gap-0 lg:divide-x lg:divide-slate-200/70">
-          {IMPACT_STATS.map((stat, index) => (
-            <CounterCard
-              key={stat.id || index}
-              stat={stat}
-              isVisible={isVisible}
-            />
-          ))}
+      {/* Tampilan Desktop: 4 Kolom Pas 1 Baris */}
+      <div className="hidden lg:block">
+        <Container size="xl" className="relative z-10">
+          <div className="grid grid-cols-4 divide-x divide-slate-200/70">
+            {IMPACT_STATS.map((stat, index) => (
+              <CounterCard
+                key={stat.id || index}
+                stat={stat}
+                isVisible={isVisible}
+              />
+            ))}
+          </div>
+        </Container>
+      </div>
+
+      {/* Tampilan Mobile & Tablet: 1 Baris Penuh dengan Animasi Looping Kanan ke Kiri */}
+      <div className="block lg:hidden w-full overflow-hidden relative z-10">
+        <div className="animate-marquee flex items-center">
+          {/* Looping Loop 1 */}
+          <div className="flex items-center flex-shrink-0">
+            {IMPACT_STATS.map((stat, index) => (
+              <div
+                key={`loop1-${stat.id || index}`}
+                className="w-[240px] sm:w-[280px] px-4 flex-shrink-0 flex items-center justify-center border-r border-slate-200/70"
+              >
+                <CounterCard stat={stat} isVisible={isVisible} />
+              </div>
+            ))}
+          </div>
+
+          {/* Looping Loop 2 (Duplikasi untuk Seamless Infinite Loop) */}
+          <div className="flex items-center flex-shrink-0">
+            {IMPACT_STATS.map((stat, index) => (
+              <div
+                key={`loop2-${stat.id || index}`}
+                className="w-[240px] sm:w-[280px] px-4 flex-shrink-0 flex items-center justify-center border-r border-slate-200/70"
+              >
+                <CounterCard stat={stat} isVisible={isVisible} />
+              </div>
+            ))}
+          </div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }
