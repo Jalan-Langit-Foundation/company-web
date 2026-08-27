@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Container } from "@/components/ui/container";
 import { ScrollIndicator } from "@/components/ui/scroll-indicator";
-import { SITE_CONFIG, HERO_CONFIG } from "@/lib/data";
+import { SITE_CONFIG } from "@/lib/data";
+import { HERO_CONFIG } from "@/lib/data/homepage";
 import { cn } from "@/lib/utils";
 
 export function HeroSection() {
