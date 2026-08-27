@@ -9,18 +9,31 @@ import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "jlf_sticky_cta_dismissed";
 
+function subscribe(callback: () => void) {
+  window.addEventListener("storage", callback);
+  return () => window.removeEventListener("storage", callback);
+}
+
+function getDismissedSnapshot(): boolean {
+  if (typeof window === "undefined") return true;
+  return sessionStorage.getItem(STORAGE_KEY) === "true";
+}
+
+function getServerSnapshot(): boolean {
+  return true;
+}
+
 export function FloatingCtaBar() {
   const [isVisible, setIsVisible] = React.useState(false);
-  const [isDismissed, setIsDismissed] = React.useState(true); // default true until checked
+  const [isDismissed, setIsDismissed] = React.useState(false);
+  const isSessionDismissed = React.useSyncExternalStore(
+    subscribe,
+    getDismissedSnapshot,
+    getServerSnapshot
+  );
 
   React.useEffect(() => {
-    // Check if dismissed in this session
-    const dismissed = sessionStorage.getItem(STORAGE_KEY) === "true";
-    if (dismissed) {
-      setIsDismissed(true);
-      return;
-    }
-    setIsDismissed(false);
+    if (isSessionDismissed) return;
 
     const handleScroll = () => {
       // Trigger once after scrolling 300px and stay visible
@@ -34,7 +47,7 @@ export function FloatingCtaBar() {
     handleScroll(); // Initial check
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isSessionDismissed]);
 
   const handleDismiss = () => {
     setIsVisible(false);
@@ -46,7 +59,7 @@ export function FloatingCtaBar() {
     }
   };
 
-  if (isDismissed) return null;
+  if (isSessionDismissed || isDismissed) return null;
 
   return (
     <aside

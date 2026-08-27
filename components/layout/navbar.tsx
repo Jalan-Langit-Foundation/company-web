@@ -4,7 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Heart, ExternalLink, ChevronDown } from "lucide-react";
+import { Menu, X, Heart, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { NAVBAR_LINKS, SITE_CONFIG } from "@/lib/data";
@@ -16,13 +16,15 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [activeDropdown, setActiveDropdown] = React.useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = React.useState<Record<string, boolean>>({});
+  const [prevPathname, setPrevPathname] = React.useState(pathname);
   const navRef = React.useRef<HTMLElement | null>(null);
 
-  // Close menus on route change
-  React.useEffect(() => {
+  // Close menus on route change during render
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
     setIsOpen(false);
     setActiveDropdown(null);
-  }, [pathname]);
+  }
 
   // Handle click outside to close desktop dropdown
   React.useEffect(() => {
