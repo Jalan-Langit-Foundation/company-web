@@ -70,9 +70,10 @@ export const FOOTER_PROGRAM_LINKS: NavLink[] = [
 ];
 
 export const FOOTER_ORGANIZATION_LINKS: NavLink[] = [
-  { label: "Tentang Kami", href: "/about" },
-  { label: "Visi & Misi", href: "/about#visi-misi" },
-  { label: "Core Values", href: "/about#core-values" },
-  { label: "Sejarah", href: "/about#sejarah" },
-  { label: "Mitra", href: "/about#mitra" },
+  { label: "Profil Yayasan", href: "/about" },
+  { label: "Visi, Misi & Nilai", href: "/about#visi-misi" },
+  { label: "Struktur Pengurus", href: "/about#pengurus" },
+  { label: "Legalitas & Akuntabilitas", href: "/about#legalitas" },
+  { label: "Laporan & Transparansi", href: "/about#laporan" },
+  { label: "Mitra Kolaborasi", href: "/about#mitra" },
 ];

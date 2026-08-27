@@ -82,10 +82,10 @@ export function Navbar() {
             <Image
               src="/images/logo-navbar.png"
               alt="Logo Yayasan Jalan Langit"
-              width={140}
-              height={34}
+              width={160}
+              height={38}
               priority
-              className="h-7 sm:h-8 w-auto object-contain"
+              className="h-7 sm:h-7.5 md:h-8.5 lg:h-9 w-auto object-contain transition-all"
             />
           </Link>
 
