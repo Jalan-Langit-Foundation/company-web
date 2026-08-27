@@ -11,7 +11,6 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-  Container,
   Input,
   Textarea,
   ButtonProps,
@@ -22,10 +21,7 @@ import {
   ArrowRight,
   Sparkles,
   CheckCircle2,
-  AlertCircle,
-  Clock,
   ShieldCheck,
-  Send,
   Search,
   Mail,
   Copy,
@@ -39,12 +35,9 @@ import {
   Users,
   Compass,
   Building2,
-  Calendar,
   Maximize2,
-  Lock,
-  Phone,
-  FileText,
 } from "lucide-react";
+
 
 export default function DesignSystemPage() {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
