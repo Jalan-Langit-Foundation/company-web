@@ -1,13 +1,11 @@
 import {
   HeroSection,
   ImpactSnapshotSection,
-  AboutTeaserSection,
-  ContributionAreasSection,
-  ProgramsHighlightSection,
-  ImpactStorySection,
+  FeaturedVideosSection,
+  ProgramsSection,
   CollaborationSection,
   LatestNewsSection,
-  ClosingCtaSection,
+  FinalCtaSection,
 } from "@/components/section/home";
 
 export default function Home() {
@@ -15,14 +13,11 @@ export default function Home() {
     <main className="flex-1 w-full flex flex-col">
       <HeroSection />
       <ImpactSnapshotSection />
-      <AboutTeaserSection />
-      <ContributionAreasSection />
-      <ProgramsHighlightSection />
-      <ImpactStorySection />
+      <FeaturedVideosSection />
+      <ProgramsSection />
       <CollaborationSection />
       <LatestNewsSection />
-      <ClosingCtaSection />
+      <FinalCtaSection />
     </main>
   );
 }
-
