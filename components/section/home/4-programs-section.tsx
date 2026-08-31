@@ -97,6 +97,7 @@ export function ProgramsSection() {
                             src={program.image}
                             alt={program.title}
                             fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 320px, 320px"
                             className="object-cover"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />

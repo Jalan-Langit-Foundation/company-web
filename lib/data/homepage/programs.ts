@@ -106,7 +106,7 @@ export const PROGRAMS_SECTION_DATA: {
         "Layanan pengelolaan dan pendistribusian dana zakat fitrah maupun zakat maal yang dilaksanakan secara profesional, transparan, dan sesuai syariat Islam. Kami memprioritaskan penyaluran tepat sasaran kepada delapan asnaf, dengan fokus pada program pemberdayaan ekonomi mustahik, perlindungan sosial fakir miskin, serta peningkatan kualitas taraf hidup penerima manfaat.",
       highlightTag: "Penyaluran Tepat Sasaran",
       image:
-        "https://images.unsplash.com/photo-1532629345422-7515f3d16bb9?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=800&auto=format&fit=crop",
       donationUrl: "https://donasi.jalanlangit.org/campaign/zakat",
     },
     {
