@@ -55,7 +55,7 @@ export function FeaturedVideosSection() {
           {/* Slider Horizontal Track */}
           <div
             ref={sliderRef}
-            className="flex items-stretch gap-6 overflow-x-auto pt-3 pb-5 px-4 sm:px-6 no-scrollbar scroll-smooth"
+            className="flex items-stretch gap-6 overflow-x-auto pt-3 pb-5 no-scrollbar scroll-smooth"
           >
             {FEATURED_VIDEOS_DATA.videos.map((video) => (
               <div
@@ -72,13 +72,6 @@ export function FeaturedVideosSection() {
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-                  {/* Category Badge */}
-                  <div className="absolute top-3 left-3 flex items-center gap-2 z-[2]">
-                    <span className="px-2.5 py-1 rounded-md bg-[#3C95C8] text-white text-[11px] font-semibold font-['Poppins',sans-serif] shadow-xs">
-                      {video.category}
-                    </span>
-                  </div>
 
                   {/* Duration Badge */}
                   <span className="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-black/70 backdrop-blur-xs text-white text-[11px] font-medium flex items-center gap-1 font-['Lato',sans-serif] z-[2]">
@@ -107,9 +100,7 @@ export function FeaturedVideosSection() {
 
                   <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-[#3C95C8] font-semibold font-['Poppins',sans-serif]">
                     <span>Tonton Video</span>
-                    <span className="group-hover:translate-x-1.5 transition-transform duration-200 text-sm">
-                      →
-                    </span>
+                    <span className="text-sm">→</span>
                   </div>
                 </div>
               </div>
@@ -126,7 +117,7 @@ export function FeaturedVideosSection() {
             <button
               onClick={() => scrollSlider("left")}
               aria-label="Geser video ke kiri"
-              className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-[#3C95C8] text-[#3C95C8] hover:bg-[#EAF5FB] active:bg-[#d5ecf8] flex items-center justify-center transition-all cursor-pointer shadow-xs hover:scale-105 active:scale-95"
+              className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-[#3C95C8] text-[#3C95C8] hover:bg-[#EAF5FB] active:bg-[#d5ecf8] flex items-center justify-center transition-all cursor-pointer shadow-xs"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -146,7 +137,7 @@ export function FeaturedVideosSection() {
             <button
               onClick={() => scrollSlider("right")}
               aria-label="Geser video ke kanan"
-              className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-[#3C95C8] text-[#3C95C8] hover:bg-[#EAF5FB] active:bg-[#d5ecf8] flex items-center justify-center transition-all cursor-pointer shadow-xs hover:scale-105 active:scale-95"
+              className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-[#3C95C8] text-[#3C95C8] hover:bg-[#EAF5FB] active:bg-[#d5ecf8] flex items-center justify-center transition-all cursor-pointer shadow-xs"
             >
               <ChevronRight className="w-5 h-5" />
             </button>

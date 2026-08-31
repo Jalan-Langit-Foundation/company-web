@@ -65,13 +65,6 @@ export function LatestNewsSection() {
               {/* Dark Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent pointer-events-none" />
 
-              {/* Top Category Badge */}
-              <div className="absolute top-3.5 left-3.5 sm:top-4 sm:left-4 z-10">
-                <span className="px-2.5 py-1 rounded-md bg-[#3C95C8] text-white text-[11px] font-semibold font-['Poppins',sans-serif] shadow-xs">
-                  {mainFeatured.category}
-                </span>
-              </div>
-
               {/* Bottom Content Area */}
               <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 z-10 space-y-2">
                 <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white font-['Poppins',sans-serif] leading-snug line-clamp-2">
@@ -118,13 +111,6 @@ export function LatestNewsSection() {
 
                   {/* Dark Gradient Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />
-
-                  {/* Top Badge */}
-                  <div className="absolute top-2.5 left-2.5 z-10">
-                    <span className="px-2.5 py-0.5 rounded-md bg-[#3C95C8] text-white text-[11px] font-semibold font-['Poppins',sans-serif] shadow-xs">
-                      {article.category}
-                    </span>
-                  </div>
 
                   {/* Bottom Content Area */}
                   <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 z-10 space-y-1">
