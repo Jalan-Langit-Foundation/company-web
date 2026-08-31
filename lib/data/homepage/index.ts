@@ -4,3 +4,4 @@ export * from "./about";
 export * from "./videos";
 export * from "./programs";
 export * from "./news";
+export * from "./final-cta";
