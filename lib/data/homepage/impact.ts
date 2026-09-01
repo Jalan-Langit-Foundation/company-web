@@ -22,7 +22,7 @@ export const IMPACT_STATS: ImpactStat[] = [
   },
   {
     id: "programs",
-    targetValue: 4,
+    targetValue: 6,
     suffix: "",
     label: "Program Identitas Aktif",
   },

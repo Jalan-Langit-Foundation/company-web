@@ -3,7 +3,6 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { User, Calendar, Clock } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { LATEST_NEWS_DATA } from "@/lib/data/homepage";
@@ -44,7 +43,7 @@ export function LatestNewsSection() {
         {/* =========================================================
             NEWS GRID: Mathematically Balanced 520px Height on Desktop
             ========================================================= */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
           {/* -------------------------------------------------------
               LEFT COLUMN: 330px + 20px (gap-5) + 170px = 520px
               ------------------------------------------------------- */}
@@ -71,62 +70,45 @@ export function LatestNewsSection() {
                   {mainFeatured.title}
                 </h3>
 
-                {/* Meta Row */}
-                <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-300 font-['Lato',sans-serif]">
-                  <div className="flex items-center gap-1">
-                    <User className="w-3 h-3 text-[#6EB6D6]" />
-                    <span>{mainFeatured.author}</span>
-                  </div>
-
-                  <div className="flex items-center gap-1">
-                    <Calendar className="w-3 h-3 text-[#6EB6D6]" />
-                    <span>{mainFeatured.date}</span>
-                  </div>
-
-                  {mainFeatured.readTime && (
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-3 h-3 text-[#6EB6D6]" />
-                      <span>{mainFeatured.readTime}</span>
-                    </div>
-                  )}
-                </div>
+                {/* Meta Row: penulis / tanggal */}
+                <p className="text-[11px] sm:text-xs text-slate-300 font-['Lato',sans-serif]">
+                  {mainFeatured.author} / {mainFeatured.date}
+                </p>
               </div>
             </Link>
 
-            {/* 2. Two Sub-Featured Article Cards (Height 170px on Desktop, gap-5) */}
+            {/* 2. Two Sub-Featured Article Cards (List style on Mobile, Grid Overlay Cards on Tablet/Desktop) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 shrink-0">
               {subFeatured.map((article) => (
                 <Link
                   key={article.id}
                   href={`/news/${article.slug}`}
-                  className="group relative w-full aspect-[16/10] lg:aspect-auto lg:h-[170px] rounded-2xl overflow-hidden bg-slate-900 border border-slate-200/80 shadow-xs block"
+                  className="group flex sm:block items-center gap-4 sm:gap-0 relative w-full sm:aspect-[16/10] lg:aspect-auto lg:h-[170px] rounded-2xl overflow-hidden bg-transparent sm:bg-slate-900 sm:border sm:border-slate-200/80 shadow-none sm:shadow-xs transition-colors"
                 >
-                  <Image
-                    src={article.image}
-                    alt={article.title}
-                    fill
-                    sizes="(max-width: 640px) 100vw, 320px"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+                  {/* Thumbnail Container */}
+                  <div className="relative w-28 sm:w-full h-[80px] sm:h-full shrink-0 rounded-2xl sm:rounded-none overflow-hidden bg-slate-900 border border-slate-100 sm:border-0">
+                    <Image
+                      src={article.image}
+                      alt={article.title}
+                      fill
+                      sizes="(max-width: 640px) 120px, 320px"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
 
-                  {/* Dark Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />
+                  {/* Dark Gradient Overlay (Only on Tablet & Desktop) */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none hidden sm:block" />
 
-                  {/* Bottom Content Area */}
-                  <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 z-10 space-y-1">
-                    <h4 className="text-xs sm:text-sm font-bold text-white font-['Poppins',sans-serif] leading-snug line-clamp-2">
+                  {/* Content Area */}
+                  <div className="sm:absolute sm:bottom-0 sm:left-0 sm:right-0 sm:p-3.5 sm:p-4 z-10 space-y-1 flex-1 min-w-0 text-left">
+                    <h4 className="text-sm sm:text-[15px] font-bold text-[#2C2C2C] sm:text-white font-['Poppins',sans-serif] leading-snug line-clamp-2">
                       {article.title}
                     </h4>
 
-                    {/* Author & Date Meta */}
-                    <div className="flex items-center gap-2 text-[10px] text-slate-300 font-['Lato',sans-serif]">
-                      <div className="flex items-center gap-1">
-                        <User className="w-2.5 h-2.5 text-[#6EB6D6]" />
-                        <span>{article.author}</span>
-                      </div>
-                      <span>•</span>
-                      <span>{article.date}</span>
-                    </div>
+                    {/* Meta: penulis / tanggal */}
+                    <p className="text-[11px] sm:text-xs text-[#777777] sm:text-slate-300 font-['Lato',sans-serif]">
+                      {article.author} / {article.date}
+                    </p>
                   </div>
                 </Link>
               ))}
@@ -154,14 +136,14 @@ export function LatestNewsSection() {
                   />
                 </div>
 
-                {/* News Title & Author / Date (Static Color) */}
+                {/* News Title & Author / Date (penulis / tanggal) */}
                 <div className="flex-1 min-w-0 space-y-1 text-left">
-                  <h4 className="text-xs sm:text-sm font-bold text-[#2C2C2C] font-['Poppins',sans-serif] leading-snug line-clamp-2">
+                  <h4 className="text-sm sm:text-[15px] font-bold text-[#2C2C2C] font-['Poppins',sans-serif] leading-snug line-clamp-2">
                     {article.title}
                   </h4>
 
-                  <p className="text-[10px] sm:text-[11px] text-[#777777] font-['Lato',sans-serif]">
-                    By <span className="text-[#555555] font-medium">{article.author}</span> / {article.date}
+                  <p className="text-[11px] sm:text-xs text-[#777777] font-['Lato',sans-serif]">
+                    {article.author} / {article.date}
                   </p>
                 </div>
               </Link>

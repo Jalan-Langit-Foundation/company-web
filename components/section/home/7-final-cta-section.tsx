@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Mail, Heart } from "lucide-react";
+import { Heart, Handshake } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { FINAL_CTA_CONFIG } from "@/lib/data/homepage";
@@ -17,7 +17,7 @@ export function FinalCtaSection() {
 
       <Container size="lg" className="relative z-10">
         <div className="max-w-2xl mx-auto text-center flex flex-col items-center">
-          {/* Main Headline: Mari Bergandeng & (Hitam) + Langitkan Kebaikan (Biru) */}
+          {/* Main Headline: Mari Bergandengan & (Hitam) + Langitkan Kebaikan (Biru) */}
           <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-extrabold text-[#2C2C2C] font-['Poppins',sans-serif] tracking-tight leading-tight">
             {FINAL_CTA_CONFIG.headline.line1}
             <br />
@@ -31,14 +31,15 @@ export function FinalCtaSection() {
             {FINAL_CTA_CONFIG.description}
           </p>
 
-          {/* Action Buttons: Hubungi Kami & Donasi Sekarang */}
+          {/* Action Buttons: Berdonasi (Primary) & Berkolaborasi (Secondary) */}
           <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
             <Button
               variant="primary"
               size="md"
               href={FINAL_CTA_CONFIG.primaryAction.href}
-              leftIcon={<Mail className="w-4 h-4" />}
-              className="w-full sm:w-auto shadow-sm hover:shadow-md transition-all font-semibold text-sm"
+              external={FINAL_CTA_CONFIG.primaryAction.isExternal}
+              leftIcon={<Heart className="w-4 h-4 fill-white" />}
+              className="w-full sm:w-auto shadow-sm hover:shadow-md transition-all font-semibold text-sm px-6"
             >
               {FINAL_CTA_CONFIG.primaryAction.label}
             </Button>
@@ -47,9 +48,8 @@ export function FinalCtaSection() {
               variant="outline"
               size="md"
               href={FINAL_CTA_CONFIG.secondaryAction.href}
-              external={FINAL_CTA_CONFIG.secondaryAction.isExternal}
-              leftIcon={<Heart className="w-4 h-4 text-[#3C95C8]" />}
-              className="w-full sm:w-auto bg-transparent text-[#3C95C8] border-2 border-[#3C95C8] hover:bg-[#EAF5FB] shadow-sm hover:shadow-md transition-all font-semibold text-sm"
+              leftIcon={<Handshake className="w-4 h-4 text-[#3C95C8]" />}
+              className="w-full sm:w-auto bg-transparent text-[#3C95C8] border-2 border-[#3C95C8] hover:bg-[#EAF5FB] shadow-sm hover:shadow-md transition-all font-semibold text-sm px-6"
             >
               {FINAL_CTA_CONFIG.secondaryAction.label}
             </Button>

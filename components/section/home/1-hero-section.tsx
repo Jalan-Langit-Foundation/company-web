@@ -6,6 +6,7 @@ import { ArrowRight, Handshake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Container } from "@/components/ui/container";
+import { Reveal } from "@/components/ui/reveal";
 import { SITE_CONFIG } from "@/lib/data";
 import { HERO_CONFIG } from "@/lib/data/homepage";
 import { cn } from "@/lib/utils";
@@ -54,12 +55,11 @@ export function HeroSection() {
           );
         })}
 
-        {/* Gradasi Halus: Primary Blue di sisi kiri fade out beralih mulus ke foto di sisi kanan */}
-        {/* Lapisan Desktop (Horizontal Left-to-Right Fade) */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#3C95C8] from-10% via-[#3C95C8]/95 via-40% lg:via-48% to-transparent to-85% hidden sm:block z-20" />
+        {/* Lapisan Desktop (sm+): Horizontal Left-to-Right Fade */}
+        <div className="hero-overlay-desktop absolute inset-0 hidden sm:block z-20 pointer-events-none" />
 
-        {/* Lapisan Mobile (Vertical Top-to-Bottom Fade) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#3C95C8] via-[#3C95C8]/85 via-50% to-[#3C95C8]/60 sm:hidden z-20" />
+        {/* Lapisan Mobile (<sm): Vertical Top-to-Bottom Fade Lebih Transparan */}
+        <div className="hero-overlay-mobile absolute inset-0 sm:hidden z-20 pointer-events-none" />
 
         {/* Soft Ambient Top Glow Accent */}
         <div className="absolute -top-20 -left-20 w-96 h-96 bg-[#6EB6D6]/35 rounded-full blur-3xl pointer-events-none z-20" />
@@ -67,54 +67,56 @@ export function HeroSection() {
 
       <Container size="xl" className="relative z-10">
         <div className="max-w-lg lg:max-w-[500px] xl:max-w-[540px] mx-auto sm:mx-0">
-          {/* Kolom Konten: Eyebrow, Headline, Supporting Copy, Dual CTA */}
-          <div className="flex flex-col items-center sm:items-start gap-6 text-center sm:text-left">
-            {/* Header Block: Badge & Headline/Copy */}
-            <div className="flex flex-col items-center sm:items-start gap-3 sm:gap-3.5 w-full">
-              {/* Eyebrow Badge (Pita Putih / Rope Ribbon) */}
-              <div className="flex items-center justify-center sm:justify-start sm:-ml-1">
-                <Badge variant="rope" size="md">
-                  NGO Muslim Indonesia · Est. 2022
-                </Badge>
+          <Reveal>
+            {/* Kolom Konten: Eyebrow, Headline, Supporting Copy, Dual CTA */}
+            <div className="flex flex-col items-center sm:items-start gap-6 text-center sm:text-left">
+              {/* Header Block: Badge & Headline/Copy */}
+              <div className="flex flex-col items-center sm:items-start gap-3 sm:gap-3.5 w-full">
+                {/* Eyebrow Badge (Pita Putih / Rope Ribbon) */}
+                <div className="flex items-center justify-center sm:justify-start sm:-ml-1">
+                  <Badge variant="rope" size="md">
+                    NGO Muslim Indonesia · Est. 2022
+                  </Badge>
+                </div>
+
+                {/* Headline & Copy Sesuai HOMEPAGE.md */}
+                <div className="flex flex-col items-center sm:items-start gap-4">
+                  <h1 className="text-fluid-3xl font-bold tracking-tight text-white font-['Poppins',sans-serif] leading-tight drop-shadow-sm">
+                    Bergandengan,
+                    <br />
+                    Langitkan
+                    <br />
+                    Kebaikan
+                  </h1>
+                  <p className="text-fluid-base leading-relaxed text-white/95 font-['Lato',sans-serif] max-w-[340px] sm:max-w-[440px] lg:max-w-[480px] drop-shadow-xs mx-auto sm:mx-0">
+                    {SITE_CONFIG.description}
+                  </p>
+                </div>
               </div>
 
-              {/* Headline & Copy Sesuai HOMEPAGE.md */}
-              <div className="flex flex-col items-center sm:items-start gap-4">
-                <h1 className="text-fluid-3xl font-bold tracking-tight text-white font-['Poppins',sans-serif] leading-tight drop-shadow-sm">
-                  Bergandengan,
-                  <br />
-                  Langitkan
-                  <br />
-                  Kebaikan
-                </h1>
-                <p className="text-fluid-base leading-relaxed text-white/95 font-['Lato',sans-serif] max-w-[340px] sm:max-w-[440px] lg:max-w-[480px] drop-shadow-xs mx-auto sm:mx-0">
-                  {SITE_CONFIG.description}
-                </p>
+              {/* Dual CTA Button */}
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3.5 pt-0.5 w-full sm:w-auto">
+                <Button
+                  variant="white"
+                  size="lg"
+                  href="/programs"
+                  rightIcon={<ArrowRight className="w-4 h-4 text-[#3C95C8]" />}
+                  className="shadow-lg hover:shadow-xl transition-all font-bold text-[#3C95C8] hover:bg-[#EAF5FB]"
+                >
+                  Lihat Program
+                </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  href="/contact"
+                  leftIcon={<Handshake className="w-4 h-4 text-white" />}
+                  className="font-semibold text-white border-white/70 hover:bg-white/15 hover:border-white hover:text-white"
+                >
+                  Berkolaborasi
+                </Button>
               </div>
             </div>
-
-            {/* Dual CTA Button */}
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3.5 pt-0.5 w-full sm:w-auto">
-              <Button
-                variant="white"
-                size="lg"
-                href="/programs"
-                rightIcon={<ArrowRight className="w-4 h-4 text-[#3C95C8]" />}
-                className="shadow-lg hover:shadow-xl transition-all font-bold text-[#3C95C8] hover:bg-[#EAF5FB]"
-              >
-                Lihat Program
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                href="/contact"
-                leftIcon={<Handshake className="w-4 h-4 text-white" />}
-                className="font-semibold text-white border-white/70 hover:bg-white/15 hover:border-white hover:text-white"
-              >
-                Berkolaborasi
-              </Button>
-            </div>
-          </div>
+          </Reveal>
         </div>
       </Container>
     </section>
