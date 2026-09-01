@@ -170,9 +170,9 @@ export function LatestNewsSection() {
         </div>
 
         {/* =========================================================
-            BOTTOM ACTION BUTTON: Lihat Semua Berita (Matching Video CTA Style)
+            BOTTOM ACTION BUTTON: Lihat Semua Berita (Matching Video CTA Style & Spacing)
             ========================================================= */}
-        <div className="mt-10 sm:mt-12 text-center">
+        <div className="pt-5 sm:pt-6 text-center">
           <Button
             variant="outline"
             size="md"

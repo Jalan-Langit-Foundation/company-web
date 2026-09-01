@@ -3,39 +3,43 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { Container } from "@/components/ui/container";
-import {
-  PROGRAMS_SECTION_DATA,
-  ProgramItem,
-} from "@/lib/data/homepage";
+import { Button } from "@/components/ui/button";
+import { PROGRAMS_SECTION_DATA, SITE_CONFIG } from "@/lib/data";
 
 export function ProgramsSection() {
-  // Default: first program is active
-  const [openId, setOpenId] = React.useState<string>(
-    PROGRAMS_SECTION_DATA.programs[0]?.id || ""
-  );
+  const [isExpanded, setIsExpanded] = React.useState(false);
+  const [isCollapsing, setIsCollapsing] = React.useState(false);
 
-  const toggleProgram = (id: string) => {
-    setOpenId((prev) => (prev === id ? "" : id));
+  const handleExpand = () => {
+    setIsExpanded(true);
+  };
+
+  const handleCollapse = () => {
+    setIsCollapsing(true);
+    setTimeout(() => {
+      setIsExpanded(false);
+      setIsCollapsing(false);
+    }, 320);
   };
 
   return (
     <section
       id="program"
       aria-label="Program Kebaikan Jalan Langit Foundation"
-      className="w-full bg-[#FAFCFE] py-16 sm:py-20 lg:py-24 border-b border-slate-100 relative overflow-hidden"
+      className="w-full bg-[#FAFCFE] py-12 sm:py-20 lg:py-24 border-b border-slate-100 relative overflow-hidden"
     >
-      {/* Decorative Background Accents */}
-      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#EAF5FB] rounded-full blur-3xl pointer-events-none -z-0" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#EAF5FB] rounded-full blur-3xl pointer-events-none -z-0" />
+      {/* Subtle Background Lighting Accent */}
+      <div className="absolute top-1/4 -left-40 w-96 h-96 bg-[#EAF5FB]/60 rounded-full blur-3xl pointer-events-none -z-0" />
+      <div className="absolute bottom-1/4 -right-40 w-96 h-96 bg-[#EAF5FB]/60 rounded-full blur-3xl pointer-events-none -z-0" />
 
       <Container size="xl" className="relative z-10">
         {/* =========================================================
-            SECTION HEADER (2-Line Color Title)
+            1. SECTION HEADER (Matching Video Section Style)
             ========================================================= */}
-        <div className="max-w-2xl mb-10 sm:mb-14">
-          <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-extrabold text-[#2C2C2C] font-['Poppins',sans-serif] leading-tight tracking-tight">
+        <div className="max-w-2xl mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl lg:text-[36px] font-extrabold text-[#2C2C2C] font-['Poppins',sans-serif] leading-tight tracking-tight">
             {PROGRAMS_SECTION_DATA.headline.prefix}
             <br />
             <span className="text-[#3C95C8]">
@@ -49,93 +53,136 @@ export function ProgramsSection() {
         </div>
 
         {/* =========================================================
-            ACCORDION CONTAINER (Pure White Background, Seamless Content)
+            2. RESPONSIVE PROGRAM CARDS GRID
+               - Mobile: 1 Card per row (Matching Video Section)
+               - Tablet (sm/md): 2 Cards per row
+               - Desktop (lg): 3 Cards per row
+               - Default: 1 row on all devices (1 on mobile, 2 on tablet, 3 on desktop)
+               - Expanded: Shows all program cards with smooth animations
             ========================================================= */}
-        <div className="w-full bg-white rounded-2xl border border-slate-200/90 divide-y divide-slate-200 shadow-xs overflow-hidden">
-          {PROGRAMS_SECTION_DATA.programs.map((program) => {
-            const isOpen = openId === program.id;
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {PROGRAMS_SECTION_DATA.programs.map((program, idx) => {
+            // Visibility logic for 1-row default across devices:
+            // Mobile (<640px): idx 0 is visible (1 card)
+            // Tablet (640px - 1023px): idx 0, 1 are visible (2 cards)
+            // Desktop (>=1024px): idx 0, 1, 2 are visible (3 cards)
+            // idx >= 3: hidden until expanded
+            const isInitiallyHidden = idx >= 1;
+            const isVisible = isExpanded || isCollapsing;
+
+            const animationClass =
+              isCollapsing && isInitiallyHidden
+                ? "animate-slide-up"
+                : isExpanded && isInitiallyHidden
+                ? "animate-slide-down"
+                : "";
+
+            const visibilityClass = isVisible
+              ? `flex ${animationClass}`
+              : idx === 0
+              ? "flex"
+              : idx === 1
+              ? "hidden sm:flex"
+              : idx === 2
+              ? "hidden lg:flex"
+              : "hidden";
+
+            const animationStyle =
+              isCollapsing && isInitiallyHidden
+                ? { animationDelay: `${Math.max(0, 5 - idx) * 30}ms` }
+                : isExpanded && isInitiallyHidden
+                ? { animationDelay: `${(idx - 1) * 60}ms` }
+                : undefined;
 
             return (
-              <div key={program.id} className="w-full bg-white">
-                {/* Title Header Row */}
-                <button
-                  type="button"
-                  onClick={() => toggleProgram(program.id)}
-                  className="w-full bg-white px-6 sm:px-8 py-5 sm:py-6 flex items-center justify-between gap-4 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3C95C8]"
-                  aria-expanded={isOpen}
-                >
-                  <h3
-                    className={`text-base sm:text-lg font-bold font-['Poppins',sans-serif] leading-snug ${
-                      isOpen ? "text-[#3C95C8]" : "text-[#2C2C2C]"
-                    }`}
-                  >
-                    {program.title}
-                  </h3>
-
-                  {/* Indicator Icon (No Circle Background) */}
-                  <ChevronDown
-                    className={`w-5 h-5 shrink-0 transition-transform duration-300 ${
-                      isOpen
-                        ? "text-[#3C95C8] rotate-180"
-                        : "text-slate-400"
-                    }`}
+              <div
+                key={program.id}
+                style={animationStyle}
+                className={`group flex-col bg-white rounded-2xl overflow-hidden border border-slate-200/80 hover:border-slate-300/90 shadow-none hover:shadow-[0_12px_32px_rgba(0,0,0,0.07)] transition-all duration-300 hover:-translate-y-1 ${visibilityClass}`}
+              >
+                {/* 16:9 Thumbnail Box */}
+                <div className="relative w-full aspect-video overflow-hidden bg-slate-900">
+                  <Image
+                    src={program.image}
+                    alt={program.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                </button>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
 
-                {/* Expandable Seamless Content (Left-Aligned, No Nested Card) */}
-                <div
-                  className={`grid transition-[grid-template-rows] duration-300 ease-out ${
-                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                  }`}
-                >
-                  <div className="overflow-hidden bg-white">
-                    <div className="px-6 sm:px-8 pb-7 pt-0 bg-white">
-                      <div className="flex flex-col sm:flex-row items-stretch gap-6 sm:gap-8 pt-1">
-                        {/* Left Side: Program Visual Image (Stretches to match exact text height on desktop) */}
-                        <div className="relative w-full sm:w-64 md:w-72 lg:w-80 shrink-0 aspect-[16/10] sm:aspect-auto min-h-[180px] rounded-xl overflow-hidden bg-slate-900 border border-slate-100">
-                          <Image
-                            src={program.image}
-                            alt={program.title}
-                            fill
-                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 320px, 320px"
-                            className="object-cover"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
-                        </div>
+                  {/* Single Blue Category Badge on Top-Left */}
+                  <span className="absolute top-3.5 left-3.5 px-2.5 py-1 rounded-md bg-[#3C95C8] text-white text-[11px] font-semibold font-['Poppins',sans-serif] shadow-xs z-[2]">
+                    {program.category}
+                  </span>
+                </div>
 
-                        {/* Right Side: Program Details (Spaced evenly to match full height) */}
-                        <div className="flex-1 flex flex-col justify-between items-start gap-4 w-full py-0.5">
-                          <div className="space-y-3 text-left w-full">
-                            {/* Category Badge */}
-                            <div className="flex items-center">
-                              <span className="px-2.5 py-1 rounded-md bg-[#3C95C8] text-white text-[11px] font-semibold font-['Poppins',sans-serif] shadow-xs">
-                                {program.category}
-                              </span>
-                            </div>
+                {/* Card Content */}
+                <div className="p-5 flex flex-col flex-1 justify-between gap-4 bg-white">
+                  <div className="space-y-2">
+                    <h3 className="text-base font-bold text-[#2C2C2C] font-['Poppins',sans-serif] line-clamp-1 leading-snug">
+                      {program.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#555555] font-['Lato',sans-serif] line-clamp-3 leading-relaxed">
+                      {program.description}
+                    </p>
+                  </div>
 
-                            {/* Description Text (Concise on Mobile/Tablet, Full Narrative on Desktop) */}
-                            <p className="text-xs sm:text-sm text-[#555555] font-['Lato',sans-serif] leading-relaxed line-clamp-2 sm:line-clamp-3 lg:line-clamp-none">
-                              {program.description}
-                            </p>
-                          </div>
-
-                          {/* Footer Link (Anchored at the bottom) */}
-                          <div className="pt-3 border-t border-slate-100 flex items-center justify-start w-full text-xs text-[#3C95C8] font-semibold font-['Poppins',sans-serif]">
-                            <Link
-                              href="/programs"
-                              className="hover:text-[#25729D] transition-colors font-semibold"
-                            >
-                              Lihat Selengkapnya
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  {/* Card Action Link (Matching Video Section Style without Arrow) */}
+                  <div className="pt-3 border-t border-slate-100 flex items-center text-xs text-[#3C95C8] font-semibold font-['Poppins',sans-serif]">
+                    <Link
+                      href={SITE_CONFIG.contact.donationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-[#25729D] transition-colors"
+                    >
+                      Donasi Sekarang
+                    </Link>
                   </div>
                 </div>
               </div>
             );
           })}
+        </div>
+
+        {/* =========================================================
+            3. ACTION BUTTONS:
+               - Default: "Lihat Lebih Banyak"
+               - Expanded: "Lihat Lebih Sedikit" & "Lihat Selengkapnya" (/programs)
+            ========================================================= */}
+        <div className="pt-5 sm:pt-6 flex flex-wrap items-center justify-center gap-3">
+          {isExpanded ? (
+            <>
+              <Button
+                variant="outline"
+                size="md"
+                onClick={handleCollapse}
+                rightIcon={<ChevronUp className="w-4 h-4" />}
+                className="font-bold border-[#3C95C8] text-[#3C95C8] hover:bg-[#EAF5FB] px-6"
+              >
+                Lihat Lebih Sedikit
+              </Button>
+
+              <Button
+                variant="outline"
+                size="md"
+                href="/programs"
+                className="font-bold border-[#3C95C8] text-[#3C95C8] hover:bg-[#EAF5FB] px-6"
+              >
+                Lihat Selengkapnya
+              </Button>
+            </>
+          ) : (
+            <Button
+              variant="outline"
+              size="md"
+              onClick={handleExpand}
+              rightIcon={<ChevronDown className="w-4 h-4" />}
+              className="font-bold border-[#3C95C8] text-[#3C95C8] hover:bg-[#EAF5FB] px-6"
+            >
+              Lihat Lebih Banyak
+            </Button>
+          )}
         </div>
       </Container>
     </section>

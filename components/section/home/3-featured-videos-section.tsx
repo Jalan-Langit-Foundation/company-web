@@ -19,7 +19,10 @@ export function FeaturedVideosSection() {
 
   const scrollSlider = (direction: "left" | "right") => {
     if (sliderRef.current) {
-      const scrollAmount = direction === "left" ? -380 : 380;
+      const scrollAmount =
+        direction === "left"
+          ? -sliderRef.current.offsetWidth
+          : sliderRef.current.offsetWidth;
       sliderRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
@@ -49,19 +52,19 @@ export function FeaturedVideosSection() {
         </div>
 
         {/* =========================================================
-            2. VIDEO SLIDER WITH FADE OUT EDGES
+            2. VIDEO SLIDER: EXACT 3 CARDS ON DESKTOP, 2 ON TABLET, 1 ON MOBILE
             ========================================================= */}
         <div className="relative group/slider">
           {/* Slider Horizontal Track */}
           <div
             ref={sliderRef}
-            className="flex items-stretch gap-6 overflow-x-auto pt-3 pb-5 no-scrollbar scroll-smooth"
+            className="flex items-stretch gap-6 lg:gap-8 overflow-x-auto pt-3 pb-5 no-scrollbar scroll-smooth snap-x snap-mandatory"
           >
             {FEATURED_VIDEOS_DATA.videos.map((video) => (
               <div
                 key={video.id}
                 onClick={() => setActiveModalVideo(video)}
-                className="w-[300px] sm:w-[350px] md:w-[380px] shrink-0 group flex flex-col bg-white rounded-2xl overflow-hidden border border-slate-200/70 hover:border-slate-300/80 shadow-none hover:shadow-[0_12px_32px_rgba(0,0,0,0.07)] transition-all duration-300 cursor-pointer hover:-translate-y-1"
+                className="w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-4rem)/3)] shrink-0 snap-start group flex flex-col bg-white rounded-2xl overflow-hidden border border-slate-200/80 hover:border-slate-300/90 shadow-none hover:shadow-[0_12px_32px_rgba(0,0,0,0.07)] transition-all duration-300 cursor-pointer hover:-translate-y-1"
               >
                 {/* 16:9 Thumbnail Box */}
                 <div className="relative w-full aspect-video overflow-hidden bg-slate-900">
@@ -69,6 +72,7 @@ export function FeaturedVideosSection() {
                     src={video.thumbnail}
                     alt={video.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
@@ -88,19 +92,18 @@ export function FeaturedVideosSection() {
                 </div>
 
                 {/* Card Text Content */}
-                <div className="p-5 flex flex-col flex-1 justify-between gap-4">
+                <div className="p-5 flex flex-col flex-1 justify-between gap-4 bg-white">
                   <div className="space-y-2">
-                    <h3 className="text-base font-bold text-[#2C2C2C] group-hover:text-[#3C95C8] transition-colors font-['Poppins',sans-serif] line-clamp-2 leading-snug">
+                    <h3 className="text-base font-bold text-[#2C2C2C] font-['Poppins',sans-serif] line-clamp-1 leading-snug">
                       {video.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-[#555555] font-['Lato',sans-serif] line-clamp-2 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#555555] font-['Lato',sans-serif] line-clamp-3 leading-relaxed">
                       {video.description}
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-[#3C95C8] font-semibold font-['Poppins',sans-serif]">
+                  <div className="pt-3 border-t border-slate-100 flex items-center text-xs text-[#3C95C8] font-semibold font-['Poppins',sans-serif]">
                     <span>Tonton Video</span>
-                    <span className="text-sm">→</span>
                   </div>
                 </div>
               </div>

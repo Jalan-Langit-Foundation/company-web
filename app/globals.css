@@ -216,4 +216,39 @@ body {
 
 .animate-marquee:hover {
   animation-play-state: paused;
-}
+}
+
+/* =========================================================
+   CARD ENTRANCE & EXIT ANIMATIONS (TOP <-> BOTTOM)
+   ========================================================= */
+
+@keyframes slideDownFade {
+  0% {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUpFade {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+}
+
+.animate-slide-down {
+  animation: slideDownFade 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-slide-up {
+  animation: slideUpFade 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
