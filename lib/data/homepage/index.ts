@@ -3,5 +3,6 @@ export * from "./impact";
 export * from "./about";
 export * from "./videos";
 export * from "./programs";
+export * from "./collaboration";
 export * from "./news";
 export * from "./final-cta";

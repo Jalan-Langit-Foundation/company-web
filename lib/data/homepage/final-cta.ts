@@ -8,7 +8,7 @@ export const FINAL_CTA_CONFIG = {
   description:
     "Bersama JLF, kontribusimu dapat menjadi bagian dari dampak nyata bagi lebih banyak penerima manfaat.",
   primaryAction: {
-    label: "Berdonasi",
+    label: "Donasi Sekarang",
     href: SITE_CONFIG.contact.donationUrl,
     isExternal: true,
   },
