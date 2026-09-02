@@ -7,6 +7,7 @@ import {
   Clock,
   ChevronLeft,
   ChevronRight,
+  ArrowRight,
   X,
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
@@ -31,7 +32,7 @@ export function FeaturedVideosSection() {
     <section
       id="video-pilihan"
       aria-label="Dokumentasi Video Jalan Langit Foundation"
-      className="w-full bg-white py-12 sm:py-20 lg:py-24 border-b border-slate-100 relative overflow-hidden transition-colors"
+      className="w-full bg-white py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 relative overflow-hidden transition-colors"
     >
       <Container size="xl" className="relative z-10">
         {/* =========================================================
@@ -102,8 +103,9 @@ export function FeaturedVideosSection() {
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-slate-100 flex items-center text-xs text-[#3C95C8] font-semibold font-['Poppins',sans-serif]">
+                  <div className="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-xs text-[#3C95C8] font-semibold font-['Poppins',sans-serif]">
                     <span>Tonton Video</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
               </div>

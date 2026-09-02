@@ -88,7 +88,7 @@ export function ImpactSnapshotSection() {
         "relative w-full overflow-hidden py-8 sm:py-10 lg:py-14",
         "bg-[linear-gradient(110deg,#F6FAFD_0%,#FFFFFF_30%,#EDF7FD_50%,#FFFFFF_70%,#F6FAFD_100%)]",
         "animate-gradient-flow",
-        "border-y border-[#6EB6D6]/15 shadow-[0_2px_12px_rgba(60,149,200,0.03)]"
+        "border-y border-slate-100 shadow-[0_2px_12px_rgba(60,149,200,0.03)]"
       )}
     >
       {/* Tampilan Desktop: 4 Kolom Pas 1 Baris */}

@@ -3,7 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { PROGRAMS_SECTION_DATA, SITE_CONFIG } from "@/lib/data";
@@ -21,14 +21,14 @@ export function ProgramsSection() {
     setTimeout(() => {
       setIsExpanded(false);
       setIsCollapsing(false);
-    }, 320);
+    }, 280);
   };
 
   return (
     <section
       id="program"
       aria-label="Program Kebaikan Jalan Langit Foundation"
-      className="w-full bg-[#FAFCFE] py-12 sm:py-20 lg:py-24 border-b border-slate-100 relative overflow-hidden"
+      className="w-full bg-[#FAFCFE] py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 relative overflow-hidden"
     >
       {/* Subtle Background Lighting Accent */}
       <div className="absolute top-1/4 -left-40 w-96 h-96 bg-[#EAF5FB]/60 rounded-full blur-3xl pointer-events-none -z-0" />
@@ -58,60 +58,53 @@ export function ProgramsSection() {
                - Tablet (sm/md): 2 Cards per row
                - Desktop (lg): 3 Cards per row
                - Default: 1 row on all devices (1 on mobile, 2 on tablet, 3 on desktop)
-               - Expanded: Shows all program cards with smooth animations
             ========================================================= */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {PROGRAMS_SECTION_DATA.programs.map((program, idx) => {
-            // Visibility logic for 1-row default across devices:
-            // Mobile (<640px): idx 0 is visible (1 card)
-            // Tablet (640px - 1023px): idx 0, 1 are visible (2 cards)
-            // Desktop (>=1024px): idx 0, 1, 2 are visible (3 cards)
-            // idx >= 3: hidden until expanded
-            const isInitiallyHidden = idx >= 1;
-            const isVisible = isExpanded || isCollapsing;
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+          {PROGRAMS_SECTION_DATA.programs.map((program, index) => {
+            // Logika responsif penentuan kartu awal:
+            // Mobile (<640px): hanya kartu pertama (index 0)
+            // Tablet (640px-1024px): 2 kartu pertama (index 0 & 1)
+            // Desktop (≥1024px): 3 kartu pertama (index 0, 1 & 2)
+            const isInitialMobile = index === 0;
+            const isInitialTablet = index < 2;
+            const isInitialDesktop = index < 3;
 
-            const animationClass =
-              isCollapsing && isInitiallyHidden
-                ? "animate-slide-up"
-                : isExpanded && isInitiallyHidden
-                ? "animate-slide-down"
-                : "";
-
-            const visibilityClass = isVisible
-              ? `flex ${animationClass}`
-              : idx === 0
-              ? "flex"
-              : idx === 1
-              ? "hidden sm:flex"
-              : idx === 2
-              ? "hidden lg:flex"
-              : "hidden";
-
-            const animationStyle =
-              isCollapsing && isInitiallyHidden
-                ? { animationDelay: `${Math.max(0, 5 - idx) * 30}ms` }
-                : isExpanded && isInitiallyHidden
-                ? { animationDelay: `${(idx - 1) * 60}ms` }
-                : undefined;
+            // Kelas CSS untuk kartu tambahan saat mode collapse vs expand
+            let visibilityClass = "";
+            if (isExpanded) {
+              visibilityClass = isCollapsing
+                ? "animate-out fade-out slide-out-to-top-4 duration-300 fill-mode-forwards"
+                : "animate-in fade-in slide-in-from-top-4 duration-500 fill-mode-forwards";
+            } else {
+              // Jika belum expanded: tampilkan hanya 1 baris pertama sesuai device
+              if (isInitialMobile) {
+                visibilityClass = "flex";
+              } else if (isInitialTablet) {
+                visibilityClass = "hidden sm:flex";
+              } else if (isInitialDesktop) {
+                visibilityClass = "hidden lg:flex";
+              } else {
+                visibilityClass = "hidden";
+              }
+            }
 
             return (
               <div
                 key={program.id}
-                style={animationStyle}
-                className={`group flex-col bg-white rounded-2xl overflow-hidden border border-slate-200/80 hover:border-slate-300/90 shadow-none hover:shadow-[0_12px_32px_rgba(0,0,0,0.07)] transition-all duration-300 hover:-translate-y-1 ${visibilityClass}`}
+                className={`${visibilityClass} group flex-col bg-white rounded-2xl overflow-hidden border border-slate-200/80 hover:border-slate-300/90 shadow-none hover:shadow-[0_12px_32px_rgba(0,0,0,0.07)] transition-all duration-300 hover:-translate-y-1`}
               >
-                {/* 16:9 Thumbnail Box */}
+                {/* 16:9 Aspect Ratio Thumbnail Image */}
                 <div className="relative w-full aspect-video overflow-hidden bg-slate-900">
                   <Image
                     src={program.image}
                     alt={program.title}
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
 
-                  {/* Single Blue Category Badge on Top-Left */}
+                  {/* Kategori Badge di Sudut Kiri Atas */}
                   <span className="absolute top-3.5 left-3.5 px-2.5 py-1 rounded-md bg-[#3C95C8] text-white text-[11px] font-semibold font-['Poppins',sans-serif] shadow-xs z-[2]">
                     {program.category}
                   </span>
@@ -128,15 +121,16 @@ export function ProgramsSection() {
                     </p>
                   </div>
 
-                  {/* Card Action Link (Matching Video Section Style without Arrow) */}
+                  {/* Card Action Link dengan Icon Panah */}
                   <div className="pt-3 border-t border-slate-100 flex items-center text-xs text-[#3C95C8] font-semibold font-['Poppins',sans-serif]">
                     <Link
                       href={SITE_CONFIG.contact.donationUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-[#25729D] transition-colors"
+                      className="inline-flex items-center gap-1.5 hover:text-[#25729D] transition-colors"
                     >
-                      Donasi Sekarang
+                      <span>Donasi Sekarang</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>
                 </div>

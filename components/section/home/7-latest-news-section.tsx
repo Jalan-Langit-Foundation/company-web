@@ -22,7 +22,7 @@ export function LatestNewsSection() {
     <section
       id="berita"
       aria-label="Kabar & Berita Jalan Langit Foundation"
-      className="w-full bg-white py-12 sm:py-16 lg:py-20 border-b border-slate-100 relative overflow-hidden"
+      className="w-full bg-white py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 relative overflow-hidden"
     >
       <Container size="xl" className="relative z-10">
         {/* =========================================================

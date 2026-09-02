@@ -11,17 +11,17 @@ export function AboutTeaserSection() {
     <section
       id="tentang-kami"
       aria-label="Tentang Jalan Langit Foundation"
-      className="w-full bg-white py-12 sm:py-20 lg:py-24 transition-colors"
+      className="w-full bg-white py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 transition-colors"
     >
       <Container size="xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-14 xl:gap-16 items-start">
           {/* Kolom Kiri: Quotes Manifesto dengan Quote Biru di Belakang & Card Putih Menimpa */}
           <div className="lg:col-span-5 flex flex-col justify-center h-full">
             <div className="relative flex items-center justify-center py-8 sm:py-10 min-h-[300px] sm:min-h-[340px]">
-              {/* Vektor Tanda Kutip Ganda Geometris Sesuai Referensi Gambar */}
+              {/* Vektor Tanda Kutip Ganda Geometris dengan Warna Primary Blue #3C95C8 */}
               <svg
                 viewBox="0 0 150 145"
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[290px] sm:w-[330px] h-auto text-[#6EB6D6] opacity-90 select-none pointer-events-none drop-shadow-xs -rotate-2"
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[290px] sm:w-[330px] h-auto text-[#3C95C8] opacity-90 select-none pointer-events-none drop-shadow-xs -rotate-2"
                 fill="currentColor"
                 aria-hidden="true"
               >

@@ -49,7 +49,7 @@ export function CollaborationSection() {
     <section
       id="kolaborasi"
       aria-label="Kolaborasi Kebaikan Jalan Langit Foundation"
-      className="w-full bg-[#FAFCFE] py-12 sm:py-20 lg:py-24 border-b border-slate-100 relative overflow-hidden"
+      className="w-full bg-[#FAFCFE] py-12 sm:py-20 lg:py-24 border-y border-slate-200/80 relative overflow-hidden"
     >
       <Container size="xl" className="relative z-10">
         {/* =========================================================
@@ -127,7 +127,7 @@ export function CollaborationSection() {
               return (
                 <div
                   key={item.id}
-                  className={`bg-white rounded-2xl border transition-all duration-300 overflow-hidden ${
+                  className={`bg-white rounded-2xl border transition-colors duration-200 overflow-hidden ${
                     isOpen
                       ? "border-slate-300/90 shadow-[0_12px_32px_rgba(0,0,0,0.07)]"
                       : "border-slate-200/80 shadow-none hover:border-slate-300/90"
@@ -180,7 +180,7 @@ export function CollaborationSection() {
             })}
 
             {/* Action Buttons di Bawah Accordion (Hanya muncul di Mobile & Tablet <lg) */}
-            <div className="pt-5 sm:pt-6 flex flex-wrap items-center justify-center gap-3 w-full lg:hidden">
+            <div className="pt-1.5 sm:pt-2 flex flex-wrap items-center justify-center gap-3 w-full lg:hidden">
               <Button
                 variant="outline"
                 size="md"
