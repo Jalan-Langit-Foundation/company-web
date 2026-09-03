@@ -11,14 +11,12 @@ function PageLoaderContent() {
 
   // Sembunyikan loader saat rute selesai berganti
   React.useEffect(() => {
-    if (isLoading) {
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-        const hideTimer = setTimeout(() => setShouldRender(false), 200);
-        return () => clearTimeout(hideTimer);
-      }, 180);
-      return () => clearTimeout(timer);
-    }
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      const hideTimer = setTimeout(() => setShouldRender(false), 200);
+      return () => clearTimeout(hideTimer);
+    }, 180);
+    return () => clearTimeout(timer);
   }, [pathname, searchParams]);
 
   // Intersep klik pada link internal untuk memicu loading screen saat berpindah halaman

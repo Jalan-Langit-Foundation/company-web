@@ -48,6 +48,7 @@ export function FinalCtaSection() {
               variant="outline"
               size="md"
               href={FINAL_CTA_CONFIG.secondaryAction.href}
+              external={FINAL_CTA_CONFIG.secondaryAction.isExternal}
               leftIcon={<Handshake className="w-4 h-4 text-[#3C95C8]" />}
               className="w-full sm:w-auto bg-transparent text-[#3C95C8] border-2 border-[#3C95C8] hover:bg-[#EAF5FB] shadow-sm hover:shadow-md transition-all font-semibold text-sm px-6"
             >

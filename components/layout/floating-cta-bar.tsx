@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { SITE_CONFIG } from "@/lib/data";
+import { floatingCtaStore } from "@/lib/stores/floating-cta-store";
 import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "jlf_sticky_cta_dismissed";
@@ -49,9 +50,18 @@ export function FloatingCtaBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isSessionDismissed]);
 
+  React.useEffect(() => {
+    const isCtaActive = isVisible && !isDismissed && !isSessionDismissed;
+    floatingCtaStore.setVisible(isCtaActive);
+    return () => {
+      floatingCtaStore.setVisible(false);
+    };
+  }, [isVisible, isDismissed, isSessionDismissed]);
+
   const handleDismiss = () => {
     setIsVisible(false);
     setIsDismissed(true);
+    floatingCtaStore.setVisible(false);
     try {
       sessionStorage.setItem(STORAGE_KEY, "true");
     } catch {
