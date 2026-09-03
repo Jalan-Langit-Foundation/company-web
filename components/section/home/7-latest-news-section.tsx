@@ -43,15 +43,15 @@ export function LatestNewsSection() {
         {/* =========================================================
             NEWS GRID: Mathematically Balanced 520px Height on Desktop
             ========================================================= */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
           {/* -------------------------------------------------------
-              LEFT COLUMN: 330px + 20px (gap-5) + 170px = 520px
+              LEFT COLUMN: 16:9 Main Card + 20px gap + 16:9 Sub Cards
               ------------------------------------------------------- */}
-          <div className="lg:col-span-7 xl:col-span-7 flex flex-col gap-5">
-            {/* 1. Main Large Featured Article Card (Height 330px on Desktop) */}
+          <div className="lg:col-span-7 xl:col-span-7 flex flex-col gap-5 justify-between">
+            {/* 1. Main Large Featured Article Card (Rasio 16:9 di semua ukuran) */}
             <Link
               href={`/news/${mainFeatured.slug}`}
-              className="group relative w-full aspect-[16/9] lg:aspect-auto lg:h-[330px] rounded-2xl overflow-hidden bg-slate-900 border border-slate-200/80 shadow-xs block shrink-0"
+              className="group relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-slate-900 border border-slate-200/80 shadow-xs block shrink-0"
             >
               <Image
                 src={mainFeatured.image}
@@ -77,16 +77,16 @@ export function LatestNewsSection() {
               </div>
             </Link>
 
-            {/* 2. Two Sub-Featured Article Cards (List style on Mobile, Grid Overlay Cards on Tablet/Desktop) */}
+            {/* 2. Two Sub-Featured Article Cards (Rasio 16:9 di semua ukuran) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 shrink-0">
               {subFeatured.map((article) => (
                 <Link
                   key={article.id}
                   href={`/news/${article.slug}`}
-                  className="group flex sm:block items-center gap-4 sm:gap-0 relative w-full sm:aspect-[16/10] lg:aspect-auto lg:h-[170px] rounded-2xl overflow-hidden bg-transparent sm:bg-slate-900 sm:border sm:border-slate-200/80 shadow-none sm:shadow-xs transition-colors"
+                  className="group flex sm:block items-center gap-4 sm:gap-0 relative w-full sm:aspect-[16/9] rounded-2xl overflow-hidden bg-transparent sm:bg-slate-900 sm:border sm:border-slate-200/80 shadow-none sm:shadow-xs transition-colors"
                 >
-                  {/* Thumbnail Container */}
-                  <div className="relative w-28 sm:w-full h-[80px] sm:h-full shrink-0 rounded-2xl sm:rounded-none overflow-hidden bg-slate-900 border border-slate-100 sm:border-0">
+                  {/* Thumbnail Container: Rasio 16:9 */}
+                  <div className="relative w-28 sm:w-full aspect-[16/9] sm:h-full shrink-0 rounded-2xl sm:rounded-none overflow-hidden bg-slate-900 border border-slate-100 sm:border-0">
                     <Image
                       src={article.image}
                       alt={article.title}
@@ -116,22 +116,22 @@ export function LatestNewsSection() {
           </div>
 
           {/* -------------------------------------------------------
-              RIGHT COLUMN: 5 x 88px + 4 x 20px (gap-5) = 520px
+              RIGHT COLUMN: Recent News List (Sejajar dengan Kolom Kiri, Gap Konsisten 20px)
               ------------------------------------------------------- */}
-          <div className="lg:col-span-5 xl:col-span-5 flex flex-col gap-5">
+          <div className="lg:col-span-5 xl:col-span-5 flex flex-col justify-between h-full gap-5">
             {recentList.map((article) => (
               <Link
                 key={article.id}
                 href={`/news/${article.slug}`}
-                className="group flex items-center gap-4 transition-colors lg:h-[88px] shrink-0"
+                className="group flex items-center gap-4 transition-colors shrink-0"
               >
-                {/* Thumbnail Image (Height 88px, aspect 16/10) */}
-                <div className="relative w-28 sm:w-32 md:w-36 lg:w-[136px] h-[80px] sm:h-[84px] lg:h-[88px] shrink-0 rounded-2xl overflow-hidden bg-slate-900 border border-slate-100">
+                {/* Thumbnail Image: Rasio 16:9 (160x90 di desktop) */}
+                <div className="relative w-28 sm:w-32 lg:w-[160px] aspect-[16/9] shrink-0 rounded-2xl overflow-hidden bg-slate-900 border border-slate-100">
                   <Image
                     src={article.image}
                     alt={article.title}
                     fill
-                    sizes="(max-width: 640px) 120px, 140px"
+                    sizes="(max-width: 640px) 120px, 150px"
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
