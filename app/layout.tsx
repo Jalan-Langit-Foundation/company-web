@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins, Lato } from "next/font/google";
-import { Navbar, Footer, FloatingCtaBar } from "@/components/layout";
+import { Navbar, Footer, FloatingCtaBar, FloatingWhatsappButton } from "@/components/layout";
+import { PageLoader } from "@/components/ui/page-loader";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -35,12 +36,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`${poppins.variable} ${lato.variable}`}>
-      <body className="flex min-h-screen flex-col">
+    <html lang="id" className={`${poppins.variable} ${lato.variable}`} suppressHydrationWarning>
+      <body className="flex min-h-screen flex-col" suppressHydrationWarning>
+        <PageLoader />
         <Navbar />
         <div className="flex-1">{children}</div>
         <Footer />
         <FloatingCtaBar />
+        <FloatingWhatsappButton />
       </body>
     </html>
   );

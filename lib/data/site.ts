@@ -5,7 +5,7 @@ export const SITE_CONFIG = {
   legalName: "Yayasan Jalan Langit",
   tagline: "#BergandenganLangitkanKebaikan",
   description:
-    "NGO Muslim Indonesia yang berfokus menghadirkan dampak kebaikan berkelanjutan melalui optimalisasi dana sosial kemanusiaan.",
+    "NGO Muslim Indonesia yang menghadirkan program kebaikan bernilai dan berdampak berkelanjutan melalui optimalisasi dana infak, sedekah, dan kemanusiaan.",
   contact: {
     email: "jalanlangitfoundation@gmail.com",
     address: {

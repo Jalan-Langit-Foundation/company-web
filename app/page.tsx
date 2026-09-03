@@ -1,9 +1,55 @@
+import {
+  HeroSection,
+  ImpactSnapshotSection,
+  AboutTeaserSection,
+  ProgramsSection,
+  FeaturedVideosSection,
+  CollaborationSection,
+  LatestNewsSection,
+  FinalCtaSection,
+} from "@/components/section/home";
+import { Reveal } from "@/components/ui/reveal";
+
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center font-sans">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 sm:items-start">
+    <main className="flex-1 w-full flex flex-col">
+      {/* 1. Hero Section */}
+      <HeroSection />
 
-      </main>
-    </div>
+      {/* 2. Impact Snapshot Section (Gradient Flow) */}
+      <Reveal>
+        <ImpactSnapshotSection />
+      </Reveal>
+
+      {/* 3. About Teaser Section (Solid White) */}
+      <Reveal>
+        <AboutTeaserSection />
+      </Reveal>
+
+      {/* 4. Programs Section (Soft Blue Accent) */}
+      <Reveal>
+        <ProgramsSection />
+      </Reveal>
+
+      {/* 5. Featured Videos Section (Solid White) */}
+      <Reveal>
+        <FeaturedVideosSection />
+      </Reveal>
+
+      {/* 6. Collaboration Section (Soft Blue Accent) */}
+      <Reveal>
+        <CollaborationSection />
+      </Reveal>
+
+      {/* 7. Latest News Section (Solid White) */}
+      <Reveal>
+        <LatestNewsSection />
+      </Reveal>
+
+      {/* 8. Final CTA Section (Soft Blue Accent) */}
+      <Reveal>
+        <FinalCtaSection />
+      </Reveal>
+    </main>
   );
 }

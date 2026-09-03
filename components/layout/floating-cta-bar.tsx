@@ -1,10 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { X } from "lucide-react";
+import { X, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { SITE_CONFIG } from "@/lib/data";
+import { floatingCtaStore } from "@/lib/stores/floating-cta-store";
 import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "jlf_sticky_cta_dismissed";
@@ -49,9 +50,18 @@ export function FloatingCtaBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isSessionDismissed]);
 
+  React.useEffect(() => {
+    const isCtaActive = isVisible && !isDismissed && !isSessionDismissed;
+    floatingCtaStore.setVisible(isCtaActive);
+    return () => {
+      floatingCtaStore.setVisible(false);
+    };
+  }, [isVisible, isDismissed, isSessionDismissed]);
+
   const handleDismiss = () => {
     setIsVisible(false);
     setIsDismissed(true);
+    floatingCtaStore.setVisible(false);
     try {
       sessionStorage.setItem(STORAGE_KEY, "true");
     } catch {
@@ -89,9 +99,10 @@ export function FloatingCtaBar() {
               size="md"
               href={SITE_CONFIG.contact.donationUrl}
               external
+              leftIcon={<Heart className="w-4 h-4 fill-[#3C95C8] text-[#3C95C8]" />}
               className="shadow-sm hover:shadow-md transition-all font-semibold"
             >
-              Salurkan Kebaikan
+              Donasi Sekarang
             </Button>
 
             <button
