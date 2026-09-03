@@ -2,31 +2,28 @@
 
 import * as React from "react";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import {
   Play,
   Clock,
   ChevronLeft,
   ChevronRight,
   ArrowRight,
-  X,
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { SectionHeader } from "@/components/ui/section-header";
+import { useHorizontalScroll } from "@/hooks";
 import { FEATURED_VIDEOS_DATA, FeaturedVideo } from "@/lib/data/homepage";
+
+const VideoModal = dynamic(
+  () => import("@/components/ui/video-modal").then((mod) => mod.VideoModal),
+  { ssr: false }
+);
 
 export function FeaturedVideosSection() {
   const [activeModalVideo, setActiveModalVideo] = React.useState<FeaturedVideo | null>(null);
-  const sliderRef = React.useRef<HTMLDivElement | null>(null);
-
-  const scrollSlider = (direction: "left" | "right") => {
-    if (sliderRef.current) {
-      const scrollAmount =
-        direction === "left"
-          ? -sliderRef.current.offsetWidth
-          : sliderRef.current.offsetWidth;
-      sliderRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    }
-  };
+  const { scrollRef: sliderRef, scroll: scrollSlider } = useHorizontalScroll();
 
   return (
     <section
@@ -35,22 +32,13 @@ export function FeaturedVideosSection() {
       className="w-full bg-white py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 relative overflow-hidden transition-colors"
     >
       <Container size="xl" className="relative z-10">
-        {/* =========================================================
-            1. SECTION HEADER
-            ========================================================= */}
-        <div className="max-w-2xl mb-8 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl lg:text-[36px] font-extrabold text-[#2C2C2C] font-['Poppins',sans-serif] leading-tight tracking-tight">
-            {FEATURED_VIDEOS_DATA.headline.prefix}
-            <br />
-            <span className="text-[#3C95C8]">
-              {FEATURED_VIDEOS_DATA.headline.highlight}
-            </span>
-          </h2>
-
-          <p className="text-sm sm:text-base text-[#555555] font-['Lato',sans-serif] leading-relaxed mt-3">
-            {FEATURED_VIDEOS_DATA.supportingCopy}
-          </p>
-        </div>
+        {/* 1. SECTION HEADER */}
+        <SectionHeader
+          headline={FEATURED_VIDEOS_DATA.headline}
+          description={FEATURED_VIDEOS_DATA.supportingCopy}
+          multiline
+          className="mb-8 sm:mb-12"
+        />
 
         {/* =========================================================
             2. VIDEO SLIDER: EXACT 3 CARDS ON DESKTOP, 2 ON TABLET, 1 ON MOBILE
@@ -150,41 +138,13 @@ export function FeaturedVideosSection() {
         </div>
       </Container>
 
-      {/* =========================================================
-          3. MODAL VIDEO PLAYER POPUP (PURE VIDEO ONLY)
-          ========================================================= */}
-      {activeModalVideo && (
-        <div
-          onClick={() => setActiveModalVideo(null)}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 lg:p-10 bg-black/85 backdrop-blur-sm animate-fadeIn cursor-pointer"
-        >
-          {/* Floating Close Button */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setActiveModalVideo(null);
-            }}
-            aria-label="Tutup Video"
-            className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 w-11 h-11 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition-all hover:scale-110 cursor-pointer backdrop-blur-md border border-white/20 shadow-lg"
-          >
-            <X className="w-6 h-6" />
-          </button>
-
-          {/* Pure 16:9 Video Player (No frame/footer) */}
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-5xl aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black cursor-default"
-          >
-            <iframe
-              src={`https://www.youtube-nocookie.com/embed/${activeModalVideo.youtubeId}?autoplay=1&rel=0`}
-              title={activeModalVideo.title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-full h-full border-0"
-            />
-          </div>
-        </div>
-      )}
+      {/* 3. MODAL VIDEO PLAYER POPUP (LAZY LOADED) */}
+      <VideoModal
+        isOpen={Boolean(activeModalVideo)}
+        youtubeId={activeModalVideo?.youtubeId}
+        title={activeModalVideo?.title}
+        onClose={() => setActiveModalVideo(null)}
+      />
     </section>
   );
 }

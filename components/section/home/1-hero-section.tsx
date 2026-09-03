@@ -9,21 +9,14 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { SITE_CONFIG } from "@/lib/data";
 import { HERO_CONFIG } from "@/lib/data/homepage";
+import { useAutoPlay } from "@/hooks";
 import { cn } from "@/lib/utils";
 
 export function HeroSection() {
-  const [currentSlideIndex, setCurrentSlideIndex] = React.useState(0);
-
-  // Auto-play slideshow dengan animasi crossfade halus
-  React.useEffect(() => {
-    if (!HERO_CONFIG.slides || HERO_CONFIG.slides.length <= 1) return;
-
-    const timer = setInterval(() => {
-      setCurrentSlideIndex((prev) => (prev + 1) % HERO_CONFIG.slides.length);
-    }, HERO_CONFIG.intervalMs || 5000);
-
-    return () => clearInterval(timer);
-  }, []);
+  const { currentIndex: currentSlideIndex } = useAutoPlay({
+    totalItems: HERO_CONFIG.slides?.length || 0,
+    intervalMs: HERO_CONFIG.intervalMs || 5000,
+  });
 
   return (
     <section

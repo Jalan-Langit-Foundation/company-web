@@ -1,10 +1,9 @@
-"use client";
-
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { SectionHeader } from "@/components/ui/section-header";
 import { LATEST_NEWS_DATA } from "@/lib/data/homepage";
 
 export function LatestNewsSection() {
@@ -25,20 +24,14 @@ export function LatestNewsSection() {
       className="w-full bg-white py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 relative overflow-hidden"
     >
       <Container size="xl" className="relative z-10">
-        {/* =========================================================
-            SECTION HEADER (Centered 2-Line Style)
-            ========================================================= */}
-        <div className="max-w-2xl mx-auto text-center mb-8 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-extrabold text-[#2C2C2C] font-['Poppins',sans-serif] leading-tight tracking-tight">
-            {headline.prefix}
-            <br />
-            <span className="text-[#3C95C8]">{headline.highlight}</span>
-          </h2>
-
-          <p className="text-sm sm:text-base text-[#555555] font-['Lato',sans-serif] leading-relaxed mt-3 max-w-lg mx-auto">
-            {supportingCopy}
-          </p>
-        </div>
+        {/* SECTION HEADER (Centered 2-Line Style) */}
+        <SectionHeader
+          headline={headline}
+          description={supportingCopy}
+          align="center"
+          multiline
+          className="mb-8 sm:mb-12"
+        />
 
         {/* =========================================================
             NEWS GRID: Mathematically Balanced 520px Height on Desktop

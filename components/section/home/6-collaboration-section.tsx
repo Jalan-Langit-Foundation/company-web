@@ -6,6 +6,8 @@ import Link from "next/link";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { SectionHeader } from "@/components/ui/section-header";
+import { useAutoPlay } from "@/hooks";
 import { COLLABORATION_DATA } from "@/lib/data/homepage";
 
 // Daftar foto slideshow mandiri (berganti otomatis tiap 4 detik)
@@ -30,16 +32,10 @@ const COLLABORATION_SLIDES = [
 
 export function CollaborationSection() {
   const [openItem, setOpenItem] = React.useState<string>("");
-  const [activeSlideIndex, setActiveSlideIndex] = React.useState(0);
-
-  // Slideshow otomatis mandiri berganti setiap 4 detik
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveSlideIndex((prev) => (prev + 1) % COLLABORATION_SLIDES.length);
-    }, 4000);
-
-    return () => clearInterval(timer);
-  }, []);
+  const { currentIndex: activeSlideIndex } = useAutoPlay({
+    totalItems: COLLABORATION_SLIDES.length,
+    intervalMs: 4000,
+  });
 
   const toggleItem = (id: string) => {
     setOpenItem((prev) => (prev === id ? "" : id));
@@ -60,19 +56,11 @@ export function CollaborationSection() {
           {/* SISI KIRI: HEADING + DESKRIPSI + FOTO TETAP + TOMBOL HORIZONTAL */}
           <div className="lg:col-span-5 flex flex-col space-y-6 lg:sticky lg:top-28">
             {/* 1. Heading 2 Baris & Supporting Copy */}
-            <div className="space-y-3">
-              <h2 className="text-2xl sm:text-3xl lg:text-[36px] font-extrabold text-[#2C2C2C] font-['Poppins',sans-serif] leading-tight tracking-tight">
-                {COLLABORATION_DATA.headline.prefix}
-                <br />
-                <span className="text-[#3C95C8]">
-                  {COLLABORATION_DATA.headline.highlight}
-                </span>
-              </h2>
-
-              <p className="text-sm sm:text-base text-[#555555] font-['Lato',sans-serif] leading-relaxed">
-                {COLLABORATION_DATA.supportingCopy}
-              </p>
-            </div>
+            <SectionHeader
+              headline={COLLABORATION_DATA.headline}
+              description={COLLABORATION_DATA.supportingCopy}
+              multiline
+            />
 
             {/* 2. Pure Photo Slideshow Box (Rasio 16:9 di Mobile) */}
             <div className="relative w-full aspect-video lg:aspect-auto lg:h-[220px] rounded-2xl overflow-hidden border border-slate-200/80 bg-slate-900 group shadow-none hover:shadow-[0_12px_32px_rgba(0,0,0,0.07)] transition-all duration-300 shrink-0">

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ChevronDown, ChevronUp, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { SectionHeader } from "@/components/ui/section-header";
 import { PROGRAMS_SECTION_DATA, SITE_CONFIG } from "@/lib/data";
 
 export function ProgramsSection() {
@@ -18,10 +19,15 @@ export function ProgramsSection() {
 
   const handleCollapse = () => {
     setIsCollapsing(true);
+    // Smooth scroll back to top of section after collapse
+    const sectionElement = document.getElementById("program");
+    if (sectionElement) {
+      sectionElement.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
     setTimeout(() => {
       setIsExpanded(false);
       setIsCollapsing(false);
-    }, 280);
+    }, 300);
   };
 
   return (
@@ -35,22 +41,13 @@ export function ProgramsSection() {
       <div className="absolute bottom-1/4 -right-40 w-96 h-96 bg-[#EAF5FB]/60 rounded-full blur-3xl pointer-events-none -z-0" />
 
       <Container size="xl" className="relative z-10">
-        {/* =========================================================
-            1. SECTION HEADER (Matching Video Section Style)
-            ========================================================= */}
-        <div className="max-w-2xl mb-8 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl lg:text-[36px] font-extrabold text-[#2C2C2C] font-['Poppins',sans-serif] leading-tight tracking-tight">
-            {PROGRAMS_SECTION_DATA.headline.prefix}
-            <br />
-            <span className="text-[#3C95C8]">
-              {PROGRAMS_SECTION_DATA.headline.highlight}
-            </span>
-          </h2>
-
-          <p className="text-sm sm:text-base text-[#555555] font-['Lato',sans-serif] leading-relaxed mt-3">
-            {PROGRAMS_SECTION_DATA.supportingCopy}
-          </p>
-        </div>
+        {/* 1. SECTION HEADER */}
+        <SectionHeader
+          headline={PROGRAMS_SECTION_DATA.headline}
+          description={PROGRAMS_SECTION_DATA.supportingCopy}
+          multiline
+          className="mb-8 sm:mb-12"
+        />
 
         {/* =========================================================
             2. RESPONSIVE PROGRAM CARDS GRID
