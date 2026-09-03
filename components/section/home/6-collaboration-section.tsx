@@ -29,7 +29,7 @@ const COLLABORATION_SLIDES = [
 ];
 
 export function CollaborationSection() {
-  const [openItem, setOpenItem] = React.useState<string>(COLLABORATION_DATA.items[0].id);
+  const [openItem, setOpenItem] = React.useState<string>("");
   const [activeSlideIndex, setActiveSlideIndex] = React.useState(0);
 
   // Slideshow otomatis mandiri berganti setiap 4 detik
@@ -155,26 +155,32 @@ export function CollaborationSection() {
                     />
                   </button>
 
-                  {/* Konten Terbuka */}
-                  {isOpen && (
-                    <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-1 border-t border-slate-100 animate-in fade-in duration-200">
-                      <p className="text-xs sm:text-sm text-[#555555] font-['Lato',sans-serif] leading-relaxed">
-                        {item.description}
-                      </p>
+                  {/* Konten Terbuka dengan Animasi Expand Halus dari Atas ke Bawah */}
+                  <div
+                    className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${
+                      isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-1 border-t border-slate-100">
+                        <p className="text-xs sm:text-sm text-[#555555] font-['Lato',sans-serif] leading-relaxed">
+                          {item.description}
+                        </p>
 
-                      <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between">
-                        <Link
-                          href={item.ctaHref}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-xs text-[#3C95C8] font-semibold font-['Poppins',sans-serif] hover:text-[#25729D] transition-colors"
-                        >
-                          <span>{item.ctaText}</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </Link>
+                        <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between">
+                          <Link
+                            href={item.ctaHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-xs text-[#3C95C8] font-semibold font-['Poppins',sans-serif] hover:text-[#25729D] transition-colors"
+                          >
+                            <span>{item.ctaText}</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </Link>
+                        </div>
                       </div>
                     </div>
-                  )}
+                  </div>
                 </div>
               );
             })}

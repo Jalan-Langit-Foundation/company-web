@@ -22,16 +22,23 @@ export function Reveal({
     const element = ref.current;
     if (!element) return;
 
+    // Jika elemen sudah berada di layar saat halaman dimuat (seperti Hero section), langsung trigger animasi
+    const rect = element.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const raf = requestAnimationFrame(() => setIsVisible(true));
+      return () => cancelAnimationFrame(raf);
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry && entry.isIntersecting) {
           setIsVisible(true);
           observer.unobserve(element);
         }
       },
       {
-        threshold: 0.05,
-        rootMargin: "0px 0px -50px 0px",
+        threshold: 0,
+        rootMargin: "0px 0px 40px 0px",
       }
     );
 
@@ -63,3 +70,4 @@ export function Reveal({
     </div>
   );
 }
+

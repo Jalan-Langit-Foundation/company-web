@@ -17,11 +17,11 @@ export function AboutTeaserSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-14 xl:gap-16 items-start">
           {/* Kolom Kiri: Quotes Manifesto dengan Quote Biru di Belakang & Card Putih Menimpa */}
           <div className="lg:col-span-5 flex flex-col justify-center h-full">
-            <div className="relative flex items-center justify-center py-8 sm:py-10 min-h-[300px] sm:min-h-[340px]">
+            <div className="relative flex items-center justify-center py-6 sm:py-10 min-h-[240px] sm:min-h-[340px]">
               {/* Vektor Tanda Kutip Ganda Geometris dengan Warna Primary Blue #3C95C8 */}
               <svg
                 viewBox="0 0 150 145"
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[290px] sm:w-[330px] h-auto text-[#3C95C8] opacity-90 select-none pointer-events-none drop-shadow-xs -rotate-2"
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[210px] sm:w-[330px] h-auto text-[#3C95C8] opacity-90 select-none pointer-events-none drop-shadow-xs -rotate-2"
                 fill="currentColor"
                 aria-hidden="true"
               >
@@ -32,9 +32,9 @@ export function AboutTeaserSection() {
               </svg>
 
               {/* Card Putih Mengambang dengan Shadow Halus yang Menimpa */}
-              <div className="relative z-10 w-full max-w-[360px] sm:max-w-[400px] rounded-2xl bg-white p-6 sm:p-7 shadow-[0_12px_32px_rgba(0,0,0,0.07)] border border-slate-100 transform -rotate-2 hover:rotate-0 transition-transform duration-300">
+              <div className="relative z-10 w-full max-w-[270px] sm:max-w-[380px] lg:max-w-[400px] rounded-2xl bg-white p-4 sm:p-7 shadow-[0_12px_32px_rgba(0,0,0,0.07)] border border-slate-100 transform -rotate-2 hover:rotate-0 transition-transform duration-300">
                 {/* Badge Logo Resmi di Sudut Kiri Atas */}
-                <div className="absolute -top-4 -left-4 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#3C95C8] shadow-md flex items-center justify-center border-2 border-white overflow-hidden p-1">
+                <div className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-8.5 h-8.5 sm:w-11 sm:h-11 rounded-full bg-[#3C95C8] shadow-md flex items-center justify-center border-2 border-white overflow-hidden p-1">
                   <Image
                     src="/images/Master%20Logo%20JLF/Logo%20Jalan%20Langit/Transparan/Bulat/Logo%20Only%20white.png"
                     alt="Logo Yayasan Jalan Langit"
@@ -47,7 +47,7 @@ export function AboutTeaserSection() {
                 </div>
 
                 <blockquote className="text-center font-['Poppins',sans-serif]">
-                  <p className="text-base sm:text-lg lg:text-[19px] font-bold leading-snug tracking-tight">
+                  <p className="text-sm sm:text-lg lg:text-[19px] font-bold leading-snug tracking-tight">
                     <span className="text-[#2C2C2C]">
                       {ABOUT_TEASER_DATA.quote.line1}
                     </span>{" "}

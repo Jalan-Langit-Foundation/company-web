@@ -19,10 +19,10 @@ export function FloatingWhatsappButton() {
   return (
     <div
       className={cn(
-        "fixed right-5 sm:right-6 z-50 transition-all duration-300 ease-out",
+        "fixed right-4 sm:right-6 lg:right-8 z-50 transition-all duration-300 ease-out",
         isCtaVisible
-          ? "bottom-5 sm:bottom-6 md:bottom-[84px]"
-          : "bottom-5 sm:bottom-6 md:bottom-6"
+          ? "bottom-4 sm:bottom-6 md:bottom-[88px] lg:bottom-[96px]"
+          : "bottom-4 sm:bottom-6 lg:bottom-8"
       )}
     >
       <a

@@ -66,10 +66,10 @@ export function HeroSection() {
       </div>
 
       <Container size="xl" className="relative z-10">
-        <div className="max-w-lg lg:max-w-[500px] xl:max-w-[540px] mx-auto sm:mx-0">
-          <Reveal>
+        <div className="max-w-lg lg:max-w-[500px] xl:max-w-[540px] mx-auto sm:mx-0 w-full">
+          <Reveal className="w-full">
             {/* Kolom Konten: Eyebrow, Headline, Supporting Copy, Dual CTA */}
-            <div className="flex flex-col items-center sm:items-start gap-6 text-center sm:text-left">
+            <div className="flex flex-col items-center sm:items-start gap-6 text-center sm:text-left w-full">
               {/* Header Block: Badge & Headline/Copy */}
               <div className="flex flex-col items-center sm:items-start gap-3 sm:gap-3.5 w-full">
                 {/* Eyebrow Badge (Pita Putih / Rope Ribbon) */}
@@ -95,22 +95,22 @@ export function HeroSection() {
               </div>
 
               {/* Dual CTA Button */}
-              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3.5 pt-0.5 w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center sm:justify-start gap-3 sm:gap-3.5 pt-0.5 w-full sm:w-auto">
                 <Button
                   variant="white"
-                  size="lg"
+                  size="md"
                   href="/programs"
                   rightIcon={<ArrowRight className="w-4 h-4 text-[#3C95C8]" />}
-                  className="shadow-lg hover:shadow-xl transition-all font-bold text-[#3C95C8] hover:bg-[#EAF5FB]"
+                  className="w-full sm:w-auto text-[15px] sm:text-base py-3 sm:py-3.5 px-6 sm:px-7 min-h-[46px] sm:min-h-[50px] shadow-sm hover:shadow-md transition-all font-semibold"
                 >
                   Lihat Program
                 </Button>
                 <Button
                   variant="outline"
-                  size="lg"
+                  size="md"
                   href="/contact"
                   leftIcon={<Handshake className="w-4 h-4 text-white" />}
-                  className="font-semibold text-white border-white/70 hover:bg-white/15 hover:border-white hover:text-white"
+                  className="w-full sm:w-auto text-[15px] sm:text-base py-3 sm:py-3.5 px-6 sm:px-7 min-h-[46px] sm:min-h-[50px] font-semibold text-white border-white/70 hover:bg-white/15 hover:border-white hover:text-white"
                 >
                   Berkolaborasi
                 </Button>

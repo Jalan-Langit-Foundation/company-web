@@ -333,14 +333,14 @@ export function Navbar() {
             })}
           </ul>
 
-          <div className="mt-3 pt-2.5 border-t border-slate-100 px-1">
+          <div className="mt-4 pt-3 border-t border-slate-100">
             <Button
               variant="primary"
-              size="sm"
+              size="md"
               href={SITE_CONFIG.contact.donationUrl}
               external
-              leftIcon={<Heart className="w-3.5 h-3.5 fill-white text-white" />}
-              className="w-full justify-center shadow-sm font-semibold py-2.5 text-xs"
+              leftIcon={<Heart className="w-4 h-4 fill-white text-white" />}
+              className="w-full justify-center shadow-sm hover:shadow-md transition-all font-semibold text-sm px-6"
             >
               Donasi Sekarang
             </Button>
