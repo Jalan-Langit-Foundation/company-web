@@ -3,7 +3,6 @@
 import * as React from "react";
 import { X, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Container } from "@/components/ui/container";
 import { SITE_CONFIG } from "@/lib/data";
 import { floatingCtaStore } from "@/lib/stores/floating-cta-store";
 import { cn } from "@/lib/utils";
@@ -85,7 +84,7 @@ export function FloatingCtaBar() {
           : "translate-y-full opacity-0 pointer-events-none"
       )}
     >
-      <Container size="xl">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-6">
           {/* Sisi Kiri: Pesan Sederhana */}
           <p className="text-sm font-medium text-white font-['Poppins',sans-serif]">
@@ -116,7 +115,7 @@ export function FloatingCtaBar() {
             </button>
           </div>
         </div>
-      </Container>
+      </div>
     </aside>
   );
 }
