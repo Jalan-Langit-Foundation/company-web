@@ -1,0 +1,9 @@
+export { AboutHeroSection } from "./1-hero-section";
+export { WhoWeAreSection } from "./2-who-we-are-section";
+export { JourneySection } from "./3-journey-section";
+export { VisionMissionSection } from "./4-vision-mission-section";
+export { CoreValuesSection } from "./5-core-values-section";
+export { FocusImpactSection } from "./6-focus-impact-section";
+export { SdgsSection } from "./7-sdgs-section";
+export { TrustLegalitySection } from "./8-trust-legality-section";
+export { ClosingCtaSection } from "./9-closing-cta-section";
