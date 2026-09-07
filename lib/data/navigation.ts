@@ -13,32 +13,32 @@ export const NAVBAR_LINKS: NavLink[] = [
       },
       {
         label: "#LangitBox",
-        href: "/programs/langit-box",
+        href: "/programs#langit-box",
         description: "Pangan & nutrisi santri, yatim, dan dhuafa",
       },
       {
         label: "#LangitScholarship",
-        href: "/programs/langit-scholarship",
+        href: "/programs#langit-scholarship",
         description: "Beasiswa dan pembinaan generasi Qur’ani",
       },
       {
         label: "#SERASI",
-        href: "/programs/serasi",
+        href: "/programs#serasi",
         description: "Sehari Bersama Santri, event rekreasi edukatif",
       },
       {
         label: "#HadiahKebahagiaan",
-        href: "/programs/hadiah-kebahagiaan",
+        href: "/programs#hadiah-kebahagiaan",
         description: "Paket sembako bagi pejuang nafkah jalanan",
       },
       {
         label: "#Zakat",
-        href: "/programs/zakat",
+        href: "/programs#zakat",
         description: "Optimalisasi penyaluran dana zakat berdaya",
       },
       {
         label: "#JalanLangitPeduli",
-        href: "/programs/jalan-langit-peduli",
+        href: "/programs#jalan-langit-peduli",
         description: "Aksi kemanusiaan tanggap darurat & bencana",
       },
     ],
