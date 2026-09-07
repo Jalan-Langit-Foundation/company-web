@@ -14,7 +14,7 @@ export const FINAL_CTA_CONFIG = {
   },
   secondaryAction: {
     label: "Berkolaborasi",
-    href: "https://wa.me/6285173473189?text=Halo%20Jalan%20Langit%20Foundation,%20saya%20ingin%20berkolaborasi",
+    href: "https://wa.me/6285173473189?text=Assalamualaikum%20kak%20Ayu,%20saya%20ingin%20berkolaborasi",
     isExternal: true,
   },
 };

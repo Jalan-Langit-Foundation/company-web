@@ -74,20 +74,6 @@ export const PROGRAMS_SECTION_DATA: {
       isFlagship: true,
     },
     {
-      id: "prog-serasi",
-      slug: "serasi",
-      title: "SERASI — Sehari Bersama Santri",
-      category: "Event Edukasi",
-      categoryKey: "pendidikan",
-      badge: "Event Santri",
-      description:
-        "Program berbasis event yang bertujuan menghadirkan kebahagiaan dan pengalaman edukatif kepada anak dan pelajar melalui kegiatan menyenangkan seperti games, nonton bersama, dan rekreasi edukatif.",
-      highlightTag: "Fun Learning & Edukasi",
-      image:
-        "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop",
-      donationUrl: "https://donasi.jalanlangit.org/campaign/serasi",
-    },
-    {
       id: "prog-hadiah-kebahagiaan",
       slug: "hadiah-kebahagiaan",
       title: "Hadiah Kebahagiaan",
@@ -100,6 +86,20 @@ export const PROGRAMS_SECTION_DATA: {
       image:
         "https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=800&auto=format&fit=crop",
       donationUrl: "https://donasi.jalanlangit.org/campaign/hadiah-kebahagiaan",
+    },
+    {
+      id: "prog-serasi",
+      slug: "serasi",
+      title: "SERASI — Sehari Bersama Santri",
+      category: "Event Edukasi",
+      categoryKey: "pendidikan",
+      badge: "Event Santri",
+      description:
+        "Program berbasis event yang bertujuan menghadirkan kebahagiaan dan pengalaman edukatif kepada anak dan pelajar melalui kegiatan menyenangkan seperti games, nonton bersama, dan rekreasi edukatif.",
+      highlightTag: "Fun Learning & Edukasi",
+      image:
+        "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop",
+      donationUrl: "https://donasi.jalanlangit.org/campaign/serasi",
     },
     {
       id: "prog-zakat",

@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 const WA_URL = "https://wa.me/6285173473189";
 const CHAT_URL = `${WA_URL}?text=${encodeURIComponent(
-  "Halo Jalan Langit Foundation, saya ingin bertanya seputar program kebaikan."
+  "Assalamualaikum kak Ayu, saya ingin bertanya seputar program kebaikan boleh?"
 )}`;
 
 export function FloatingWhatsappButton() {
