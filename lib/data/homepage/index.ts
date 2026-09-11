@@ -5,4 +5,5 @@ export * from "./videos";
 export * from "./programs";
 export * from "./collaboration";
 export * from "./news";
+export * from "./langit-values";
 export * from "./final-cta";

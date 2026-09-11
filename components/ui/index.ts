@@ -8,5 +8,5 @@ export * from "./scroll-indicator";
 export * from "./section-header";
 export * from "./reveal";
 export * from "./video-modal";
-
-
+export * from "./vector-box";
+export * from "./langit-card";
