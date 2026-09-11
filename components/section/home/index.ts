@@ -1,6 +1,7 @@
 export { HeroSection } from "./1-hero-section";
 export { ImpactSnapshotSection } from "./2-impact-snapshot-section";
 export { AboutTeaserSection } from "./3-about-teaser-section";
+export { LangitValuesSection } from "./langit-values-section";
 export { WhatWeDoSection } from "./4-what-we-do-section";
 export { ProgramsSection } from "./5-programs-section";
 export { FeaturedVideosSection } from "./6-featured-videos-section";

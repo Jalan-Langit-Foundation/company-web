@@ -36,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`${poppins.variable} ${lato.variable}`} suppressHydrationWarning>
+    <html lang="id" className={`scroll-smooth ${poppins.variable} ${lato.variable}`} suppressHydrationWarning>
       <body className="flex min-h-screen flex-col" suppressHydrationWarning>
         <PageLoader />
         <Navbar />

@@ -2,6 +2,7 @@ import {
   HeroSection,
   ImpactSnapshotSection,
   AboutTeaserSection,
+  LangitValuesSection,
   WhatWeDoSection,
   ProgramsSection,
   FeaturedVideosSection,
@@ -27,6 +28,9 @@ export default function Home() {
       <Reveal>
         <AboutTeaserSection />
       </Reveal>
+
+      {/* Nilai Inti L.A.N.G.I.T (Core Values - Muncul saat Baca Selengkapnya diklik) */}
+      <LangitValuesSection />
 
       {/* Section 4 — Apa Yang Kami Lakukan */}
       <Reveal>
