@@ -26,10 +26,10 @@ const DEFAULT_VECTORS: CardVector[] = [
 
 export function LangitValuesSection() {
   const { isExpanded } = useAboutValues();
-  const [isBoxOpen, setIsBoxOpen] = React.useState(true);
+  const [isBoxOpen, setIsBoxOpen] = React.useState(false);
   const [animState, setAnimState] = React.useState<
     "idle-open" | "sucking" | "idle-closed" | "popping" | "expanding-space"
-  >("idle-open");
+  >("idle-closed");
   const [vectors, setVectors] = React.useState<CardVector[]>(DEFAULT_VECTORS);
 
   const boxRef = React.useRef<HTMLDivElement | null>(null);
@@ -95,13 +95,19 @@ export function LangitValuesSection() {
     };
   }, [updateVectors]);
 
-  // Update vektor saat section diperluas/dibuka
+  // Update vektor saat section diperluas/dibuka (di awal & setelah animasi ekspansi selesai)
   React.useEffect(() => {
     if (isExpanded) {
-      const timer = setTimeout(() => {
+      const timer1 = setTimeout(() => {
         updateVectors();
       }, 150);
-      return () => clearTimeout(timer);
+      const timer2 = setTimeout(() => {
+        updateVectors();
+      }, 750);
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+      };
     }
   }, [isExpanded, updateVectors]);
 
@@ -185,7 +191,7 @@ export function LangitValuesSection() {
         <section
           id="nilai-langit"
           aria-label="Mengenal Nilai L.A.N.G.I.T"
-          className="w-full bg-white py-12 sm:py-16 lg:py-20"
+          className="w-full bg-white py-12 sm:py-16 lg:py-20 scroll-mt-20"
         >
           <Container size="xl">
             {/* Section Header */}

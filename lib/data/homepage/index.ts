@@ -6,4 +6,5 @@ export * from "./programs";
 export * from "./collaboration";
 export * from "./news";
 export * from "./langit-values";
+export * from "./vision-mission";
 export * from "./final-cta";

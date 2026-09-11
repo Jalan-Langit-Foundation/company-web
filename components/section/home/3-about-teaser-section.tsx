@@ -17,11 +17,11 @@ export function AboutTeaserSection() {
 
     if (willOpen) {
       setTimeout(() => {
-        const el = document.getElementById("nilai-langit");
+        const el = document.getElementById("visi-misi");
         if (el) {
           el.scrollIntoView({ behavior: "smooth", block: "start" });
         }
-      }, 150);
+      }, 200);
     }
   };
 
@@ -102,7 +102,7 @@ export function AboutTeaserSection() {
                 type="button"
                 onClick={handleToggle}
                 aria-expanded={isExpanded}
-                aria-controls="nilai-langit"
+                aria-controls="visi-misi nilai-langit"
                 className="inline-flex items-center gap-1.5 font-medium text-[#3C95C8] hover:text-[#2c7ca9] font-['Lato',sans-serif] text-sm sm:text-base transition-colors group cursor-pointer"
               >
                 <span className="leading-none">

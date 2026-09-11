@@ -39,11 +39,20 @@ export function useAboutValues() {
     getServerSnapshot
   );
 
-  // Auto-expand jika URL hash memuat '#nilai-langit' saat dimuat pertama kali
+  // Auto-expand jika URL hash memuat '#nilai-langit' atau '#visi-misi' saat dimuat pertama kali atau berpindah hash
   React.useEffect(() => {
-    if (typeof window !== "undefined" && window.location.hash === "#nilai-langit") {
-      setValuesExpanded(true);
-    }
+    const checkHash = () => {
+      if (
+        typeof window !== "undefined" &&
+        (window.location.hash === "#nilai-langit" || window.location.hash === "#visi-misi")
+      ) {
+        setValuesExpanded(true);
+      }
+    };
+
+    checkHash();
+    window.addEventListener("hashchange", checkHash);
+    return () => window.removeEventListener("hashchange", checkHash);
   }, []);
 
   return {
