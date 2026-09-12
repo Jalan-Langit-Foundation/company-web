@@ -5,10 +5,9 @@ export interface MissionPoint {
 }
 
 export const VISION_MISSION_DATA = {
-  eyebrow: "ARAH & TUJUAN",
   headline: {
-    prefix: "Visi &",
-    highlight: "Misi Lembaga",
+    prefix: "Visi & Misi",
+    highlight: "Jalan Langit Foundation",
   },
   vision: {
     label: "Visi Lembaga",

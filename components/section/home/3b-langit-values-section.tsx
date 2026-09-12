@@ -197,8 +197,8 @@ export function LangitValuesSection() {
             {/* Section Header */}
             <SectionHeader
               headline={{
-                prefix: "Mengenal Nilai",
-                highlight: "L.A.N.G.I.T",
+                prefix: "Core Values",
+                highlight: "Jalan Langit Foundation",
               }}
               multiline={true}
               description="Enam pilar nilai utama yang melandasi setiap langkah dan program kebaikan Jalan Langit Foundation."
