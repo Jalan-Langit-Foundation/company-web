@@ -260,74 +260,180 @@ body {
 }
 
 /* =========================================================
-   GENIE UNBOXING ANIMATIONS (MACBOOK MINIMIZE & RESTORE WARP)
+   3D ISOMETRIC CARD STACK & BOX INSERTION ANIMATIONS
+   - Kartu diputar ke sudut isometrik sesuai bukaan mulut kardus
+   - Bertumpuk rapi di atas kardus
+   - Meluncur bertumpuk masuk ke dalam rongga kardus
    ========================================================= */
 
-@keyframes genieSuckIn {
+@keyframes cardStackIntoBox {
+  /* 1. Berada tegak di grid slot masing-masing */
   0% {
-    transform: translate3d(0, 0, 0) scale(1) rotate(0deg) skewX(0deg);
+    transform: translate3d(0, 0, 0) scale(1);
     opacity: 1;
-    filter: blur(0px);
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.04));
   }
 
-  35% {
-    transform: translate3d(calc(var(--dx) * 0.35), calc(var(--dy) * 0.4), 0) scale(0.72, 1.18) rotate(calc(var(--rot) * 0.6)) skewX(var(--skew));
-    opacity: 0.92;
-    filter: blur(0.5px);
-  }
-
-  75% {
-    transform: translate3d(calc(var(--dx) * 0.85), calc(var(--dy) * 0.9), 0) scale(0.24, 0.45) rotate(var(--rot)) skewX(calc(var(--skew) * 1.5));
-    opacity: 0.6;
-    filter: blur(1.5px);
-  }
-
-  100% {
-    transform: translate3d(var(--dx), var(--dy), 0) scale(0.04, 0.08) rotate(var(--rot)) skewX(0deg);
-    opacity: 0;
-    filter: blur(4px);
-  }
-}
-
-@keyframes geniePopOut {
-  0% {
-    transform: translate3d(var(--dx), var(--dy), 0) scale(0.04, 0.08) rotate(var(--rot)) skewX(0deg);
-    opacity: 0;
-    filter: blur(4px);
-  }
-
+  /* 2. Mengangkat dan mulai berputar menuju sudut belah ketupat isometrik */
   30% {
-    transform: translate3d(calc(var(--dx) * 0.65), calc(var(--dy) * 0.65), 0) scale(0.35, 0.65) rotate(calc(var(--rot) * 0.8)) skewX(var(--skew));
-    opacity: 0.75;
-    filter: blur(1.5px);
+    transform: translate3d(
+      calc(var(--dx) * 0.45),
+      calc((var(--dy) - 90px) * 0.4 + var(--stack-y)),
+      0px
+    )
+    scaleY(calc(1 - 0.42265 * 0.45))
+    rotate(calc(45deg * 0.45))
+    scale(calc(1 + (var(--scale-x, 0.52) - 1) * 0.45), calc(1 + (var(--scale-y, 0.44) - 1) * 0.45));
+    opacity: 1;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.08));
   }
 
+  /* 3. Tiba tepat di atas bukaan mulut kardus dan bertumpuk rapi membentuk belah ketupat 100% presisi */
+  58% {
+    transform: translate3d(
+      var(--dx),
+      calc(var(--dy) - 85px + var(--stack-y)),
+      0px
+    )
+    scaleY(0.57735)
+    rotate(45deg)
+    scale(var(--scale-x, 0.52), var(--scale-y, 0.44));
+    opacity: 1;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.08));
+  }
+
+  /* 4. Tumpukan belah ketupat mengambang sesaat secara elegan di atas mulut kardus */
   70% {
-    transform: translate3d(calc(var(--dx) * 0.08), calc(var(--dy) * 0.08), 0) scale(1.06, 0.96) rotate(calc(var(--rot) * -0.2)) skewX(calc(var(--skew) * -0.3));
+    transform: translate3d(
+      var(--dx),
+      calc(var(--dy) - 75px + var(--stack-y)),
+      0px
+    )
+    scaleY(0.57735)
+    rotate(45deg)
+    scale(var(--scale-x, 0.52), var(--scale-y, 0.44));
     opacity: 1;
-    filter: blur(0px);
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.06));
   }
 
+  /* 5. Meluncur masuk lurus ke dalam rongga mulut kardus - melewati bibir depan box (z-30) dengan opacity 1 */
   88% {
-    transform: translate3d(0, 0, 0) scale(0.99, 1.01) rotate(0deg) skewX(0deg);
+    transform: translate3d(
+      var(--dx),
+      calc(var(--dy) + 20px),
+      0px
+    )
+    scaleY(0.57735)
+    rotate(45deg)
+    scale(calc(var(--scale-x, 0.52) * 0.92), calc(var(--scale-y, 0.44) * 0.92));
     opacity: 1;
-    filter: blur(0px);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.04));
   }
 
+  /* 6. Tenggelam ke dasar dalam rongga kardus */
   100% {
-    transform: translate3d(0, 0, 0) scale(1) rotate(0deg) skewX(0deg);
-    opacity: 1;
-    filter: blur(0px);
+    transform: translate3d(
+      var(--dx),
+      calc(var(--dy) + 65px),
+      0px
+    )
+    scaleY(0.57735)
+    rotate(45deg)
+    scale(calc(var(--scale-x, 0.52) * 0.80), calc(var(--scale-y, 0.44) * 0.80));
+    opacity: 0;
+    filter: none;
   }
 }
 
-.animate-genie-suck {
-  animation: genieSuckIn 0.55s cubic-bezier(0.55, 0.055, 0.675, 0.19) both;
+@keyframes cardPopFromBox {
+  /* 1. Berada di dasar rongga dalam kardus */
+  0% {
+    transform: translate3d(
+      var(--dx),
+      calc(var(--dy) + 65px),
+      0px
+    )
+    scaleY(0.57735)
+    rotate(45deg)
+    scale(calc(var(--scale-x, 0.52) * 0.80), calc(var(--scale-y, 0.44) * 0.80));
+    opacity: 0;
+  }
+
+  /* 2. Meluncur naik keluar dari balik dinding depan box */
+  20% {
+    transform: translate3d(
+      var(--dx),
+      calc(var(--dy) + 20px),
+      0px
+    )
+    scaleY(0.57735)
+    rotate(45deg)
+    scale(calc(var(--scale-x, 0.52) * 0.92), calc(var(--scale-y, 0.44) * 0.92));
+    opacity: 1;
+  }
+
+  /* 3. Tumpukan kartu meluncur naik sepenuhnya keluar dari mulut kardus */
+  38% {
+    transform: translate3d(
+      var(--dx),
+      calc(var(--dy) - 85px + var(--stack-y)),
+      0px
+    )
+    scaleY(0.57735)
+    rotate(45deg)
+    scale(var(--scale-x, 0.52), var(--scale-y, 0.44));
+    opacity: 1;
+    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.12));
+  }
+
+  /* 4. Tumpukan mengambang sejenak di atas kardus dalam bentuk belah ketupat */
+  50% {
+    transform: translate3d(
+      var(--dx),
+      calc(var(--dy) - 92px + var(--stack-y)),
+      0px
+    )
+    scaleY(0.57735)
+    rotate(45deg)
+    scale(var(--scale-x, 0.52), var(--scale-y, 0.44));
+    opacity: 1;
+  }
+
+  /* 5. Membuka tumpukan, memutar kembali ke tegak, dan meluncur ke grid */
+  80% {
+    transform: translate3d(
+      calc(var(--dx) * 0.12),
+      calc(var(--dy) * 0.12),
+      0px
+    )
+    scaleY(calc(1 - 0.42265 * 0.15))
+    rotate(calc(45deg * 0.15))
+    scale(calc(1 + (var(--scale-x, 0.52) - 1) * 0.15), calc(1 + (var(--scale-y, 0.44) - 1) * 0.15));
+    opacity: 1;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.05));
+  }
+
+  92% {
+    transform: translate3d(0, -3px, 0) scale(1.02);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+    filter: none;
+  }
+}
+
+.animate-genie-suck,
+.animate-card-stack-suck {
+  animation: cardStackIntoBox 0.82s cubic-bezier(0.35, 0, 0.25, 1) both;
   will-change: transform, opacity, filter;
 }
 
-.animate-genie-pop {
-  animation: geniePopOut 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.15) both;
+.animate-genie-pop,
+.animate-card-stack-pop {
+  animation: cardPopFromBox 0.95s cubic-bezier(0.175, 0.885, 0.32, 1.1) both;
   will-change: transform, opacity, filter;
 }
 

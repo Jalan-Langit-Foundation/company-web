@@ -13,15 +13,17 @@ interface CardVector {
   dy: number;
   rot: number;
   skew: number;
+  scaleX: number;
+  scaleY: number;
 }
 
 const DEFAULT_VECTORS: CardVector[] = [
-  { dx: 0, dy: 300, rot: -16, skew: -14 },
-  { dx: 0, dy: 300, rot: -10, skew: -8 },
-  { dx: 0, dy: 300, rot: -3, skew: -3 },
-  { dx: 0, dy: 300, rot: 3, skew: 3 },
-  { dx: 0, dy: 300, rot: 10, skew: 8 },
-  { dx: 0, dy: 300, rot: 16, skew: 14 },
+  { dx: 0, dy: 300, rot: -16, skew: -14, scaleX: 0.52, scaleY: 0.44 },
+  { dx: 0, dy: 300, rot: -10, skew: -8, scaleX: 0.52, scaleY: 0.44 },
+  { dx: 0, dy: 300, rot: -3, skew: -3, scaleX: 0.52, scaleY: 0.44 },
+  { dx: 0, dy: 300, rot: 3, skew: 3, scaleX: 0.52, scaleY: 0.44 },
+  { dx: 0, dy: 300, rot: 10, skew: 8, scaleX: 0.52, scaleY: 0.44 },
+  { dx: 0, dy: 300, rot: 16, skew: 14, scaleX: 0.52, scaleY: 0.44 },
 ];
 
 export function LangitValuesSection() {
@@ -37,25 +39,32 @@ export function LangitValuesSection() {
   const cardWrapperRefs = React.useRef<(HTMLDivElement | null)[]>([]);
   const isAnimatingRef = React.useRef(false);
 
-  // Hitung vektor relatif (dx, dy, rotasi, skew) dari setiap kartu ke mulut rongga 3D VectorBox
+  // Hitung vektor relatif (dx, dy, rotasi, skew, skala belah ketupat) dari setiap kartu ke mulut rongga 3D VectorBox
   const updateVectors = React.useCallback(() => {
     if (!boxRef.current) return;
     const boxRect = boxRef.current.getBoundingClientRect();
     const mouthX = boxRect.left + boxRect.width / 2;
-    const mouthY = boxRect.top + boxRect.height * 0.36; // Pusat rongga bukaan mulut atas kotak
+    // Pusat bukaan mulut belah ketupat VectorBox (y = 130 dalam viewBox 380 = ~0.3421)
+    const mouthY = boxRect.top + boxRect.height * 0.342;
+
+    // Lebar mulut rongga kotak dalam screen pixels (207.8px pada viewBox 400x380)
+    const mouthWidth = boxRect.width * (207.8 / 400);
+    // Target lebar belah ketupat kartu dibuat ~94% dari lebar bukaan agar pas masuk rongga
+    const targetRhombusWidth = mouthWidth * 0.94;
+    const targetSide = targetRhombusWidth / Math.SQRT2;
 
     const newVectors: CardVector[] = [];
 
     cardSlotRefs.current.forEach((slot, idx) => {
       if (!slot) {
-        newVectors.push(DEFAULT_VECTORS[idx] || { dx: 0, dy: 300, rot: 0, skew: 0 });
+        newVectors.push(DEFAULT_VECTORS[idx] || { dx: 0, dy: 300, rot: 0, skew: 0, scaleX: 0.52, scaleY: 0.44 });
         return;
       }
 
       const slotRect = slot.getBoundingClientRect();
       // Bila kontainer sedang collapse (tinggi 0), gunakan nilai default / nilai yang sudah ada
-      if (slotRect.height === 0) {
-        newVectors.push(vectors[idx] || DEFAULT_VECTORS[idx] || { dx: 0, dy: 300, rot: 0, skew: 0 });
+      if (slotRect.height === 0 || slotRect.width === 0) {
+        newVectors.push(vectors[idx] || DEFAULT_VECTORS[idx] || { dx: 0, dy: 300, rot: 0, skew: 0, scaleX: 0.52, scaleY: 0.44 });
         return;
       }
 
@@ -65,17 +74,21 @@ export function LangitValuesSection() {
       const dx = mouthX - cardCenterX;
       const dy = mouthY - cardCenterY; // Nilai dy positif karena kartu di atas kotak (tersedot ke bawah)
 
-      // Lengkungan & distorsi kurva Genie (macOS minimize effect ke bawah)
-      // Kartu di kiri meliuk ke arah kanan bawah, kartu di kanan meliuk ke kiri bawah
       const factor = Math.max(-1, Math.min(1, (cardCenterX - mouthX) / 380));
       const rot = factor * 16;
       const skew = factor * 14;
+
+      // Hitung skala kompresi agar kartu persegi tepat menjadi belah ketupat bersisi sama (30 deg)
+      const scaleX = targetSide / slotRect.width;
+      const scaleY = targetSide / slotRect.height;
 
       newVectors.push({
         dx: Math.round(dx),
         dy: Math.round(dy),
         rot: Math.round(rot * 10) / 10,
         skew: Math.round(skew * 10) / 10,
+        scaleX: Math.round(scaleX * 10000) / 10000,
+        scaleY: Math.round(scaleY * 10000) / 10000,
       });
     });
 
@@ -114,46 +127,48 @@ export function LangitValuesSection() {
   // Durasi transisi geser simetris saat box naik (menutup) dan turun (membuka)
   const BOX_SLIDE_MS = 600;
 
-  // Handler interaktif klik box untuk efek hisap / lontar Genie dengan sekuens pergerakan box yang simetris dan butter-smooth
+  // Handler interaktif klik box untuk efek tumpukan 3D isometrik masuk & keluar rongga kardus
   const handleToggleBox = React.useCallback(() => {
     if (isAnimatingRef.current) return;
 
     if (isBoxOpen) {
       // =========================================================================
       // FLOW MENUTUP:
-      // 1. Kartu tersedot ke bawah masuk ke rongga box (0 - 780ms)
-      // 2. Flap box menutup rapat (780ms - 1250ms)
+      // 1. Kartu memutar sudut pandang isometrik sesuai lubang kardus,
+      //    bertumpuk rapi di atas mulut kardus, lalu meluncur masuk ke dalam (0 - 980ms)
+      // 2. Flap box menutup rapat (980ms - 1500ms)
       // 3. Setelah box tertutup rapat, box meluncur NAIK ke atas (selama 600ms)
       // =========================================================================
       isAnimatingRef.current = true;
       updateVectors();
       setAnimState("sucking");
 
-      // Tunggu hingga semua 6 kartu selesai masuk sempurna ke mulut box
+      // Tunggu hingga seluruh 6 kartu selesai bertumpuk dan masuk sempurna ke dalam kardus
       setTimeout(() => {
         setIsBoxOpen(false);
-      }, 780);
+      }, 980);
 
-      // Setelah flap box selesai menutup rapat (~470ms setelah mulai tutup),
+      // Setelah flap box selesai menutup rapat (~520ms setelah mulai tutup),
       // hilangkan space kartu sehingga box meluncur naik ke atas secara mulus
       setTimeout(() => {
         setAnimState("idle-closed");
-      }, 1250);
+      }, 1500);
 
       // Selesai seluruh siklus menutup setelah box mendarat di atas
       setTimeout(() => {
         isAnimatingRef.current = false;
-      }, 1250 + BOX_SLIDE_MS);
+      }, 1500 + BOX_SLIDE_MS);
     } else {
       // =========================================================================
       // FLOW MEMBUKA:
-      // 1. Box meluncur TURUN ke bawah (selama 600ms - waktu yang SAMA PERSIS dengan saat naik)
+      // 1. Box meluncur TURUN ke bawah (selama 600ms)
       // 2. Box mendarat sempurna -> flap box membuka (250ms)
-      // 3. Flap terbuka -> kartu meluncur keluar melontar ke atas dari dalam box
+      // 3. Tumpukan kartu meluncur naik dari dalam kardus, melayang bertumpuk di udara,
+      //    lalu membuka dan berputar kembali tegak mendarat di grid slot
       // =========================================================================
       isAnimatingRef.current = true;
 
-      // Langkah 1: Buka space kartu di atas sehingga box meluncur turun ke posisi bawah selama 600ms
+      // Langkah 1: Buka space kartu di atas sehingga box meluncur turun selama 600ms
       setAnimState("expanding-space");
 
       // Langkah 2: Setelah box selesai turun sempurna (600ms), buka flap box
@@ -161,7 +176,7 @@ export function LangitValuesSection() {
         setIsBoxOpen(true);
       }, BOX_SLIDE_MS);
 
-      // Langkah 3: Flap box sudah terbuka (~250ms), slot kartu settled -> lontar kartu ke atas
+      // Langkah 3: Flap box sudah terbuka (~250ms) -> tumpukan kartu meluncur naik dan membuka
       setTimeout(() => {
         updateVectors();
         setAnimState("popping");
@@ -172,7 +187,7 @@ export function LangitValuesSection() {
         setAnimState("idle-open");
         isAnimatingRef.current = false;
         updateVectors();
-      }, BOX_SLIDE_MS + 250 + 1150);
+      }, BOX_SLIDE_MS + 250 + 1250);
     }
   }, [isBoxOpen, updateVectors]);
 
@@ -226,24 +241,27 @@ export function LangitValuesSection() {
 
                     let animClass = "";
                     if (isSucking) {
-                      animClass = "animate-genie-suck";
+                      animClass = "animate-card-stack-suck";
                     } else if (isPopping) {
-                      animClass = "animate-genie-pop";
+                      animClass = "animate-card-stack-pop";
                     } else if (isClosed) {
                       animClass = "opacity-0 pointer-events-none invisible";
                     }
 
-                    const vec = vectors[idx] || DEFAULT_VECTORS[idx] || { dx: 0, dy: 300, rot: 0, skew: 0 };
+                    const vec = vectors[idx] || DEFAULT_VECTORS[idx] || { dx: 0, dy: 300, rot: 0, skew: 0, scaleX: 0.52, scaleY: 0.44 };
 
                     const animStyle: React.CSSProperties = {
                       ["--dx" as string]: `${vec.dx}px`,
                       ["--dy" as string]: `${vec.dy}px`,
-                      ["--rot" as string]: `${vec.rot}deg`,
-                      ["--skew" as string]: `${vec.skew}deg`,
+                      ["--scale-x" as string]: `${vec.scaleX || 0.52}`,
+                      ["--scale-y" as string]: `${vec.scaleY || 0.44}`,
+                      ["--stack-y" as string]: `${(5 - idx) * -5}px`,
+                      ["--stack-z" as string]: `${idx * 4}px`,
+                      zIndex: isSucking || isPopping ? 20 + idx : undefined,
                       ...(isSucking
-                        ? { animationDelay: `${(5 - idx) * 45}ms` }
+                        ? { animationDelay: `${idx * 28}ms` }
                         : isPopping
-                          ? { animationDelay: `${idx * 70}ms` }
+                          ? { animationDelay: `${(5 - idx) * 32}ms` }
                           : {}),
                     } as React.CSSProperties;
 
@@ -253,14 +271,14 @@ export function LangitValuesSection() {
                         ref={(el) => {
                           cardSlotRefs.current[idx] = el;
                         }}
-                        className="w-full relative [perspective:1000px]"
+                        className="w-full relative"
                       >
                         <div
                           ref={(el) => {
                             cardWrapperRefs.current[idx] = el;
                           }}
                           style={animStyle}
-                          className={`w-full h-full [transform-style:preserve-3d] ${animClass}`}
+                          className={`w-full h-full ${animClass}`}
                         >
                           <LangitCard
                             value={val}
@@ -280,7 +298,7 @@ export function LangitValuesSection() {
           <div
             ref={boxRef}
             onClick={handleToggleBox}
-            className="relative z-10 flex flex-col items-center cursor-pointer group select-none"
+            className="relative flex flex-col items-center cursor-pointer group select-none"
             title={isBoxOpen ? "Klik box untuk menyedot kartu ke dalam box" : "Klik box untuk membuka & mengeluarkan kartu"}
             role="button"
             tabIndex={0}
@@ -292,11 +310,25 @@ export function LangitValuesSection() {
             }}
             aria-label={isBoxOpen ? "Tutup kardus nilai LANGIT" : "Buka kardus nilai LANGIT"}
           >
-            <VectorBox
-              isOpen={isBoxOpen}
-              animationDuration={500}
-              className="w-[240px] sm:w-[280px]"
-            />
+            <div className="relative w-[240px] sm:w-[280px]">
+              {/* Layer Belakang: Dinding Dalam & Flap Belakang (z-10, berada di belakang kartu z-20) */}
+              <VectorBox
+                isOpen={isBoxOpen}
+                animationDuration={500}
+                layer="back"
+                className="w-full h-auto"
+              />
+
+              {/* Layer Depan: Dinding Depan, Flap Depan & Bibir Depan (z-30, berada di depan kartu z-20) */}
+              <div className="absolute inset-0 z-30 pointer-events-none">
+                <VectorBox
+                  isOpen={isBoxOpen}
+                  animationDuration={500}
+                  layer="front"
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </Container>
