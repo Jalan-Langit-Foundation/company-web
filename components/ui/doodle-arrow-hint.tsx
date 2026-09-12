@@ -13,10 +13,6 @@ export interface DoodleArrowHintProps {
    */
   isVisible?: boolean;
   /**
-   * Status apakah sedang animasi buka/tutup
-   */
-  isAnimating?: boolean;
-  /**
    * Optional className untuk container
    */
   className?: string;
@@ -37,19 +33,9 @@ export interface DoodleArrowHintProps {
 export function DoodleArrowHint({
   isOpen = false,
   isVisible = true,
-  isAnimating = false,
   className = "",
   onClick,
 }: DoodleArrowHintProps) {
-  const [animKey, setAnimKey] = React.useState(0);
-
-  // Animasi digambar ulang setiap kali status box berubah atau hint menjadi visible kembali
-  React.useEffect(() => {
-    if (isVisible) {
-      setAnimKey((prev) => prev + 1);
-    }
-  }, [isOpen, isVisible]);
-
   const textLabel = isOpen ? "Klik untuk menutup" : "Coba klik kotaknya";
 
   return (
@@ -69,7 +55,7 @@ export function DoodleArrowHint({
           <>
             {/* Panah Coretan Tangan Mengarah ke Atas-Kanan (Up-Right towards Box) */}
             <svg
-              key={`svg-open-${animKey}`}
+              key="svg-open"
               viewBox="0 0 120 75"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +98,7 @@ export function DoodleArrowHint({
 
             {/* Teks Catatan Tangan di Kiri Bawah */}
             <div
-              key={`text-open-${animKey}`}
+              key="text-open"
               className="animate-doodle-text flex items-center gap-1.5 -mt-1 pl-1"
             >
               <span
@@ -128,7 +114,7 @@ export function DoodleArrowHint({
             {/* JIKA BOX TERTUTUP (Petunjuk Membuka Box di Kanan) */}
             {/* Teks Catatan Tangan */}
             <div
-              key={`text-closed-${animKey}`}
+              key="text-closed"
               className="animate-doodle-text flex items-center gap-1.5 pl-4 sm:pl-6"
             >
               <span
@@ -141,7 +127,7 @@ export function DoodleArrowHint({
 
             {/* Panah Coretan Tangan Gaya 2: Lengkungan Sapuan Busur Dinamis dengan Sketsa Ganda (Sweeping Crescent Arch) */}
             <svg
-              key={`svg-closed-${animKey}`}
+              key="svg-closed"
               viewBox="0 0 120 75"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

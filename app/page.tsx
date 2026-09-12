@@ -33,32 +33,32 @@ export default function Home() {
       <VisionMissionSection />
       <LangitValuesSection />
 
-      {/* Section 5 — Program JLF */}
+      {/* Section 4 — Program JLF */}
       <Reveal>
         <ProgramsSection />
       </Reveal>
 
-      {/* Section 6 — Video Pilihan (Showcase YouTube JLF) */}
+      {/* Section 5 — Video Pilihan (Showcase YouTube JLF) */}
       <Reveal>
         <FeaturedVideosSection />
       </Reveal>
 
-      {/* Section 7 — Impact Story */}
+      {/* Section 6 — Impact Story */}
       <Reveal>
         <ImpactStorySection />
       </Reveal>
 
-      {/* Section 8 — Kolaborasi */}
+      {/* Section 7 — Kolaborasi */}
       <Reveal>
         <CollaborationSection />
       </Reveal>
 
-      {/* Section 9 — Update JLF */}
+      {/* Section 8 — Update JLF */}
       <Reveal>
         <LatestNewsSection />
       </Reveal>
 
-      {/* Section 10 — Final CTA */}
+      {/* Section 9 — Final CTA */}
       <Reveal>
         <FinalCtaSection />
       </Reveal>

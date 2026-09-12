@@ -368,7 +368,6 @@ export function LangitValuesSection() {
                 <DoodleArrowHint
                   isOpen={isBoxOpen}
                   isVisible={isHintVisible}
-                  isAnimating={isAnimatingRef.current}
                   onClick={handleToggleBox}
                 />
               </div>
