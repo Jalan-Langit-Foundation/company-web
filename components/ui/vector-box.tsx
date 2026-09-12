@@ -27,6 +27,16 @@ export interface VectorBoxProps {
    */
   layer?: "all" | "back" | "front";
   /**
+   * Ketebalan garis stroke rusuk box
+   * @default 5.2
+   */
+  strokeWidth?: number;
+  /**
+   * Status apakah box sedang mengalami efek hentakan beban berat kartu (heavy impact bounce)
+   * @default false
+   */
+  isBouncing?: boolean;
+  /**
    * Handler saat box diklik
    */
   onClick?: () => void;
@@ -76,6 +86,8 @@ export function VectorBox({
   className = "w-full max-w-[340px] h-auto",
   showBrandBadge = true,
   layer = "all",
+  strokeWidth = 5.2,
+  isBouncing = false,
   onClick,
 }: VectorBoxProps) {
   const [progress, setProgress] = React.useState<number>(isOpen ? 1 : 0);
@@ -187,9 +199,9 @@ export function VectorBox({
   const brC1 = project3D(brX_outer, 0, brZ_outer);
   const brC2 = project3D(brX_outer, W, brZ_outer);
 
-  // Parameter Visual Seragam: SELURUH STROKE = 6px, FILL SOLID PUTIH
-  const STROKE_COLOR = "#0F172A"; // Slate-900 tebal seragam
-  const STROKE_WIDTH = 6;         // Ketebalan seragam 6px
+  // Parameter Visual Seragam: SELURUH STROKE = strokeWidth, FILL SOLID PUTIH
+  const STROKE_COLOR = "#0F172A"; // Slate-900 seragam
+  const STROKE_WIDTH = strokeWidth; // Ketebalan seragam matching stroke panah
   const SOLID_WHITE = "#FFFFFF";  // Solid putih bersih 100%
   const CLOSED_OPACITY = Math.max(0, 1 - p * 3.5); // Opacity garis lipatan saat tertutup
 
@@ -241,7 +253,9 @@ export function VectorBox({
           </defs>
 
           {/* 1. Bayangan Lantai Halus & Difusi (Multi-layer Gaussian Blur) */}
-          <g className="transition-all duration-300 ease-out group-hover:scale-[0.85] group-hover:opacity-55 origin-[200px_325px]">
+          <g className={`transition-all duration-300 ease-out origin-[200px_325px] group-hover:scale-[0.85] group-hover:opacity-55 ${
+            isBouncing ? "animate-shadow-heavy-impact" : "animate-box-shadow-float"
+          }`}>
             <ellipse
               cx="200"
               cy="325"
@@ -260,8 +274,10 @@ export function VectorBox({
             />
           </g>
 
-          {/* Badan Box Belakang (Terangkat saat Hover) */}
-          <g className="transition-transform duration-300 ease-out group-hover:-translate-y-2.5">
+          {/* Badan Box Belakang (Terangkat saat Hover, Melayang Kontinu, atau Hentakan Berat) */}
+          <g className={`transition-transform duration-300 ease-out group-hover:-translate-y-2.5 ${
+            isBouncing ? "animate-box-heavy-impact" : "animate-box-body-float"
+          }`}>
             {/* Flap Belakang Kiri & Kanan (Saat Terbuka) */}
             {p > 0.02 && (
               <g>
@@ -353,8 +369,10 @@ export function VectorBox({
           className="w-full h-auto overflow-visible absolute inset-0 z-30 pointer-events-none"
           aria-hidden="true"
         >
-          {/* Badan Box Depan (Terangkat secara sinkron saat Hover) */}
-          <g className="transition-transform duration-300 ease-out group-hover:-translate-y-2.5">
+          {/* Badan Box Depan (Terangkat secara sinkron saat Hover, Melayang, atau Hentakan Berat) */}
+          <g className={`transition-transform duration-300 ease-out group-hover:-translate-y-2.5 ${
+            isBouncing ? "animate-box-heavy-impact" : "animate-box-body-float"
+          }`}>
             {/* Dinding Kiri Depan (Solid Putih 100%) */}
             <polygon
               points={`${topLeft[0]},${topLeft[1]} ${topFront[0]},${topFront[1]} ${botFront[0]},${botFront[1]} ${botLeft[0]},${botLeft[1]}`}
