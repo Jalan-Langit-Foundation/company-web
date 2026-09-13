@@ -29,11 +29,11 @@ export const COLLABORATION_DATA = {
   globalCtas: {
     primary: {
       label: "Ajak Kolaborasi",
-      href: "https://wa.me/6285173473189?text=Halo%20Jalan%20Langit%20Foundation,%20kami%20ingin%20mengajak%20kolaborasi",
+      href: "https://wa.me/6285173473189?text=Assalamualaikum%20kak%20Ayu,%20kami%20ingin%20mengajak%20kolaborasi",
     },
     secondary: {
       label: "Gabung Kebaikan",
-      href: "https://wa.me/6285173473189?text=Halo%20Jalan%20Langit%20Foundation,%20saya%20ingin%20menjadi%20bagian%20dari%20kebaikan",
+      href: "https://wa.me/6285173473189?text=Assalamualaikum%20kak%20Ayu,%20saya%20ingin%20menjadi%20bagian%20dari%20kebaikan",
     },
   },
   items: [
@@ -54,7 +54,7 @@ export const COLLABORATION_DATA = {
       ],
       ctaText: "Ajukan Kemitraan CSR",
       ctaHref:
-        "https://wa.me/6285173473189?text=Halo%20Jalan%20Langit%20Foundation,%20saya%20tertarik%20berkolaborasi%20program%20CSR%20Mitra/Brand",
+        "https://wa.me/6285173473189?text=Assalamualaikum%20kak%20Ayu,%20saya%20tertarik%20berkolaborasi%20dalam%20program%20CSR%20Mitra/Brand",
       iconName: "Building2",
       accentColor: {
         badgeBg: "bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800/60",
@@ -70,7 +70,7 @@ export const COLLABORATION_DATA = {
       subtitle: "Community Partnership",
       persona: "Komunitas & Gerakan Sosial",
       description:
-        "Bergerak bersama komunitas untuk memperluas jangkauan kebaikan. Baik melalui aksi fundraising kolektif maupun kolaborasi penyaluran program di lapangan—di mana JLF siap menopang kebutuhan pendanaan—kita menyatukan energi dan jaringan demi mengukir senyum di tengah masyarakat.",
+        "Bergerak bersama komunitas untuk memperluas jangkauan kebaikan. Baik melalui aksi fundraising kolektif maupun kolaborasi penyaluran program di lapangan, di mana JLF siap menopang kebutuhan pendanaan, kita menyatukan energi dan jaringan demi mengukir senyum di tengah masyarakat.",
       highlight:
         "Menyatukan energi dan jaringan komunitas demi kebaikan yang lebih luas.",
       keyPoints: [
@@ -80,7 +80,7 @@ export const COLLABORATION_DATA = {
       ],
       ctaText: "Kolaborasi Komunitas",
       ctaHref:
-        "https://wa.me/6285173473189?text=Halo%20Jalan%20Langit%20Foundation,%20kami%20dari%20komunitas%20ingin%20berkolaborasi",
+        "https://wa.me/6285173473189?text=Assalamualaikum%20kak%20Ayu,%20kami%20dari%20komunitas%20ingin%20berkolaborasi",
       iconName: "Users",
       accentColor: {
         badgeBg: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60",
@@ -106,7 +106,7 @@ export const COLLABORATION_DATA = {
       ],
       ctaText: "Gabung Jadi Relawan",
       ctaHref:
-        "https://wa.me/6285173473189?text=Halo%20Jalan%20Langit%20Foundation,%20saya%20ingin%20mendaftar%20sebagai%20Relawan%20JLF",
+        "https://wa.me/6285173473189?text=Assalamualaikum%20kak%20Ayu,%20saya%20ingin%20mendaftar%20sebagai%20Relawan%20JLF",
       iconName: "HeartHandshake",
       accentColor: {
         badgeBg: "bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800/60",
@@ -132,7 +132,7 @@ export const COLLABORATION_DATA = {
       ],
       ctaText: "Daftar Program Magang",
       ctaHref:
-        "https://wa.me/6285173473189?text=Halo%20Jalan%20Langit%20Foundation,%20saya%20ingin%20mendaftar%20Program%20Magang%20Berdampak",
+        "https://wa.me/6285173473189?text=Assalamualaikum%20kak%20Ayu,%20saya%20ingin%20mendaftar%20Program%20Magang%20Berdampak",
       iconName: "GraduationCap",
       accentColor: {
         badgeBg: "bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800/60",

@@ -22,8 +22,8 @@ export const FEATURED_VIDEOS_DATA: {
 } = {
   eyebrow: "DOKUMENTASI KEBAIKAN",
   headline: {
-    prefix: "Merekam Senyum,",
-    highlight: "Melangitkan Harapan",
+    prefix: "Cuplikan",
+    highlight: "Senyum Kebaikan",
   },
   supportingCopy:
     "Setiap senyum santri dan penerima manfaat adalah doa yang terus dilangitkan untuk kebaikan bersama.",

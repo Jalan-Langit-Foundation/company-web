@@ -2,12 +2,11 @@
 
 import * as React from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { ChevronDown, ChevronUp, ArrowRight } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/section-header";
-import { PROGRAMS_SECTION_DATA, SITE_CONFIG } from "@/lib/data";
+import { PROGRAMS_SECTION_DATA } from "@/lib/data";
 
 export function ProgramsSection() {
   const [isExpanded, setIsExpanded] = React.useState(false);
@@ -34,7 +33,7 @@ export function ProgramsSection() {
     <section
       id="program"
       aria-label="Program Kebaikan Jalan Langit Foundation"
-      className="w-full bg-[#FAFCFE] py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 relative overflow-hidden"
+      className="w-full bg-[#FAFCFE] py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 relative overflow-hidden scroll-mt-16"
     >
       {/* Subtle Background Lighting Accent */}
       <div className="absolute top-1/4 -left-40 w-96 h-96 bg-[#EAF5FB]/60 rounded-full blur-3xl pointer-events-none -z-0" />
@@ -108,27 +107,14 @@ export function ProgramsSection() {
                 </div>
 
                 {/* Card Content */}
-                <div className="p-5 flex flex-col flex-1 justify-between gap-4 bg-white">
+                <div className="p-5 flex flex-col flex-1 bg-white">
                   <div className="space-y-2">
-                    <h3 className="text-base font-bold text-[#2C2C2C] font-['Poppins',sans-serif] line-clamp-1 leading-snug">
+                    <h3 className="text-base font-bold text-[#2C2C2C] font-['Poppins',sans-serif] leading-snug">
                       {program.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-[#555555] font-['Lato',sans-serif] line-clamp-3 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#555555] font-['Lato',sans-serif] leading-relaxed">
                       {program.description}
                     </p>
-                  </div>
-
-                  {/* Card Action Link dengan Icon Panah */}
-                  <div className="pt-3 border-t border-slate-100 flex items-center text-xs text-[#3C95C8] font-semibold font-['Poppins',sans-serif]">
-                    <Link
-                      href={SITE_CONFIG.contact.donationUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 hover:text-[#25729D] transition-colors"
-                    >
-                      <span>Donasi Sekarang</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
                   </div>
                 </div>
               </div>
@@ -143,26 +129,15 @@ export function ProgramsSection() {
             ========================================================= */}
         <div className="pt-5 sm:pt-6 flex flex-wrap items-center justify-center gap-3">
           {isExpanded ? (
-            <>
-              <Button
-                variant="outline"
-                size="md"
-                onClick={handleCollapse}
-                rightIcon={<ChevronUp className="w-4 h-4" />}
-                className="font-bold border-[#3C95C8] text-[#3C95C8] hover:bg-[#EAF5FB] px-6"
-              >
-                Lihat Lebih Sedikit
-              </Button>
-
-              <Button
-                variant="outline"
-                size="md"
-                href="/programs"
-                className="font-bold border-[#3C95C8] text-[#3C95C8] hover:bg-[#EAF5FB] px-6"
-              >
-                Lihat Selengkapnya
-              </Button>
-            </>
+            <Button
+              variant="outline"
+              size="md"
+              onClick={handleCollapse}
+              rightIcon={<ChevronUp className="w-4 h-4" />}
+              className="font-bold border-[#3C95C8] text-[#3C95C8] hover:bg-[#EAF5FB] px-6"
+            >
+              Lihat Lebih Sedikit
+            </Button>
           ) : (
             <Button
               variant="outline"

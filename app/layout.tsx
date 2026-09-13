@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins, Lato } from "next/font/google";
+import { Poppins, Lato, Caveat } from "next/font/google";
 import { Navbar, Footer, FloatingCtaBar, FloatingWhatsappButton } from "@/components/layout";
 import { PageLoader } from "@/components/ui/page-loader";
 import "./globals.css";
@@ -15,6 +15,13 @@ const lato = Lato({
   variable: "--font-body",
   subsets: ["latin"],
   weight: ["400", "700"],
+  display: "swap",
+});
+
+const caveat = Caveat({
+  variable: "--font-handwriting",
+  subsets: ["latin"],
+  weight: ["600", "700"],
   display: "swap",
 });
 
@@ -36,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`${poppins.variable} ${lato.variable}`} suppressHydrationWarning>
+    <html lang="id" className={`scroll-smooth ${poppins.variable} ${lato.variable} ${caveat.variable}`} suppressHydrationWarning>
       <body className="flex min-h-screen flex-col" suppressHydrationWarning>
         <PageLoader />
         <Navbar />

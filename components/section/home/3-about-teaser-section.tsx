@@ -1,15 +1,35 @@
+"use client";
+
 import * as React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { Container } from "@/components/ui/container";
+import { ChevronDown } from "lucide-react";
 import { ABOUT_TEASER_DATA } from "@/lib/data/homepage";
+import { useAboutValues } from "@/hooks";
 
 export function AboutTeaserSection() {
+  const { isExpanded, toggle } = useAboutValues();
+
+  const handleToggle = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const willOpen = !isExpanded;
+    toggle();
+
+    if (willOpen) {
+      setTimeout(() => {
+        const el = document.getElementById("visi-misi");
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 200);
+    }
+  };
+
   return (
     <section
       id="tentang-kami"
       aria-label="Tentang Jalan Langit Foundation"
-      className="w-full bg-white py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 transition-colors"
+      className="w-full bg-white py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 transition-colors scroll-mt-16"
     >
       <Container size="xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-14 xl:gap-16 items-start">
@@ -34,7 +54,7 @@ export function AboutTeaserSection() {
                 {/* Badge Logo Resmi di Sudut Kiri Atas */}
                 <div className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-8.5 h-8.5 sm:w-11 sm:h-11 rounded-full bg-[#3C95C8] shadow-md flex items-center justify-center border-2 border-white overflow-hidden p-1">
                   <Image
-                    src="/images/Master%20Logo%20JLF/Logo%20Jalan%20Langit/Transparan/Bulat/Logo%20Only%20white.png"
+                    src="/images/logo/logo-bulat-putih.png"
                     alt="Logo Yayasan Jalan Langit"
                     width={64}
                     height={64}
@@ -58,7 +78,7 @@ export function AboutTeaserSection() {
             </div>
           </div>
 
-          {/* Kolom Kanan: Headline, Copy Teks & Link CTA */}
+          {/* Kolom Kanan: Headline, Copy Teks & Link Navigasi Nilai */}
           <div className="lg:col-span-7 flex flex-col gap-6">
             {/* Headline Sesuai Referensi Gambar */}
             <h2 className="text-2xl sm:text-3xl lg:text-[36px] font-extrabold text-[#2C2C2C] font-['Poppins',sans-serif] leading-tight tracking-tight">
@@ -76,14 +96,24 @@ export function AboutTeaserSection() {
               ))}
             </div>
 
-            {/* Anchor Link CTA: Baca selengkapnya */}
+            {/* Tombol CTA: Buka/Tutup Section Nilai L.A.N.G.I.T */}
             <div className="pt-1">
-              <Link
-                href={ABOUT_TEASER_DATA.cta.href}
-                className="inline-block font-medium text-[#3C95C8] hover:text-[#2c7ca9] hover:underline font-['Lato',sans-serif] text-sm sm:text-base transition-colors duration-200"
+              <button
+                type="button"
+                onClick={handleToggle}
+                aria-expanded={isExpanded}
+                aria-controls="visi-misi nilai-langit"
+                className="inline-flex items-center gap-1.5 font-medium text-[#3C95C8] hover:text-[#2c7ca9] font-['Lato',sans-serif] text-sm sm:text-base transition-colors group cursor-pointer"
               >
-                {ABOUT_TEASER_DATA.cta.label}
-              </Link>
+                <span className="leading-none">
+                  {isExpanded ? "Tutup selengkapnya" : ABOUT_TEASER_DATA.cta.label}
+                </span>
+                <ChevronDown
+                  className={`w-4 h-4 shrink-0 transition-transform duration-300 ${
+                    isExpanded ? "rotate-180" : "group-hover:translate-y-0.5"
+                  }`}
+                />
+              </button>
             </div>
           </div>
         </div>

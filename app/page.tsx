@@ -2,8 +2,11 @@ import {
   HeroSection,
   ImpactSnapshotSection,
   AboutTeaserSection,
+  VisionMissionSection,
+  LangitValuesSection,
   ProgramsSection,
   FeaturedVideosSection,
+  ImpactStorySection,
   CollaborationSection,
   LatestNewsSection,
   FinalCtaSection,
@@ -13,40 +16,49 @@ import { Reveal } from "@/components/ui/reveal";
 export default function Home() {
   return (
     <main className="flex-1 w-full flex flex-col">
-      {/* 1. Hero Section */}
+      {/* Section 1 — Hero */}
       <HeroSection />
 
-      {/* 2. Impact Snapshot Section (Gradient Flow) */}
+      {/* Section 2 — Impact Snapshot */}
       <Reveal>
         <ImpactSnapshotSection />
       </Reveal>
 
-      {/* 3. About Teaser Section (Solid White) */}
+      {/* Section 3 — Tentang JLF */}
       <Reveal>
         <AboutTeaserSection />
       </Reveal>
 
-      {/* 4. Programs Section (Soft Blue Accent) */}
+      {/* Section 3a & 3b — Visi Misi & Nilai Inti L.A.N.G.I.T (Muncul saat Baca Selengkapnya diklik) */}
+      <VisionMissionSection />
+      <LangitValuesSection />
+
+      {/* Section 4 — Program JLF */}
       <Reveal>
         <ProgramsSection />
       </Reveal>
 
-      {/* 5. Featured Videos Section (Solid White) */}
+      {/* Section 5 — Video Pilihan (Showcase YouTube JLF) */}
       <Reveal>
         <FeaturedVideosSection />
       </Reveal>
 
-      {/* 6. Collaboration Section (Soft Blue Accent) */}
+      {/* Section 6 — Impact Story */}
+      <Reveal>
+        <ImpactStorySection />
+      </Reveal>
+
+      {/* Section 7 — Kolaborasi */}
       <Reveal>
         <CollaborationSection />
       </Reveal>
 
-      {/* 7. Latest News Section (Solid White) */}
+      {/* Section 8 — Update JLF */}
       <Reveal>
         <LatestNewsSection />
       </Reveal>
 
-      {/* 8. Final CTA Section (Soft Blue Accent) */}
+      {/* Section 9 — Final CTA */}
       <Reveal>
         <FinalCtaSection />
       </Reveal>

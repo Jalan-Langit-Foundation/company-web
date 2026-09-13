@@ -29,7 +29,7 @@ export function FeaturedVideosSection() {
     <section
       id="video-pilihan"
       aria-label="Dokumentasi Video Jalan Langit Foundation"
-      className="w-full bg-white py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 relative overflow-hidden transition-colors"
+      className="w-full bg-white py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 relative overflow-hidden transition-colors scroll-mt-16"
     >
       <Container size="xl" className="relative z-10">
         {/* 1. SECTION HEADER */}
