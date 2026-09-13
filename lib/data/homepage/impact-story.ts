@@ -12,6 +12,7 @@ export interface ImpactStory {
   impactMetric: string;
   donationUrl: string;
   featuredImage: string;
+  hashtag: string;
 }
 
 export interface ImpactMarqueePhoto {
@@ -48,6 +49,7 @@ export const IMPACT_STORY_DATA = {
       impactMetric: "Ratusan Paket Nutrisi Rutin untuk Santri Tahfidz",
       donationUrl: "https://donasi.jalanlangit.org/campaign/langit-box",
       featuredImage: "/images/draft-foto/langit-box/langit-box-01.webp",
+      hashtag: "#LangitBox",
     },
     {
       id: "hadiah-kebahagiaan",
@@ -65,6 +67,7 @@ export const IMPACT_STORY_DATA = {
       impactMetric: "Paket Sembako Apresiasi Pejuang Jalanan",
       donationUrl: "https://donasi.jalanlangit.org/campaign/hadiah-kebahagiaan",
       featuredImage: "/images/draft-foto/hadiah-kebahagiaan/hadiah-kebahagiaan-01.webp",
+      hashtag: "#HadiahKebahagiaan",
     },
     {
       id: "jalan-langit-scholarship",
@@ -82,6 +85,7 @@ export const IMPACT_STORY_DATA = {
       impactMetric: "Beasiswa Penuh & Pembinaan Kapasitas Mandiri",
       donationUrl: "https://donasi.jalanlangit.org/campaign/langit-scholarship",
       featuredImage: "/images/draft-foto/ramadhan/ramadhan-01.webp",
+      hashtag: "#LangitScholarship",
     },
     {
       id: "serasi",
@@ -99,6 +103,7 @@ export const IMPACT_STORY_DATA = {
       impactMetric: "1 Hari Penuh Pengalaman & Kebahagiaan Anak",
       donationUrl: "https://donasi.jalanlangit.org/campaign/serasi",
       featuredImage: "/images/draft-foto/serasi/serasi-07.webp",
+      hashtag: "#SERASI",
     },
     {
       id: "zakat",
@@ -116,6 +121,7 @@ export const IMPACT_STORY_DATA = {
       impactMetric: "Penyaluran Amanah Zakat bagi Asnaf Prioritas",
       donationUrl: "https://donasi.jalanlangit.org/campaign/zakat",
       featuredImage: "/images/draft-foto/zakat/zakat-05.webp",
+      hashtag: "#ZakatJLF",
     },
   ] satisfies ImpactStory[],
 
