@@ -639,8 +639,9 @@ body {
 }
 
 /* =========================================================
-   VERTICAL INFINITE MARQUEE ANIMATION (IMPACT STORY)
-   - Foto bergerak meluncur ke atas terus-menerus tanpa putus (seamless loop)
+   INFINITE MARQUEE ANIMATIONS (IMPACT STORY)
+   - Vertical untuk Desktop (meluncur ke atas)
+   - Horizontal untuk Tablet & Mobile (meluncur ke kiri)
    - Tetap berjalan mulus tanpa berhenti saat pointer mouse dihover
    ========================================================= */
 
@@ -656,6 +657,24 @@ body {
 .animate-marquee-vertical,
 .animate-marquee-vertical:hover {
   animation: marqueeVertical 34s linear infinite;
+  animation-play-state: running !important;
+  will-change: transform;
+}
+
+@keyframes marqueeHorizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-horizontal,
+.animate-marquee-horizontal:hover {
+  display: flex;
+  width: max-content;
+  animation: marqueeHorizontal 26s linear infinite;
   animation-play-state: running !important;
   will-change: transform;
 }

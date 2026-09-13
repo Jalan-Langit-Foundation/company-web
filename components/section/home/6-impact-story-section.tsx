@@ -75,7 +75,29 @@ export function ImpactStorySection() {
               className="max-w-xl"
             />
 
-            {/* 2. Card Cerita — Mengadopsi Style Card Video Section (Tanpa Hover Behaviour) */}
+            {/* 2. KHUSUS MOBILE & TABLET (< lg): FOTO BERGERAK HORIZONTAL
+                Urutan tampilan di mobile/tab: 1. Header -> 2. Foto -> 3. Card Cerita */}
+            <div className="block lg:hidden w-full overflow-hidden py-1">
+              <div className="flex items-center gap-3 sm:gap-3.5 animate-marquee-horizontal w-max">
+                {marqueeList.map((photo, idx) => (
+                  <div
+                    key={`mobile-${photo.id}-${idx}`}
+                    className="relative w-[250px] sm:w-[290px] aspect-video rounded-2xl overflow-hidden bg-slate-100 shadow-none border border-slate-200/60 shrink-0"
+                  >
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      fill
+                      sizes="(max-width: 640px) 250px, 290px"
+                      className="object-cover"
+                      priority={idx < 2}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 3. Card Cerita — Mengadopsi Style Card Video Section (Tanpa Hover Behaviour) */}
             <div
               className={cn(
                 "p-5 flex flex-col justify-between gap-4 bg-white rounded-2xl border border-slate-200/80 shadow-none transition-opacity duration-200",
@@ -154,20 +176,19 @@ export function ImpactStorySection() {
           </div>
 
           {/* =========================================================
-              SISI KANAN: MURNI FOTO 16:9 DALAM VERTICAL INFINITE MARQUEE
-              - Horizontally: Terkunci di dalam Container size="xl" (jarak kanan persis sama dengan section lain)
+              SISI KANAN (KHUSUS DESKTOP >= lg): MURNI FOTO 16:9 VERTICAL MARQUEE
+              - Horizontally: Terkunci di dalam Container size="xl"
               - Vertically: Membentang penuh setinggi batas section (border-t ke border-b)
-              - Tanpa efek gradien fade in/fade out
-              - Strictly 16:9 ratio
+              - Bergerak vertikal meluncur ke atas
               ========================================================= */}
-          <div className="lg:col-span-5 w-full flex justify-center lg:justify-end pb-8 lg:pb-0 lg:absolute lg:top-0 lg:bottom-0 lg:right-4 sm:lg:right-6 lg:right-8 lg:w-[calc((100%-2rem)*5/12)] xl:w-[360px] pointer-events-auto">
-            <div className="relative w-full max-w-[340px] xl:max-w-[360px] h-[460px] sm:h-[500px] lg:h-full overflow-hidden">
+          <div className="hidden lg:flex lg:col-span-5 w-full justify-end lg:absolute lg:top-0 lg:bottom-0 lg:right-4 sm:lg:right-6 lg:right-8 lg:w-[calc((100%-2rem)*5/12)] xl:w-[360px] pointer-events-auto">
+            <div className="relative w-full max-w-[340px] xl:max-w-[360px] h-full overflow-hidden">
               
-              {/* Vertical Infinite Marquee Track (Tanpa Gradien Fade, Murni Foto Bersih) */}
+              {/* Vertical Infinite Marquee Track */}
               <div className="w-full flex flex-col space-y-3.5 animate-marquee-vertical py-1">
                 {marqueeList.map((photo, idx) => (
                   <div
-                    key={`${photo.id}-${idx}`}
+                    key={`desktop-${photo.id}-${idx}`}
                     className="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-100 shadow-none border border-slate-200/60 shrink-0"
                   >
                     <Image
