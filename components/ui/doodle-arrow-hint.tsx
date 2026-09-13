@@ -36,10 +36,50 @@ export function DoodleArrowHint({
   className = "",
   onClick,
 }: DoodleArrowHintProps) {
+  const containerRef = React.useRef<HTMLDivElement | null>(null);
+  const [isInView, setIsInView] = React.useState(false);
+  const [animCycle, setAnimCycle] = React.useState(0);
+
   const textLabel = isOpen ? "Klik untuk menutup" : "Coba klik kotaknya";
+
+  // 1. Deteksi saat elemen masuk/keluar viewport layar pengguna
+  React.useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          // Picu animasi menggambar panah saat pengguna scroll ke posisi kotak
+          setAnimCycle((c) => c + 1);
+        } else {
+          setIsInView(false);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+
+
+  // 3. Ulangi animasi goresan secara periodik (setiap 6.5 detik) agar ajakan selalu hidup
+  React.useEffect(() => {
+    if (!isVisible || !isInView) return;
+
+    const interval = setInterval(() => {
+      setAnimCycle((c) => c + 1);
+    }, 6500);
+
+    return () => clearInterval(interval);
+  }, [isVisible, isInView]);
 
   return (
     <div
+      ref={containerRef}
       onClick={onClick}
       className={`relative select-none pointer-events-auto cursor-pointer group/hint transition-all duration-300 ease-out ${
         isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"
@@ -52,10 +92,9 @@ export function DoodleArrowHint({
       }`}>
         {/* JIKA BOX TERBUKA (Petunjuk Menutup Box di Kiri Bawah) */}
         {isOpen ? (
-          <>
+          <React.Fragment key={`open-${isVisible ? "v" : "h"}-${animCycle}`}>
             {/* Panah Coretan Tangan Mengarah ke Atas-Kanan (Up-Right towards Box) */}
             <svg
-              key="svg-open"
               viewBox="0 0 120 75"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +108,6 @@ export function DoodleArrowHint({
                 strokeWidth="3"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                pathLength="100"
                 className="animate-draw-line"
               />
 
@@ -80,7 +118,6 @@ export function DoodleArrowHint({
                 strokeWidth="1.8"
                 strokeLinecap="round"
                 opacity="0.5"
-                pathLength="100"
                 className="animate-draw-line"
               />
 
@@ -91,35 +128,38 @@ export function DoodleArrowHint({
                 strokeWidth="3"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                pathLength="60"
                 className="animate-draw-head"
               />
             </svg>
 
             {/* Teks Catatan Tangan di Kiri Bawah */}
             <div
-              key="text-open"
               className="animate-doodle-text flex items-center gap-1.5 -mt-1 pl-1"
             >
               <span
                 className="font-handwriting text-xl sm:text-2xl text-[#3C95C8] font-bold tracking-wide drop-shadow-xs whitespace-nowrap"
-                style={{ textShadow: "0 1px 2px rgba(255,255,255,0.8)" }}
+                style={{
+                  fontFamily: "var(--font-caveat), 'Caveat', cursive, sans-serif",
+                  textShadow: "0 1px 2px rgba(255,255,255,0.8)",
+                }}
               >
                 {textLabel}
               </span>
             </div>
-          </>
+          </React.Fragment>
         ) : (
-          <>
+          <React.Fragment key={`closed-${isVisible ? "v" : "h"}-${animCycle}`}>
             {/* JIKA BOX TERTUTUP (Petunjuk Membuka Box di Kanan) */}
             {/* Teks Catatan Tangan */}
             <div
-              key="text-closed"
               className="animate-doodle-text flex items-center gap-1.5 pl-4 sm:pl-6"
             >
               <span
                 className="font-handwriting text-xl sm:text-2xl text-[#3C95C8] font-bold tracking-wide drop-shadow-xs whitespace-nowrap"
-                style={{ textShadow: "0 1px 2px rgba(255,255,255,0.8)" }}
+                style={{
+                  fontFamily: "var(--font-caveat), 'Caveat', cursive, sans-serif",
+                  textShadow: "0 1px 2px rgba(255,255,255,0.8)",
+                }}
               >
                 {textLabel}
               </span>
@@ -127,7 +167,6 @@ export function DoodleArrowHint({
 
             {/* Panah Coretan Tangan Gaya 2: Lengkungan Sapuan Busur Dinamis dengan Sketsa Ganda (Sweeping Crescent Arch) */}
             <svg
-              key="svg-closed"
               viewBox="0 0 120 75"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -141,7 +180,6 @@ export function DoodleArrowHint({
                 strokeWidth="3"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                pathLength="100"
                 className="animate-draw-line"
               />
 
@@ -152,7 +190,6 @@ export function DoodleArrowHint({
                 strokeWidth="2"
                 strokeLinecap="round"
                 opacity="0.55"
-                pathLength="100"
                 className="animate-draw-line"
               />
 
@@ -163,11 +200,10 @@ export function DoodleArrowHint({
                 strokeWidth="3"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                pathLength="60"
                 className="animate-draw-head"
               />
             </svg>
-          </>
+          </React.Fragment>
         )}
       </div>
     </div>

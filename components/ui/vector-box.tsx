@@ -390,8 +390,8 @@ export function VectorBox({
                 {/* Sisi Kiri: Logo Bulat Jalan Langit */}
                 <g transform="matrix(0.866 0.5 0 1 96.1 130)">
                   <image
-                    href="/images/Master%20Logo%20JLF/Logo%20Jalan%20Langit/Transparan/Bulat/Logo%20bulat%20putih.png"
-                    xlinkHref="/images/Master%20Logo%20JLF/Logo%20Jalan%20Langit/Transparan/Bulat/Logo%20bulat%20putih.png"
+                    href="/images/logo/logo-bulat-biru.png"
+                    xlinkHref="/images/logo/logo-bulat-biru.png"
                     x="36"
                     y="24"
                     width="48"
