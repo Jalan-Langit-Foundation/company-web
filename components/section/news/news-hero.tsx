@@ -1,7 +1,9 @@
+import { Container } from "@/components/ui/container";
+
 export default function NewsHero() {
   return (
-    <section className="py-16 px-6 bg-white">
-      <div className="max-w-4xl mx-auto text-center">
+    <section className="w-full bg-white py-12 sm:py-16 lg:py-20 border-b border-slate-200/80">
+      <Container size="xl" className="text-center">
         <p className="text-sm font-semibold tracking-wide uppercase text-primary-blue">
           Berita & Update
         </p>
@@ -13,7 +15,7 @@ export default function NewsHero() {
         <p className="mt-4 text-dark-gray max-w-2xl mx-auto">
           Ikuti perjalanan dan dampak nyata program JLF yang terus berkembang.
         </p>
-      </div>
+      </Container>
     </section>
   );
 }

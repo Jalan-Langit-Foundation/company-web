@@ -1,11 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Container } from "@/components/ui/container";
 import { news } from "@/lib/data/news";
 
 export default function NewsList() {
   return (
-    <section className="py-8 px-6 bg-white">
-      <div className="max-w-3xl mx-auto flex flex-col gap-5">
+    <section className="w-full bg-white py-12 sm:py-16 border-b border-slate-200/80">
+      <Container size="xl">
+        <div className="w-full flex flex-col gap-6">
         {news.map((item) => (
           <Link
             key={item.id}
@@ -34,7 +36,8 @@ export default function NewsList() {
             </div>
           </Link>
         ))}
-      </div>
+        </div>
+      </Container>
     </section>
   );
 }
