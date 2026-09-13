@@ -22,6 +22,6 @@ export const FOOTER_ORGANIZATION_LINKS: NavLink[] = [
   { label: "Visi & Misi", href: "/#visi-misi" },
   { label: "Core Values LANGIT", href: "/#nilai-langit" },
   { label: "Kontribusi SDGs", href: "/#tentang-kami" },
-  { label: "Legalitas Resmi", href: "/#final-cta" },
+  { label: "Legalitas Resmi", href: "/#legalitas" },
 ];
 
