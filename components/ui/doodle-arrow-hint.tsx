@@ -102,7 +102,7 @@ export function DoodleArrowHint({
               className="animate-doodle-text flex items-center gap-1.5 -mt-1 pl-1"
             >
               <span
-                className="font-[family-name:var(--font-handwriting)] text-xl sm:text-2xl text-[#3C95C8] font-bold tracking-wide drop-shadow-xs whitespace-nowrap"
+                className="font-handwriting text-xl sm:text-2xl text-[#3C95C8] font-bold tracking-wide drop-shadow-xs whitespace-nowrap"
                 style={{ textShadow: "0 1px 2px rgba(255,255,255,0.8)" }}
               >
                 {textLabel}
@@ -118,7 +118,7 @@ export function DoodleArrowHint({
               className="animate-doodle-text flex items-center gap-1.5 pl-4 sm:pl-6"
             >
               <span
-                className="font-[family-name:var(--font-handwriting)] text-xl sm:text-2xl text-[#3C95C8] font-bold tracking-wide drop-shadow-xs whitespace-nowrap"
+                className="font-handwriting text-xl sm:text-2xl text-[#3C95C8] font-bold tracking-wide drop-shadow-xs whitespace-nowrap"
                 style={{ textShadow: "0 1px 2px rgba(255,255,255,0.8)" }}
               >
                 {textLabel}
