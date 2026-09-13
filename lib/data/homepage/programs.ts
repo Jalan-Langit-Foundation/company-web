@@ -10,6 +10,7 @@ export interface ProgramItem {
   image: string;
   donationUrl: string;
   isFlagship?: boolean;
+  hashtag: string;
 }
 
 export const PROGRAMS_SECTION_DATA: {
@@ -53,6 +54,7 @@ export const PROGRAMS_SECTION_DATA: {
       description:
         "Program distribusi pangan dan nutrisi tambahan berupa buah dan susu yang diperuntukkan bagi anak sekolah, yatim, dhuafa, dan hamba pilihan Allah. Penyaluran dilakukan rutin pada momen buka puasa sunnah Senin dan Kamis.",
       highlightTag: "Pangan & Nutrisi",
+      hashtag: "#NutrisiKebaikanRutin",
       image: "/images/draft-foto/langit-box/langit-box-01.webp",
       donationUrl: "https://donasi.jalanlangit.org/campaign/langit-box",
       isFlagship: true,
@@ -67,6 +69,7 @@ export const PROGRAMS_SECTION_DATA: {
       description:
         "Program beasiswa dan pembinaan terpadu selama satu tahun bagi pelajar untuk membentuk generasi Qur’ani yang kuat dalam hafalan, unggul dalam akhlak, terampil dalam soft skill, dan memiliki kemandirian ekonomi.",
       highlightTag: "Generasi Qur'ani",
+      hashtag: "#MencetakGenerasiQurani",
       image: "/images/draft-foto/langit-scholarship/langit-scholarship-01.webp",
       donationUrl: "https://donasi.jalanlangit.org/campaign/langit-scholarship",
       isFlagship: true,
@@ -81,6 +84,7 @@ export const PROGRAMS_SECTION_DATA: {
       description:
         "Wujud apresiasi bagi para pejuang nafkah di jalanan. Hadiah Kebahagiaan menghadirkan paket sembako untuk menguatkan langkah para driver ojek online, pedagang kecil, dan keluarga prasejahtera yang terus berjuang tanpa menyerah.",
       highlightTag: "Apresiasi Pejuang Jalanan",
+      hashtag: "#ApresiasiPejuangNafkah",
       image: "/images/draft-foto/hadiah-kebahagiaan/hadiah-kebahagiaan-01.webp",
       donationUrl: "https://donasi.jalanlangit.org/campaign/hadiah-kebahagiaan",
     },
@@ -94,6 +98,7 @@ export const PROGRAMS_SECTION_DATA: {
       description:
         "Program berbasis event yang bertujuan menghadirkan kebahagiaan dan pengalaman edukatif kepada anak dan pelajar melalui kegiatan menyenangkan seperti games, nonton bersama, dan rekreasi edukatif.",
       highlightTag: "Fun Learning & Edukasi",
+      hashtag: "#KeceriaanBersamaSantri",
       image: "/images/draft-foto/serasi/serasi-07.webp",
       donationUrl: "https://donasi.jalanlangit.org/campaign/serasi",
     },
@@ -107,6 +112,7 @@ export const PROGRAMS_SECTION_DATA: {
       description:
         "Menyalurkan dana zakat secara tepat sasaran untuk menghadirkan perubahan nyata dan keberdayaan bagi sesama yang membutuhkan.",
       highlightTag: "Penyaluran Tepat Sasaran",
+      hashtag: "#ZakatTepatSasaran",
       image: "/images/draft-foto/zakat/zakat-07.webp",
       donationUrl: "https://donasi.jalanlangit.org/campaign/zakat",
     },
@@ -120,6 +126,7 @@ export const PROGRAMS_SECTION_DATA: {
       description:
         "Inisiatif aksi kemanusiaan dan tanggap bencana yang bergerak cepat menyalurkan bantuan darurat bagi saudara-saudara kita yang terdampak bencana alam dan krisis kemanusiaan.",
       highlightTag: "Aksi Tanggap Darurat",
+      hashtag: "#TanggapDaruratKemanusiaan",
       image: "/images/draft-foto/jalan-langit-peduli/jalan-langit-peduli-01.webp",
       donationUrl: "https://donasi.jalanlangit.org/campaign/jalan-langit-peduli",
     },

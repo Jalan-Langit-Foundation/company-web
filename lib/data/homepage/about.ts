@@ -1,7 +1,7 @@
 export const ABOUT_TEASER_DATA = {
   quote: {
-    line1: "Kami bukan sekadar lembaga donasi.",
-    line2: "Kami adalah gerakan tumbuh bersama.",
+    line1: "Bergandengan dalam Kebaikan,",
+    line2: "Melangkah Menuju Dampak yang Berkelanjutan",
   },
   headline: {
     prefix: "NGO Muslim dengan",
