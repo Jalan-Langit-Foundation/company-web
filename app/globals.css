@@ -637,3 +637,27 @@ body {
   animation: shadowHeavyImpact 0.68s cubic-bezier(0.22, 1, 0.36, 1) both;
   transform-origin: 200px 325px;
 }
+
+/* =========================================================
+   VERTICAL INFINITE MARQUEE ANIMATION (IMPACT STORY)
+   - Foto bergerak meluncur ke atas terus-menerus tanpa putus (seamless loop)
+   - Tetap berjalan mulus tanpa berhenti saat pointer mouse dihover
+   ========================================================= */
+
+@keyframes marqueeVertical {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-marquee-vertical,
+.animate-marquee-vertical:hover {
+  animation: marqueeVertical 34s linear infinite;
+  animation-play-state: running !important;
+  will-change: transform;
+}
+
+

@@ -7,4 +7,5 @@ export * from "./collaboration";
 export * from "./news";
 export * from "./langit-values";
 export * from "./vision-mission";
+export * from "./impact-story";
 export * from "./final-cta";
