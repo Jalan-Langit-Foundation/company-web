@@ -50,7 +50,7 @@ export function ImpactStorySection() {
     <section
       id="cerita-dampak"
       aria-label="Cerita di Balik Dampak Jalan Langit Foundation"
-      className="w-full bg-[#FAFCFE] border-b border-slate-200/80 relative overflow-hidden"
+      className="w-full bg-[#FAFCFE] border-y border-slate-200/80 relative overflow-hidden"
     >
       {/* Background Soft Ambient Lighting Accent */}
       <div className="absolute top-1/4 -left-32 w-80 h-80 bg-[#EAF5FB]/70 rounded-full blur-3xl pointer-events-none -z-0" />
