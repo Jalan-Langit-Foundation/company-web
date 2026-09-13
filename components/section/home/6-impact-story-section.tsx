@@ -50,7 +50,7 @@ export function ImpactStorySection() {
     <section
       id="cerita-dampak"
       aria-label="Cerita di Balik Dampak Jalan Langit Foundation"
-      className="w-full bg-[#FAFCFE] border-y border-slate-200/80 relative overflow-hidden scroll-mt-16"
+      className="w-full bg-[#FAFCFE] border-b border-slate-200/80 relative overflow-hidden scroll-mt-16"
     >
       {/* Background Soft Ambient Lighting Accent */}
       <div className="absolute top-1/4 -left-32 w-80 h-80 bg-[#EAF5FB]/70 rounded-full blur-3xl pointer-events-none -z-0" />
@@ -181,7 +181,7 @@ export function ImpactStorySection() {
               - Vertically: Membentang penuh setinggi batas section (border-t ke border-b)
               - Bergerak vertikal meluncur ke atas
               ========================================================= */}
-          <div className="hidden lg:flex lg:col-span-5 w-full justify-end lg:absolute lg:top-0 lg:bottom-0 lg:right-4 sm:lg:right-6 lg:right-8 lg:w-[calc((100%-2rem)*5/12)] xl:w-[360px] pointer-events-auto">
+          <div className="hidden lg:flex lg:col-span-5 w-full justify-end lg:absolute lg:top-0 lg:bottom-0 lg:right-6 xl:lg:right-8 lg:w-[calc((100%-2rem)*5/12)] xl:w-[360px] pointer-events-auto">
             <div className="relative w-full max-w-[340px] xl:max-w-[360px] h-full overflow-hidden">
               
               {/* Vertical Infinite Marquee Track */}

@@ -50,9 +50,9 @@ export function Reveal({
   }, []);
 
   const getTransformStyle = () => {
-    if (isVisible) return "opacity-100 translate-y-0";
-    if (direction === "up") return "opacity-0 translate-y-10 sm:translate-y-12";
-    if (direction === "down") return "opacity-0 -translate-y-10 sm:-translate-y-12";
+    if (isVisible) return "opacity-100 transform-none";
+    if (direction === "up") return "opacity-0 translate-y-8 will-change-[opacity,transform]";
+    if (direction === "down") return "opacity-0 -translate-y-8 will-change-[opacity,transform]";
     return "opacity-0";
   };
 
@@ -60,11 +60,11 @@ export function Reveal({
     <div
       ref={ref}
       style={{
-        transitionDuration: "850ms",
+        transitionDuration: "700ms",
         transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
         transitionDelay: `${delay}ms`,
       }}
-      className={`transition-all will-change-[opacity,transform] ${getTransformStyle()} ${className}`}
+      className={`transition-[opacity,transform] ${getTransformStyle()} ${className}`}
     >
       {children}
     </div>
