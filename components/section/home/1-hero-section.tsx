@@ -92,7 +92,7 @@ export function HeroSection() {
                 <Button
                   variant="white"
                   size="md"
-                  href="/programs"
+                  href="/#program"
                   rightIcon={<ArrowRight className="w-4 h-4 text-[#3C95C8]" />}
                   className="w-full sm:w-auto text-[15px] sm:text-base py-3 sm:py-3.5 px-6 sm:px-7 min-h-[46px] sm:min-h-[50px] shadow-sm hover:shadow-md transition-all font-semibold"
                 >
@@ -101,7 +101,7 @@ export function HeroSection() {
                 <Button
                   variant="outline"
                   size="md"
-                  href="/contact"
+                  href="/#kolaborasi"
                   leftIcon={<Handshake className="w-4 h-4 text-white" />}
                   className="w-full sm:w-auto text-[15px] sm:text-base py-3 sm:py-3.5 px-6 sm:px-7 min-h-[46px] sm:min-h-[50px] font-semibold text-white border-white/70 hover:bg-white/15 hover:border-white hover:text-white"
                 >

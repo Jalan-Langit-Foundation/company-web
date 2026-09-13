@@ -143,26 +143,15 @@ export function ProgramsSection() {
             ========================================================= */}
         <div className="pt-5 sm:pt-6 flex flex-wrap items-center justify-center gap-3">
           {isExpanded ? (
-            <>
-              <Button
-                variant="outline"
-                size="md"
-                onClick={handleCollapse}
-                rightIcon={<ChevronUp className="w-4 h-4" />}
-                className="font-bold border-[#3C95C8] text-[#3C95C8] hover:bg-[#EAF5FB] px-6"
-              >
-                Lihat Lebih Sedikit
-              </Button>
-
-              <Button
-                variant="outline"
-                size="md"
-                href="/programs"
-                className="font-bold border-[#3C95C8] text-[#3C95C8] hover:bg-[#EAF5FB] px-6"
-              >
-                Lihat Selengkapnya
-              </Button>
-            </>
+            <Button
+              variant="outline"
+              size="md"
+              onClick={handleCollapse}
+              rightIcon={<ChevronUp className="w-4 h-4" />}
+              className="font-bold border-[#3C95C8] text-[#3C95C8] hover:bg-[#EAF5FB] px-6"
+            >
+              Lihat Lebih Sedikit
+            </Button>
           ) : (
             <Button
               variant="outline"

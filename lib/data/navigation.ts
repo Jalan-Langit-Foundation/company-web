@@ -8,20 +8,20 @@ export const NAVBAR_LINKS: NavLink[] = [
 ];
 
 export const FOOTER_PROGRAM_LINKS: NavLink[] = [
-  { label: "#LangitBox", href: "/programs#langit-box" },
-  { label: "#LangitScholarship", href: "/programs#langit-scholarship" },
-  { label: "#SERASI", href: "/programs#serasi" },
-  { label: "#HadiahKebahagiaan", href: "/programs#hadiah-kebahagiaan" },
-  { label: "#Zakat", href: "/programs#zakat" },
-  { label: "#JalanLangitPeduli", href: "/programs#jalan-langit-peduli" },
+  { label: "#LangitBox", href: "/#program" },
+  { label: "#LangitScholarship", href: "/#program" },
+  { label: "#SERASI", href: "/#program" },
+  { label: "#HadiahKebahagiaan", href: "/#program" },
+  { label: "#Zakat", href: "/#program" },
+  { label: "#JalanLangitPeduli", href: "/#program" },
 ];
 
 export const FOOTER_ORGANIZATION_LINKS: NavLink[] = [
-  { label: "Profil Yayasan", href: "/about" },
-  { label: "Perjalanan Kami", href: "/about#perjalanan-kami" },
-  { label: "Visi & Misi", href: "/about#visi-misi" },
-  { label: "Core Values LANGIT", href: "/about#core-values" },
-  { label: "Kontribusi SDGs", href: "/about#sdgs" },
-  { label: "Legalitas Resmi", href: "/about#legalitas" },
+  { label: "Profil Yayasan", href: "/#tentang-kami" },
+  { label: "Perjalanan Kami", href: "/#tentang-kami" },
+  { label: "Visi & Misi", href: "/#visi-misi" },
+  { label: "Core Values LANGIT", href: "/#nilai-langit" },
+  { label: "Kontribusi SDGs", href: "/#tentang-kami" },
+  { label: "Legalitas Resmi", href: "/#final-cta" },
 ];
 
