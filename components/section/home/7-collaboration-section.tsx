@@ -13,19 +13,19 @@ import { COLLABORATION_DATA } from "@/lib/data/homepage";
 // Daftar foto slideshow mandiri (berganti otomatis tiap 4 detik)
 const COLLABORATION_SLIDES = [
   {
-    src: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=1200&auto=format&fit=crop",
+    src: "/images/draft-foto/zakat/zakat-07.webp",
     alt: "Kolaborasi Kemitraan & CSR Jalan Langit Foundation",
   },
   {
-    src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1200&auto=format&fit=crop",
+    src: "/images/draft-foto/serasi/serasi-07.webp",
     alt: "Gerakan Kolaborasi Bersama Komunitas",
   },
   {
-    src: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?q=80&w=1200&auto=format&fit=crop",
+    src: "/images/draft-foto/langit-box/langit-box-01.webp",
     alt: "Aksi Nyata Relawan Jalan Langit Foundation",
   },
   {
-    src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop",
+    src: "/images/draft-foto/langit-school/langit-school-01.webp",
     alt: "Program Magang Berdampak & Talenta Muda",
   },
 ];

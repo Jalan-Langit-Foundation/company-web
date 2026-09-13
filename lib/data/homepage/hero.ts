@@ -11,28 +11,28 @@ export const HERO_CONFIG = {
   slides: [
     {
       id: "slide-1",
-      src: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1600&auto=format&fit=crop",
-      alt: "Penyaluran bantuan nutrisi dan kebersamaan santri pelosok",
+      src: "/images/draft-foto/ramadhan/ramadhan-05.webp",
+      alt: "Kebersamaan santri dan penerima manfaat Jalan Langit Foundation di Ramadhan Bahagia",
     },
     {
       id: "slide-2",
-      src: "https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1600&auto=format&fit=crop",
-      alt: "Pendidikan, dakwah, dan keceriaan anak-anak penerima manfaat",
+      src: "/images/draft-foto/serasi/serasi-07.webp",
+      alt: "Dokumentasi kebahagiaan santri dalam program SERASI (Sehari Bersama Santri)",
     },
     {
       id: "slide-3",
-      src: "https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=1600&auto=format&fit=crop",
-      alt: "Optimalisasi dana infak dan sedekah untuk program kemanusiaan",
+      src: "/images/draft-foto/langit-box/langit-box-01.webp",
+      alt: "Aksi relawan Jalan Langit Foundation menyalurkan bantuan pangan dan nutrisi",
     },
     {
       id: "slide-4",
-      src: "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?q=80&w=1600&auto=format&fit=crop",
-      alt: "Aktivitas gotong royong dan aksi nyata relawan kebaikan",
+      src: "/images/draft-foto/zakat/zakat-07.webp",
+      alt: "Penyaluran amanah zakat, infak, dan sedekah kepada penerima manfaat",
     },
     {
       id: "slide-5",
-      src: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=1600&auto=format&fit=crop",
-      alt: "Program santunan dan pembinaan santri penghafal Al-Qur'an",
+      src: "/images/draft-foto/zakat/zakat-01.webp",
+      alt: "Armada unit layanan operasional kebaikan Jalan Langit Foundation",
     },
   ] satisfies HeroSlide[],
 };
