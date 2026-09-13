@@ -66,7 +66,7 @@ export function LatestNewsSection() {
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent pointer-events-none" />
                 <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 z-10 space-y-2 text-left">
-                  <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white font-['Poppins',sans-serif] leading-snug line-clamp-2 group-hover:text-sky-200 transition-colors">
+                  <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white font-['Poppins',sans-serif] leading-snug line-clamp-2">
                     {mainFeatured.title}
                   </h3>
                   <p className="text-[11px] sm:text-xs text-slate-300 font-['Lato',sans-serif]">
@@ -106,7 +106,7 @@ export function LatestNewsSection() {
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none hidden sm:block" />
                   <div className="sm:absolute sm:bottom-0 sm:left-0 sm:right-0 sm:p-3.5 sm:p-4 z-10 space-y-1 flex-1 min-w-0 text-left">
-                    <h4 className="text-sm sm:text-[15px] font-bold text-[#2C2C2C] sm:text-white font-['Poppins',sans-serif] leading-snug line-clamp-2 group-hover:text-[#3C95C8] sm:group-hover:text-sky-200 transition-colors">
+                    <h4 className="text-sm sm:text-[15px] font-bold text-[#2C2C2C] sm:text-white font-['Poppins',sans-serif] leading-snug line-clamp-2">
                       {article.title}
                     </h4>
                     <p className="text-[11px] sm:text-xs text-[#777777] sm:text-slate-300 font-['Lato',sans-serif]">
@@ -144,7 +144,7 @@ export function LatestNewsSection() {
                   )}
                 </div>
                 <div className="flex-1 min-w-0 space-y-1 text-left">
-                  <h4 className="text-sm sm:text-[15px] font-bold text-[#2C2C2C] font-['Poppins',sans-serif] leading-snug line-clamp-2 group-hover:text-[#3C95C8] transition-colors">
+                  <h4 className="text-sm sm:text-[15px] font-bold text-[#2C2C2C] font-['Poppins',sans-serif] leading-snug line-clamp-2">
                     {article.title}
                   </h4>
                   <p className="text-[11px] sm:text-xs text-[#777777] font-['Lato',sans-serif]">
