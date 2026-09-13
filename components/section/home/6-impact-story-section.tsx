@@ -149,15 +149,15 @@ export function ImpactStorySection() {
                   ))}
                 </div>
 
-                {/* Navigasi Klik untuk Lanjut ke Cerita Berikutnya */}
+                {/* Navigasi Klik untuk Lanjut & Kembali ke Cerita */}
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
                     onClick={handlePrev}
-                    aria-label="Cerita Sebelumnya"
-                    className="w-8 h-8 rounded-full border border-slate-200 text-slate-600 hover:text-[#3C95C8] hover:border-[#3C95C8] flex items-center justify-center transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-[#3C95C8] bg-white hover:bg-[#EAF5FB] text-[#3C95C8] text-xs font-semibold font-['Poppins',sans-serif] transition-colors cursor-pointer"
                   >
-                    <ChevronLeft className="w-4 h-4" />
+                    <ChevronLeft className="w-3.5 h-3.5" />
+                    <span>Sebelumnya</span>
                   </button>
 
                   <button
@@ -165,7 +165,7 @@ export function ImpactStorySection() {
                     onClick={handleNext}
                     className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-[#3C95C8] bg-white hover:bg-[#EAF5FB] text-[#3C95C8] text-xs font-semibold font-['Poppins',sans-serif] transition-colors cursor-pointer"
                   >
-                    <span>Cerita Selanjutnya</span>
+                    <span>Selanjutnya</span>
                     <ChevronRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
