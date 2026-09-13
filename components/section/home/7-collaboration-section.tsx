@@ -45,7 +45,7 @@ export function CollaborationSection() {
     <section
       id="kolaborasi"
       aria-label="Kolaborasi Kebaikan Jalan Langit Foundation"
-      className="w-full bg-[#FAFCFE] py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 relative overflow-hidden"
+      className="w-full bg-[#FAFCFE] py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 relative overflow-hidden scroll-mt-16"
     >
       <Container size="xl" className="relative z-10">
         {/* =========================================================

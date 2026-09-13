@@ -34,7 +34,7 @@ export function ProgramsSection() {
     <section
       id="program"
       aria-label="Program Kebaikan Jalan Langit Foundation"
-      className="w-full bg-[#FAFCFE] py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 relative overflow-hidden"
+      className="w-full bg-[#FAFCFE] py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 relative overflow-hidden scroll-mt-16"
     >
       {/* Subtle Background Lighting Accent */}
       <div className="absolute top-1/4 -left-40 w-96 h-96 bg-[#EAF5FB]/60 rounded-full blur-3xl pointer-events-none -z-0" />

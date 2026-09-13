@@ -29,7 +29,7 @@ export function AboutTeaserSection() {
     <section
       id="tentang-kami"
       aria-label="Tentang Jalan Langit Foundation"
-      className="w-full bg-white py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 transition-colors"
+      className="w-full bg-white py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 transition-colors scroll-mt-16"
     >
       <Container size="xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-14 xl:gap-16 items-start">

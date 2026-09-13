@@ -1,75 +1,10 @@
 import { NavLink } from "@/types";
 
 export const NAVBAR_LINKS: NavLink[] = [
-  { label: "Tentang Kami", href: "/about" },
-  {
-    label: "Program",
-    href: "/programs",
-    children: [
-      {
-        label: "Semua Program",
-        href: "/programs",
-        description: "Daftar seluruh program dan inisiatif kebaikan",
-      },
-      {
-        label: "#LangitBox",
-        href: "/programs/langit-box",
-        description: "Pangan & nutrisi santri, yatim, dan dhuafa",
-      },
-      {
-        label: "#LangitScholarship",
-        href: "/programs/langit-scholarship",
-        description: "Beasiswa dan pembinaan generasi Qur’ani",
-      },
-      {
-        label: "#SERASI",
-        href: "/programs/serasi",
-        description: "Sehari Bersama Santri, event rekreasi edukatif",
-      },
-      {
-        label: "#HadiahKebahagiaan",
-        href: "/programs/hadiah-kebahagiaan",
-        description: "Paket sembako bagi pejuang nafkah jalanan",
-      },
-      {
-        label: "#Zakat",
-        href: "/programs/zakat",
-        description: "Optimalisasi penyaluran dana zakat berdaya",
-      },
-      {
-        label: "#JalanLangitPeduli",
-        href: "/programs/jalan-langit-peduli",
-        description: "Aksi kemanusiaan tanggap darurat & bencana",
-      },
-    ],
-  },
-  {
-    label: "Berita",
-    href: "/news",
-    children: [
-      {
-        label: "Semua Berita",
-        href: "/news",
-        description: "Kumpulan kabar dan update terkini",
-      },
-      {
-        label: "Kabar Yayasan",
-        href: "/news?category=kabar-yayasan",
-        description: "Aktivitas dan laporan penyaluran kebaikan",
-      },
-      {
-        label: "Cerita Inspiratif",
-        href: "/news?category=inspirasi",
-        description: "Kisah nyata penerima manfaat dan donatur",
-      },
-      {
-        label: "Press Release",
-        href: "/news?category=press-release",
-        description: "Informasi dan rilis resmi kelembagaan",
-      },
-    ],
-  },
-  { label: "Kontak", href: "/contact" },
+  { label: "Tentang Kami", href: "/#tentang-kami" },
+  { label: "Program", href: "/#program" },
+  { label: "Berita", href: "/#berita" },
+  { label: "Kontak", href: "/#final-cta" },
 ];
 
 export const FOOTER_PROGRAM_LINKS: NavLink[] = [

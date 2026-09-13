@@ -9,8 +9,9 @@ export function FinalCtaSection() {
     <section
       id="final-cta"
       aria-label="Ajakan Berbagi Kebaikan"
-      className="w-full bg-[#FAFCFE] py-12 sm:py-20 lg:py-24 border-t border-slate-100 relative overflow-hidden"
+      className="w-full bg-[#FAFCFE] py-12 sm:py-20 lg:py-24 border-t border-slate-100 relative overflow-hidden scroll-mt-16"
     >
+      <div id="kontak" className="absolute top-0" />
       {/* Decorative Background Accents matching other sections */}
       <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#EAF5FB] rounded-full blur-3xl pointer-events-none -z-0" />
       <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#EAF5FB] rounded-full blur-3xl pointer-events-none -z-0" />

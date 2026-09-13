@@ -21,7 +21,7 @@ export function LatestNewsSection() {
     <section
       id="berita"
       aria-label="Kabar & Berita Jalan Langit Foundation"
-      className="w-full bg-white py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 relative overflow-hidden"
+      className="w-full bg-white py-12 sm:py-20 lg:py-24 border-b border-slate-200/80 relative overflow-hidden scroll-mt-16"
     >
       <Container size="xl" className="relative z-10">
         {/* SECTION HEADER (Centered 2-Line Style) */}
