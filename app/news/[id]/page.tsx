@@ -35,12 +35,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: detailNews.title,
       description: detailNews.excerpt,
-      images: [
-        {
-          url: detailNews.image,
-          alt: detailNews.title,
-        },
-      ],
+      images: detailNews.image
+        ? [
+            {
+              url: detailNews.image,
+              alt: detailNews.title,
+            },
+          ]
+        : [],
     },
   };
 }
