@@ -69,8 +69,8 @@ export function ProgramsSection() {
             let visibilityClass = "";
             if (isExpanded) {
               visibilityClass = isCollapsing
-                ? "animate-out fade-out slide-out-to-top-4 duration-300 fill-mode-forwards"
-                : "animate-in fade-in slide-in-from-top-4 duration-500 fill-mode-forwards";
+                ? "flex animate-out fade-out slide-out-to-top-4 duration-300 fill-mode-forwards"
+                : "flex animate-in fade-in slide-in-from-top-4 duration-500 fill-mode-forwards";
             } else {
               // Jika belum expanded: tampilkan hanya 1 baris pertama sesuai device
               if (isInitialMobile) {
@@ -87,10 +87,10 @@ export function ProgramsSection() {
             return (
               <div
                 key={program.id}
-                className={`${visibilityClass} group flex-col bg-white rounded-2xl overflow-hidden border border-slate-200/80 hover:border-slate-300/90 shadow-none hover:shadow-[0_12px_32px_rgba(0,0,0,0.07)] transition-all duration-300 hover:-translate-y-1`}
+                className={`${visibilityClass} group flex-col h-full bg-white rounded-2xl overflow-hidden border border-slate-200/80 hover:border-slate-300/90 shadow-none hover:shadow-[0_12px_32px_rgba(0,0,0,0.07)] transition-all duration-300 hover:-translate-y-1`}
               >
                 {/* 16:9 Aspect Ratio Thumbnail Image */}
-                <div className="relative w-full aspect-video overflow-hidden bg-slate-900">
+                <div className="relative w-full aspect-video overflow-hidden bg-slate-900 shrink-0">
                   <Image
                     src={program.image}
                     alt={program.title}
@@ -108,13 +108,18 @@ export function ProgramsSection() {
 
                 {/* Card Content */}
                 <div className="p-5 flex flex-col flex-1 bg-white">
-                  <div className="space-y-2">
+                  <div className="space-y-2 flex-1 pb-4">
                     <h3 className="text-base font-bold text-[#2C2C2C] font-['Poppins',sans-serif] leading-snug">
                       {program.title}
                     </h3>
                     <p className="text-xs sm:text-sm text-[#555555] font-['Lato',sans-serif] leading-relaxed">
                       {program.description}
                     </p>
+                  </div>
+
+                  {/* Hashtag Selalu Terletak Tepat di Paling Bawah */}
+                  <div className="mt-auto pt-3 border-t border-slate-100 flex items-center text-xs text-[#3C95C8] font-semibold font-['Poppins',sans-serif]">
+                    <span>{program.hashtag}</span>
                   </div>
                 </div>
               </div>

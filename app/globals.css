@@ -9,9 +9,9 @@
   --color-brand-soft: #EAF5FB;
 
   /* ============ TYPEFACE ============ */
-  --font-heading: var(--font-heading), 'Poppins', system-ui, sans-serif;
-  --font-body: var(--font-body), 'Lato', system-ui, sans-serif;
-  --font-handwriting: var(--font-handwriting), 'Caveat', cursive, sans-serif;
+  --font-heading: var(--font-poppins), 'Poppins', system-ui, sans-serif;
+  --font-body: var(--font-lato), 'Lato', system-ui, sans-serif;
+  --font-handwriting: var(--font-caveat), 'Caveat', cursive, sans-serif;
 
   /* ============ FLUID TYPOGRAPHY SCALE (Tailwind utility: text-fluid-*) ============ */
   --text-fluid-xs: clamp(0.75rem, 0.70rem + 0.20vw, 0.8125rem);
@@ -481,10 +481,10 @@ body {
 
 @keyframes drawStrokeLine {
   0% {
-    stroke-dashoffset: 100;
+    stroke-dashoffset: 220;
     opacity: 0;
   }
-  5% {
+  3% {
     opacity: 1;
   }
   100% {
@@ -495,7 +495,7 @@ body {
 
 @keyframes drawStrokeHead {
   0% {
-    stroke-dashoffset: 60;
+    stroke-dashoffset: 70;
     opacity: 0;
   }
   1% {
@@ -531,14 +531,14 @@ body {
 }
 
 .animate-draw-line {
-  stroke-dasharray: 100;
-  stroke-dashoffset: 100;
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
   animation: drawStrokeLine 1.1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .animate-draw-head {
-  stroke-dasharray: 60;
-  stroke-dashoffset: 60;
+  stroke-dasharray: 70;
+  stroke-dashoffset: 70;
   animation: drawStrokeHead 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.85s forwards;
 }
 

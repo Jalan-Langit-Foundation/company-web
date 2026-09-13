@@ -75,9 +75,9 @@ export function NewsSidebar({ otherNews = [] }: NewsSidebarProps) {
                   <Link
                     key={item.id}
                     href={`/news/${item.id}`}
-                    className="group block py-2.5 first:pt-0 last:pb-0 transition-colors"
+                    className="group block py-2.5 first:pt-0 last:pb-0"
                   >
-                    <h4 className="text-xs sm:text-[13px] font-medium text-[#2C2C2C] font-['Poppins',sans-serif] leading-snug group-hover:text-[#3C95C8] transition-colors line-clamp-2">
+                    <h4 className="text-xs sm:text-[13px] font-medium text-[#2C2C2C] font-['Poppins',sans-serif] leading-snug line-clamp-2">
                       {item.title}
                     </h4>
                     <p className="text-[11px] text-[#888888] font-['Lato',sans-serif] mt-1">

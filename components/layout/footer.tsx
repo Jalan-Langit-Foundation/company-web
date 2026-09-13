@@ -16,7 +16,7 @@ export function Footer() {
       {/* Main Footer Content */}
       <Container size="xl" className="pt-16 pb-12">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          {/* Kolom 1: Profil Brand & Deskripsi */}
+          {/* Kolom 1: Profil Brand & Deskripsi & Social Links */}
           <div className="flex flex-col gap-4 lg:col-span-4 lg:pr-6">
             <Link
               href="/"
@@ -62,7 +62,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Sisi Kanan: 3 Kolom Navigasi (Program, Organisasi, Kontak) - 2 Baris di Mobile */}
+          {/* Sisi Kanan: 3 Kolom Navigasi & Info (Program, Organisasi, Legalitas) */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 lg:gap-10 lg:col-span-8">
             {/* Kolom 2: Program */}
             <div className="flex flex-col gap-4 col-span-1">
@@ -102,41 +102,25 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Kolom 4: Kontak (Baris ke-2 di Mobile) */}
-            <div className="flex flex-col gap-4 col-span-2 sm:col-span-1">
-              <h4 className="text-xs font-bold tracking-widest text-white uppercase font-['Poppins',sans-serif]">
-                KONTAK
-              </h4>
-              <ul className="flex flex-col gap-2.5 list-none m-0 p-0 text-sm">
-                <li>
-                  <a
-                    href={`mailto:${SITE_CONFIG.contact.email}`}
-                    className="text-[#A0A0A0] hover:text-[#6EB6D6] transition-colors break-all inline-block"
-                  >
-                    {SITE_CONFIG.contact.email}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={SITE_CONFIG.contact.instagram.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#A0A0A0] hover:text-[#6EB6D6] transition-colors inline-block"
-                  >
-                    {SITE_CONFIG.contact.instagram.handle}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={SITE_CONFIG.contact.address.mapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#A0A0A0] hover:text-[#6EB6D6] transition-colors leading-relaxed inline-block"
-                  >
-                    {SITE_CONFIG.contact.address.text}
-                  </a>
-                </li>
-              </ul>
+            {/* Kolom 4: Legalitas Kelembagaan & Kemitraan Zakat */}
+            <div id="legalitas" className="flex flex-col gap-6 col-span-2 sm:col-span-1 scroll-mt-16">
+              <div className="flex flex-col gap-4">
+                <h4 className="text-xs font-bold tracking-widest text-white uppercase font-['Poppins',sans-serif]">
+                  LEGALITAS KELEMBAGAAN
+                </h4>
+                <p className="text-sm text-[#A0A0A0]">
+                  AHU-0024939.AH.01.04.Tahun 2022
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-4">
+                <h4 className="text-xs font-bold tracking-widest text-white uppercase font-['Poppins',sans-serif]">
+                  KEMITRAAN ZAKAT
+                </h4>
+                <p className="text-sm text-[#A0A0A0]">
+                  UKZ bersama IBS Foundation
+                </p>
+              </div>
             </div>
           </div>
         </div>

@@ -14,8 +14,7 @@ export const FINAL_CTA_CONFIG = {
   },
   secondaryAction: {
     label: "Berkolaborasi",
-    href: "https://wa.me/6285173473189?text=Assalamualaikum%20kak%20Ayu,%20saya%20ingin%20berkolaborasi",
+    href: "https://api.whatsapp.com/send/?phone=628999979400&text=Assalamualaikum+kak+Tedi%2C+saya+ingin+berkolaborasi&type=phone_number&app_absent=0",
     isExternal: true,
   },
 };
-

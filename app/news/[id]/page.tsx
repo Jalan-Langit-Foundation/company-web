@@ -29,18 +29,35 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  return {
-    title: `${detailNews.title} | ${SITE_CONFIG.name}`,
-    description: detailNews.excerpt,
-    openGraph: {
-      title: detailNews.title,
-      description: detailNews.excerpt,
-      images: [
+  const pageUrl = `${SITE_CONFIG.url}/news/${id}`;
+  const ogImages = detailNews.image
+    ? [
         {
           url: detailNews.image,
           alt: detailNews.title,
         },
-      ],
+      ]
+    : [];
+
+  return {
+    title: detailNews.title,
+    description: detailNews.excerpt,
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      type: "article",
+      url: pageUrl,
+      title: detailNews.title,
+      description: detailNews.excerpt,
+      siteName: SITE_CONFIG.name,
+      images: ogImages,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: detailNews.title,
+      description: detailNews.excerpt,
+      images: detailNews.image ? [detailNews.image] : [],
     },
   };
 }
@@ -55,20 +72,53 @@ export default async function NewsDetailPage({ params }: PageProps) {
 
   const otherNews = news.filter((item) => item.id !== id);
 
-  return (
-    <div className="w-full bg-white py-10 sm:py-14 lg:py-16 border-b border-slate-200/80">
-      <Container size="xl" as="main">
-        {/* Layout 2 Kolom (~80 : 20) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-start">
-          {/* Kolom Utama: Konten Artikel (~80%) */}
-          <div className="lg:col-span-8 xl:col-span-9 w-full">
-            <NewsContent news={detailNews} />
-          </div>
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: detailNews.title,
+    description: detailNews.excerpt,
+    datePublished: detailNews.date,
+    dateModified: detailNews.date,
+    image: detailNews.image ? [`${SITE_CONFIG.url}${detailNews.image}`] : undefined,
+    author: {
+      "@type": "Organization",
+      name: SITE_CONFIG.name,
+      url: SITE_CONFIG.url,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_CONFIG.name,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_CONFIG.url}/images/logo/logo-navbar.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_CONFIG.url}/news/${id}`,
+    },
+  };
 
-          {/* Kolom Samping: Sidebar (~20%) */}
-          <NewsSidebar otherNews={otherNews} />
-        </div>
-      </Container>
-    </div>
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <div className="w-full bg-white py-10 sm:py-14 lg:py-16 border-b border-slate-200/80">
+        <Container size="xl" as="main">
+          {/* Layout 2 Kolom (~80 : 20) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-start">
+            {/* Kolom Utama: Konten Artikel (~80%) */}
+            <div className="lg:col-span-8 xl:col-span-9 w-full">
+              <NewsContent news={detailNews} />
+            </div>
+
+            {/* Kolom Samping: Sidebar (~20%) */}
+            <NewsSidebar otherNews={otherNews} />
+          </div>
+        </Container>
+      </div>
+    </>
   );
 }

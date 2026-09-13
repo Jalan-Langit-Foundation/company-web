@@ -2,14 +2,12 @@
 
 import * as React from "react";
 import Image from "next/image";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Quote,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
+import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/section-header";
 import { IMPACT_STORY_DATA } from "@/lib/data/homepage";
+import { SITE_CONFIG } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 
 export function ImpactStorySection() {
@@ -58,10 +56,10 @@ export function ImpactStorySection() {
 
       {/* Container size xl persis sama dengan section lain (Programs, Videos, Collaboration, dll) */}
       <Container size="xl" className="relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-14 items-start">
           
           {/* =========================================================
-              SISI KIRI: HEADLINE 2 BARIS & CARD CERITA
+              SISI KIRI: HEADLINE 2 BARIS, CARD CERITA & NAVIGASI KONTROL
               - Mengatur padding vertikal py-12 sm:py-16 lg:py-20 secara alami
               ========================================================= */}
           <div className="lg:col-span-7 py-12 sm:py-16 lg:py-20 flex flex-col justify-center space-y-5 z-10">
@@ -82,13 +80,13 @@ export function ImpactStorySection() {
                 {marqueeList.map((photo, idx) => (
                   <div
                     key={`mobile-${photo.id}-${idx}`}
-                    className="relative w-[250px] sm:w-[290px] aspect-video rounded-2xl overflow-hidden bg-slate-100 shadow-none border border-slate-200/60 shrink-0"
+                    className="relative w-[calc(100vw-2rem)] sm:w-[calc(100vw-3rem)] aspect-video rounded-2xl overflow-hidden bg-slate-100 shadow-none border border-slate-200/60 shrink-0"
                   >
                     <Image
                       src={photo.src}
                       alt={photo.alt}
                       fill
-                      sizes="(max-width: 640px) 250px, 290px"
+                      sizes="(max-width: 1024px) 100vw, 400px"
                       className="object-cover"
                       priority={idx < 2}
                     />
@@ -97,31 +95,30 @@ export function ImpactStorySection() {
               </div>
             </div>
 
-            {/* 3. Card Cerita — Mengadopsi Style Card Video Section (Tanpa Hover Behaviour) */}
+            {/* 3. Card Cerita — Mengadopsi Style Card Video Section */}
             <div
               className={cn(
-                "p-5 flex flex-col justify-between gap-4 bg-white rounded-2xl border border-slate-200/80 shadow-none transition-opacity duration-200",
+                "p-5 sm:p-6 flex flex-col justify-between gap-4 bg-white rounded-2xl border border-slate-200/80 shadow-none transition-opacity duration-200",
                 isAnimating ? "opacity-50" : "opacity-100"
               )}
             >
-              {/* Judul & Narasi (Ukuran Font Sama dengan Video Section) */}
+              {/* Judul & Narasi */}
               <div className="space-y-3">
                 <div>
-                  <h3 className="text-base font-bold text-[#2C2C2C] font-['Poppins',sans-serif] leading-snug">
+                  <h3 className="text-base sm:text-lg font-bold text-[#2C2C2C] font-['Poppins',sans-serif] leading-snug">
                     {activeStory.title}
                   </h3>
-                  <p className="text-xs text-[#555555] font-medium font-['Lato',sans-serif]">
+                  <p className="text-xs sm:text-sm text-[#555555] font-medium font-['Lato',sans-serif] leading-relaxed mt-0.5">
                     {activeStory.person} — {activeStory.role}
                   </p>
                 </div>
 
                 {/* Kutipan Cerita */}
-                <div className="relative pl-3.5 py-1 border-l-2 border-[#3C95C8] bg-slate-50/60 rounded-r-lg">
-                  <Quote className="w-3.5 h-3.5 text-[#3C95C8]/40 absolute top-1 left-1 -scale-x-100" />
-                  <p className="text-xs sm:text-sm text-slate-700 italic font-['Lato',sans-serif] leading-relaxed pl-2">
+                <blockquote className="border-l-2 border-[#3C95C8]/70 pl-3">
+                  <p className="text-xs sm:text-sm text-slate-700 italic font-['Lato',sans-serif] leading-relaxed">
                     {activeStory.quote}
                   </p>
-                </div>
+                </blockquote>
 
                 {/* Deskripsi Cerita */}
                 <p className="text-xs sm:text-sm text-[#555555] font-['Lato',sans-serif] leading-relaxed">
@@ -129,48 +126,44 @@ export function ImpactStorySection() {
                 </p>
               </div>
 
-              {/* Card Footer: Navigasi Indikator & Kontrol Cerita Selanjutnya */}
-              <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
-                {/* Indicator Dots Navigasi */}
-                <div className="flex items-center gap-1.5">
-                  {IMPACT_STORY_DATA.stories.map((_, dotIdx) => (
-                    <button
-                      key={dotIdx}
-                      type="button"
-                      onClick={() => changeStory(dotIdx)}
-                      aria-label={`Buka Cerita ${dotIdx + 1}`}
-                      className={cn(
-                        "h-1.5 rounded-full transition-all duration-300 cursor-pointer",
-                        dotIdx === currentStoryIndex
-                          ? "w-6 bg-[#3C95C8]"
-                          : "w-1.5 bg-slate-300 hover:bg-slate-400"
-                      )}
-                    />
-                  ))}
-                </div>
-
-                {/* Navigasi Klik untuk Lanjut & Kembali ke Cerita */}
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={handlePrev}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-[#3C95C8] bg-white hover:bg-[#EAF5FB] text-[#3C95C8] text-xs font-semibold font-['Poppins',sans-serif] transition-colors cursor-pointer"
-                  >
-                    <ChevronLeft className="w-3.5 h-3.5" />
-                    <span>Sebelumnya</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={handleNext}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-[#3C95C8] bg-white hover:bg-[#EAF5FB] text-[#3C95C8] text-xs font-semibold font-['Poppins',sans-serif] transition-colors cursor-pointer"
-                  >
-                    <span>Selanjutnya</span>
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </button>
-                </div>
+              {/* Hashtag Program Terkait */}
+              <div className="mt-auto pt-3 border-t border-slate-100 flex items-center text-xs text-[#3C95C8] font-semibold font-['Poppins',sans-serif]">
+                <span>{activeStory.hashtag}</span>
               </div>
+            </div>
 
+            {/* 4. Kontrol Navigasi Cerita & CTA Instagram (Terpisah dari Card, Gaya Video Section) */}
+            <div className="pt-2 flex items-center justify-center gap-3 w-full">
+              {/* Tombol Sebelumnya */}
+              <button
+                type="button"
+                onClick={handlePrev}
+                aria-label="Cerita sebelumnya"
+                className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-[#3C95C8] text-[#3C95C8] hover:bg-[#EAF5FB] active:bg-[#d5ecf8] flex items-center justify-center transition-all cursor-pointer shadow-xs shrink-0"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
+              {/* Tombol CTA Cerita Lainnya di Instagram */}
+              <Button
+                variant="outline"
+                size="md"
+                href={SITE_CONFIG.contact.instagram.url}
+                external
+                className="font-bold border-[#3C95C8] text-[#3C95C8] hover:bg-[#EAF5FB] px-5 sm:px-6 text-xs sm:text-sm whitespace-nowrap"
+              >
+                Lihat Cerita Lainnya
+              </Button>
+
+              {/* Tombol Selanjutnya */}
+              <button
+                type="button"
+                onClick={handleNext}
+                aria-label="Cerita selanjutnya"
+                className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-[#3C95C8] text-[#3C95C8] hover:bg-[#EAF5FB] active:bg-[#d5ecf8] flex items-center justify-center transition-all cursor-pointer shadow-xs shrink-0"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
             </div>
 
           </div>
@@ -181,21 +174,21 @@ export function ImpactStorySection() {
               - Vertically: Membentang penuh setinggi batas section (border-t ke border-b)
               - Bergerak vertikal meluncur ke atas
               ========================================================= */}
-          <div className="hidden lg:flex lg:col-span-5 w-full justify-end lg:absolute lg:top-0 lg:bottom-0 lg:right-6 xl:lg:right-8 lg:w-[calc((100%-2rem)*5/12)] xl:w-[360px] pointer-events-auto">
-            <div className="relative w-full max-w-[340px] xl:max-w-[360px] h-full overflow-hidden">
+          <div className="hidden lg:flex lg:col-span-5 w-full justify-end lg:absolute lg:top-0 lg:bottom-0 lg:right-8 lg:w-[calc((100%-7.5rem)*5/12)] pointer-events-auto">
+            <div className="relative w-full h-full overflow-hidden">
               
               {/* Vertical Infinite Marquee Track */}
               <div className="w-full flex flex-col space-y-3.5 animate-marquee-vertical py-1">
                 {marqueeList.map((photo, idx) => (
                   <div
                     key={`desktop-${photo.id}-${idx}`}
-                    className="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-100 shadow-none border border-slate-200/60 shrink-0"
+                    className="relative w-full lg:h-[220px] rounded-2xl overflow-hidden bg-slate-100 shadow-none border border-slate-200/60 shrink-0"
                   >
                     <Image
                       src={photo.src}
                       alt={photo.alt}
                       fill
-                      sizes="(max-width: 1024px) 100vw, 360px"
+                      sizes="(max-width: 1024px) 100vw, 400px"
                       className="object-cover"
                       priority={idx < 2}
                     />

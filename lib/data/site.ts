@@ -4,8 +4,21 @@ export const SITE_CONFIG = {
   name: "Jalan Langit Foundation",
   legalName: "Yayasan Jalan Langit",
   tagline: "#BergandenganLangitkanKebaikan",
+  url: "https://jalanlangitfoundation.id",
   description:
     "NGO Muslim Indonesia yang menghadirkan program kebaikan bernilai dan berdampak berkelanjutan melalui optimalisasi dana infak, sedekah, dan kemanusiaan.",
+  legal: {
+    institution: {
+      title: "Legalitas Kelembagaan",
+      identifier: "AHU-0024939.AH.01.04.Tahun 2022",
+      authority: "Terdaftar Resmi Kemenkumham RI",
+    },
+    zakat: {
+      title: "Kemitraan Zakat",
+      identifier: "UKZ bersama IBS Foundation",
+      description: "Mitra Pengelolaan Zakat Resmi",
+    },
+  },
   contact: {
     email: "jalanlangitfoundation@gmail.com",
     address: {
