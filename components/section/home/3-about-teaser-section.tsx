@@ -54,7 +54,7 @@ export function AboutTeaserSection() {
                 {/* Badge Logo Resmi di Sudut Kiri Atas */}
                 <div className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-8.5 h-8.5 sm:w-11 sm:h-11 rounded-full bg-[#3C95C8] shadow-md flex items-center justify-center border-2 border-white overflow-hidden p-1">
                   <Image
-                    src="/images/Master%20Logo%20JLF/Logo%20Jalan%20Langit/Transparan/Bulat/Logo%20Only%20white.png"
+                    src="/images/logo/logo-bulat-putih.png"
                     alt="Logo Yayasan Jalan Langit"
                     width={64}
                     height={64}
