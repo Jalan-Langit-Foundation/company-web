@@ -22,8 +22,8 @@ export function NewsSidebar({ otherNews = [] }: NewsSidebarProps) {
               className="block w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3C95C8] rounded-lg"
             >
               <Image
-                src="/images/logo-navbar.png"
-                alt="Logo Yayatan Jalan Langit"
+                src="/images/logo/logo-navbar.png"
+                alt="Logo Yayasan Jalan Langit"
                 width={320}
                 height={76}
                 priority

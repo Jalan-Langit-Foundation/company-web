@@ -67,7 +67,7 @@ export const PROGRAMS_SECTION_DATA: {
       description:
         "Program beasiswa dan pembinaan terpadu selama satu tahun bagi pelajar untuk membentuk generasi Qur’ani yang kuat dalam hafalan, unggul dalam akhlak, terampil dalam soft skill, dan memiliki kemandirian ekonomi.",
       highlightTag: "Generasi Qur'ani",
-      image: "/images/draft-foto/langit-school/langit-school-01.webp",
+      image: "/images/draft-foto/langit-scholarship/langit-scholarship-01.webp",
       donationUrl: "https://donasi.jalanlangit.org/campaign/langit-scholarship",
       isFlagship: true,
     },
@@ -81,7 +81,7 @@ export const PROGRAMS_SECTION_DATA: {
       description:
         "Wujud apresiasi bagi para pejuang nafkah di jalanan. Hadiah Kebahagiaan menghadirkan paket sembako untuk menguatkan langkah para driver ojek online, pedagang kecil, dan keluarga prasejahtera yang terus berjuang tanpa menyerah.",
       highlightTag: "Apresiasi Pejuang Jalanan",
-      image: "/images/draft-foto/ramadhan/ramadhan-03.webp",
+      image: "/images/draft-foto/hadiah-kebahagiaan/hadiah-kebahagiaan-01.webp",
       donationUrl: "https://donasi.jalanlangit.org/campaign/hadiah-kebahagiaan",
     },
     {
@@ -120,7 +120,7 @@ export const PROGRAMS_SECTION_DATA: {
       description:
         "Inisiatif aksi kemanusiaan dan tanggap bencana yang bergerak cepat menyalurkan bantuan darurat bagi saudara-saudara kita yang terdampak bencana alam dan krisis kemanusiaan.",
       highlightTag: "Aksi Tanggap Darurat",
-      image: "/images/draft-foto/qurban/qurban-02.webp",
+      image: "/images/draft-foto/jalan-langit-peduli/jalan-langit-peduli-01.webp",
       donationUrl: "https://donasi.jalanlangit.org/campaign/jalan-langit-peduli",
     },
   ],

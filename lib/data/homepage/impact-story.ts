@@ -165,7 +165,7 @@ export const IMPACT_STORY_DATA = {
     },
     {
       id: "mp-7",
-      src: "/images/draft-foto/langit-school/langit-school-01.webp",
+      src: "/images/draft-foto/langit-scholarship/langit-scholarship-01.webp",
       alt: "Santri dan mahasiswa beasiswa pembinaan",
       caption: "Pembinaan karakter dan kemandirian santri",
       tag: "Pendidikan Santri",

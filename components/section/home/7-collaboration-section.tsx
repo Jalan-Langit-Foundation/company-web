@@ -25,7 +25,7 @@ const COLLABORATION_SLIDES = [
     alt: "Aksi Nyata Relawan Jalan Langit Foundation",
   },
   {
-    src: "/images/draft-foto/langit-school/langit-school-01.webp",
+    src: "/images/draft-foto/langit-scholarship/langit-scholarship-01.webp",
     alt: "Program Magang Berdampak & Talenta Muda",
   },
 ];

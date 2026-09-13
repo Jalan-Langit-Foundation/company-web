@@ -24,7 +24,7 @@ export function Footer() {
               aria-label="Beranda Yayasan Jalan Langit"
             >
               <Image
-                src="/images/logo-footer.png"
+                src="/images/logo/logo-footer.png"
                 alt="Logo Jalan Langit Foundation"
                 width={200}
                 height={54}
