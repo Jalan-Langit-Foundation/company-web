@@ -15,6 +15,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [activeDropdown, setActiveDropdown] = React.useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = React.useState<Record<string, boolean>>({});
+  const [activeSection, setActiveSection] = React.useState<string>("");
   const [prevPathname, setPrevPathname] = React.useState(pathname);
   const navRef = React.useRef<HTMLElement | null>(null);
 
@@ -50,6 +51,50 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Scrollspy: pantau section aktif saat pengunjung scroll di homepage
+  React.useEffect(() => {
+    if (pathname !== "/") return;
+
+    const sectionIds = NAVBAR_LINKS.map((link) => link.href.replace("/#", "")).filter(Boolean);
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      const visibleEntries = entries.filter((e) => e.isIntersecting);
+      if (visibleEntries.length > 0) {
+        visibleEntries.sort(
+          (a, b) => Math.abs(a.boundingClientRect.top) - Math.abs(b.boundingClientRect.top)
+        );
+        setActiveSection(visibleEntries[0].target.id);
+      }
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+      rootMargin: "-10% 0px -45% 0px",
+      threshold: [0, 0.1, 0.25, 0.5],
+    });
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [pathname]);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("/#") && pathname === "/") {
+      e.preventDefault();
+      const targetId = href.replace("/#", "");
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth" });
+        window.history.pushState(null, "", href);
+        setActiveSection(targetId);
+      }
+    }
+    setIsOpen(false);
+    setActiveDropdown(null);
+  };
 
   const toggleDropdown = (href: string) => {
     setActiveDropdown((prev) => (prev === href ? null : href));
@@ -91,12 +136,14 @@ export function Navbar() {
           </Link>
 
           {/* Bagian Tengah: Desktop Navigation Links */}
-          <ul className="hidden md:flex h-full items-center gap-7 list-none m-0 p-0">
+          <ul className="hidden lg:flex h-full items-center gap-5 xl:gap-7 list-none m-0 p-0">
             {NAVBAR_LINKS.map((item) => {
               const hasChildren = Boolean(item.children && item.children.length > 0);
+              const targetId = item.href.replace("/#", "");
+              const isCurrentSection = pathname === "/" && activeSection === targetId;
               const isActive =
-                pathname === item.href ||
-                (item.href !== "/" && pathname.startsWith(item.href)) ||
+                isCurrentSection ||
+                (pathname !== "/" && (pathname === item.href || pathname.startsWith(item.href))) ||
                 (item.children?.some(
                   (child) => pathname === child.href || (child.href !== "/" && pathname.startsWith(child.href))
                 ) ?? false);
@@ -128,7 +175,7 @@ export function Navbar() {
                       />
                     </button>
 
-                    {/* Desktop Dropdown Panel (Sejajar Kiri Navlink & Tepat di Bawah Navbar) */}
+                    {/* Desktop Dropdown Panel */}
                     <div
                       className={cn(
                         "absolute left-0 top-full pt-1.5 w-72 transition-all duration-200 z-50",
@@ -145,7 +192,7 @@ export function Navbar() {
                             <Link
                               key={child.href}
                               href={child.href}
-                              onClick={() => setActiveDropdown(null)}
+                              onClick={(e) => handleNavClick(e, child.href)}
                               className={cn(
                                 "flex flex-col px-3.5 py-2.5 rounded-xl transition-colors group",
                                 isChildActive
@@ -181,6 +228,7 @@ export function Navbar() {
                 <li key={item.href} className="h-full flex items-center">
                   <Link
                     href={item.href}
+                    onClick={(e) => handleNavClick(e, item.href)}
                     className={cn(
                       "inline-flex items-center text-sm font-medium transition-colors duration-200 font-['Poppins',sans-serif] leading-none py-2 px-1",
                       "hover:text-[#3C95C8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3C95C8] rounded-md",
@@ -197,8 +245,8 @@ export function Navbar() {
 
           {/* Sisi Kanan: Action CTA & Mobile Toggle */}
           <div className="flex items-center gap-3">
-            {/* Desktop CTA Button */}
-            <div className="hidden md:block">
+            {/* Desktop / Tablet CTA Button */}
+            <div className="hidden sm:block">
               <Button
                 variant="primary"
                 size="md"
@@ -211,12 +259,12 @@ export function Navbar() {
               </Button>
             </div>
 
-            {/* Mobile Menu Toggle Button */}
+            {/* Mobile / Tablet Menu Toggle Button */}
             <button
               type="button"
               onClick={() => setIsOpen(!isOpen)}
               className={cn(
-                "inline-flex md:hidden items-center justify-center p-0 bg-transparent border-0 text-[#555555]",
+                "inline-flex lg:hidden items-center justify-center p-1.5 bg-transparent border-0 text-[#555555]",
                 "hover:text-[#3C95C8] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3C95C8] rounded-md cursor-pointer"
               )}
               aria-expanded={isOpen}
@@ -235,7 +283,7 @@ export function Navbar() {
       {/* Mobile Navigation Drawer / Dropdown (Overlay Menimpa Layer Bawah) */}
       <div
         className={cn(
-          "absolute left-0 top-full w-full bg-white shadow-xl border-b border-slate-100 md:hidden transition-all duration-200 ease-in-out z-50",
+          "absolute left-0 top-full w-full bg-white shadow-xl border-b border-slate-100 lg:hidden transition-all duration-200 ease-in-out z-50",
           isOpen
             ? "opacity-100 translate-y-0 pointer-events-auto visible"
             : "opacity-0 -translate-y-2 pointer-events-none invisible"
@@ -245,9 +293,11 @@ export function Navbar() {
           <ul className="flex flex-col gap-1 list-none m-0 p-0">
             {NAVBAR_LINKS.map((item) => {
               const hasChildren = Boolean(item.children && item.children.length > 0);
+              const targetId = item.href.replace("/#", "");
+              const isCurrentSection = pathname === "/" && activeSection === targetId;
               const isActive =
-                pathname === item.href ||
-                (item.href !== "/" && pathname.startsWith(item.href)) ||
+                isCurrentSection ||
+                (pathname !== "/" && (pathname === item.href || pathname.startsWith(item.href))) ||
                 (item.children?.some(
                   (child) => pathname === child.href || (child.href !== "/" && pathname.startsWith(child.href))
                 ) ?? false);
@@ -291,7 +341,7 @@ export function Navbar() {
                           <Link
                             key={child.href}
                             href={child.href}
-                            onClick={() => setIsOpen(false)}
+                            onClick={(e) => handleNavClick(e, child.href)}
                             className={cn(
                               "px-2.5 py-1.5 rounded-sm text-xs font-medium transition-colors font-['Poppins',sans-serif]",
                               isChildActive
@@ -317,7 +367,7 @@ export function Navbar() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    onClick={() => setIsOpen(false)}
+                    onClick={(e) => handleNavClick(e, item.href)}
                     className={cn(
                       "flex items-center px-3 py-2 text-sm font-medium transition-colors font-['Poppins',sans-serif]",
                       isActive
