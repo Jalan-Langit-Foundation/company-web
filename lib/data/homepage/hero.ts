@@ -26,13 +26,28 @@ export const HERO_CONFIG = {
     },
     {
       id: "slide-4",
-      src: "/images/draft-foto/langit-box/langit-box-01.webp",
-      alt: "Aksi relawan Jalan Langit Foundation menyalurkan bantuan pangan dan nutrisi Langit Box",
+      src: "/images/hero/hero-01.webp",
+      alt: "Penyaluran bingkisan kebaikan oleh relawan Jalan Langit Foundation kepada santriwati",
     },
     {
       id: "slide-5",
-      src: "/images/draft-foto/serasi/serasi-07.webp",
-      alt: "Dokumentasi keceriaan dan kebersamaan santri dalam program SERASI",
+      src: "/images/hero/hero-02.webp",
+      alt: "Keceriaan santriwati menerima paket berkah dari Jalan Langit Foundation",
+    },
+    {
+      id: "slide-6",
+      src: "/images/hero/hero-03.webp",
+      alt: "Semarak kebersamaan santriwati penerima manfaat program Jalan Langit Foundation",
+    },
+    {
+      id: "slide-7",
+      src: "/images/hero/hero-04.webp",
+      alt: "Senyum syukur santri binaan Jalan Langit Foundation",
+    },
+    {
+      id: "slide-8",
+      src: "/images/hero/hero-05.webp",
+      alt: "Kolaborasi hangat relawan bersama santri penerima paket kebaikan Jalan Langit Foundation",
     },
   ] satisfies HeroSlide[],
 };
