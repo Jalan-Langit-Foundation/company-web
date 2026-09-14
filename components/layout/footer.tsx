@@ -1,6 +1,9 @@
+"use client";
+
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Container } from "@/components/ui/container";
 import {
   SITE_CONFIG,
@@ -9,7 +12,28 @@ import {
 } from "@/lib/data";
 
 export function Footer() {
+  const pathname = usePathname();
   const currentYear = new Date().getFullYear();
+
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("/#") && pathname === "/") {
+      const targetId = href.replace("/#", "");
+      const element = document.getElementById(targetId);
+      if (element) {
+        e.preventDefault();
+        element.scrollIntoView({ behavior: "smooth" });
+        window.history.pushState(null, "", href);
+      }
+    }
+  };
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.history.pushState(null, "", "/");
+    }
+  };
 
   return (
     <footer className="w-full bg-[#2C2C2C] text-[#A0A0A0] font-['Lato',sans-serif]">
@@ -20,6 +44,7 @@ export function Footer() {
           <div className="flex flex-col gap-4 lg:col-span-4 lg:pr-6">
             <Link
               href="/"
+              onClick={handleLogoClick}
               className="inline-flex items-center transition-transform duration-200 hover:opacity-90 w-fit focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6EB6D6] rounded-md"
               aria-label="Beranda Yayasan Jalan Langit"
             >
@@ -74,6 +99,7 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
+                      onClick={(e) => handleScroll(e, link.href)}
                       className="text-[#A0A0A0] hover:text-[#6EB6D6] transition-colors inline-block"
                     >
                       {link.label}
@@ -93,6 +119,7 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
+                      onClick={(e) => handleScroll(e, link.href)}
                       className="text-[#A0A0A0] hover:text-[#6EB6D6] transition-colors inline-block"
                     >
                       {link.label}
