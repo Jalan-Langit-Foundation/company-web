@@ -130,5 +130,33 @@ export const PROGRAMS_SECTION_DATA: {
       image: "/images/draft-foto/jalan-langit-peduli/jalan-langit-peduli-01.webp",
       donationUrl: "https://donasi.jalanlangit.org/campaign/jalan-langit-peduli",
     },
+    {
+      id: "prog-qurma",
+      slug: "qurma",
+      title: "QURMA — Qurban Untuk Sesama",
+      category: "Qurban & Kemanusiaan",
+      categoryKey: "sosial",
+      badge: "Musiman",
+      description:
+        "Program qurban yang menghadirkan pemerataan manfaat hingga kepada masyarakat yang jarang merasakan qurban, sekaligus membawa kebahagiaan, kebersamaan, dan asupan gizi yang berarti.",
+      highlightTag: "Qurban & Kemanusiaan",
+      hashtag: "#QurbanUntukSesama",
+      image: "/images/draft-foto/qurban/qurban-02.webp",
+      donationUrl: "https://donasi.jalanlangit.org/campaign/qurma",
+    },
+    {
+      id: "prog-ramadhan-bahagia",
+      slug: "ramadhan-bahagia",
+      title: "Ramadhan Bahagia",
+      category: "Ramadhan & Kebersamaan",
+      categoryKey: "sosial",
+      badge: "Musiman",
+      description:
+        "Ruang kebersamaan di bulan Ramadhan yang mempertemukan santri dan berbagai pihak untuk bermain, berbuka, beribadah, dan merasakan hangatnya Ramadhan bersama.",
+      highlightTag: "Ramadhan & Kebersamaan",
+      hashtag: "#SatuRasaBersama",
+      image: "/images/draft-foto/ramadhan/ramadhan-03.webp",
+      donationUrl: "https://donasi.jalanlangit.org/campaign/ramadhan-bahagia",
+    },
   ],
 };
