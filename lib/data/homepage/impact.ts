@@ -16,9 +16,9 @@ export const IMPACT_STATS: ImpactStat[] = [
   },
   {
     id: "packages",
-    targetValue: 13691,
-    suffix: "",
-    label: "Hadiah Kebahagiaan Tersalurkan",
+    targetValue: 13600,
+    suffix: "+",
+    label: "Paket Kebaikan Tersalurkan",
   },
   {
     id: "programs",
