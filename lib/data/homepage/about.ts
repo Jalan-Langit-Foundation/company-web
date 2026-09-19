@@ -1,18 +1,19 @@
 export const ABOUT_TEASER_DATA = {
   quote: {
     line1: "Bergandengan dalam Kebaikan,",
-    line2: "Melangkah Menuju Dampak yang Berkelanjutan",
+    line2: "Melangkah Bersama Menghadirkan Dampak Nyata",
   },
   headline: {
-    prefix: "NGO Muslim dengan",
-    highlight: "Dampak Nyata",
+    prefix: "Menggerakkan Kebaikan",
+    highlight: "Menjadi Manfaat Nyata",
   },
   paragraphs: [
-    "Jalan Langit Foundation adalah Non-Government Organization (NGO) Muslim di Indonesia yang berfokus pada pengelolaan program kebaikan yang bernilai dan berdampak berkelanjutan melalui optimalisasi dana infak, sedekah, dan dana sosial kemanusiaan lainnya.",
-    "Merupakan transformasi dari Jalan Langit Peduli yang berdiri pada 10 Oktober 2022, kami hadir dengan wajah baru membawa semangat kolaborasi, akuntabilitas, dan keberlanjutan dalam setiap program yang dijalankan.",
+    "Jalan Langit Foundation adalah organisasi sosial-filantropi yang hadir untuk menggerakkan kebaikan menjadi manfaat nyata bagi masyarakat.",
+    "Kami menjalankan berbagai program di bidang sosial, pendidikan, kemanusiaan, dan pemberdayaan dengan mempertemukan kepedulian, sumber daya, dan kolaborasi dari berbagai pihak.",
+    "Berawal dari Jalan Langit Peduli yang berdiri pada 10 Oktober 2022, Jalan Langit Foundation terus bertumbuh dengan semangat kolaborasi, akuntabilitas, dan keberlanjutan.",
   ],
   cta: {
-    label: "Baca selengkapnya",
+    label: "Kenali JLF Lebih Dekat",
     href: "/about",
   },
 };

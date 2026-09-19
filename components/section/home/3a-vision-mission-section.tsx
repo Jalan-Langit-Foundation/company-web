@@ -32,7 +32,7 @@ export function VisionMissionSection() {
             <SectionHeader
               headline={VISION_MISSION_DATA.headline}
               multiline={true}
-              description="Landasan arah perjuangan dan komitmen jangka panjang Jalan Langit Foundation dalam membangun ekosistem kebaikan yang berdaya guna dan berkelanjutan."
+              description={VISION_MISSION_DATA.description}
               align="center"
               className="mb-8 sm:mb-12"
             />
