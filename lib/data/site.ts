@@ -22,7 +22,7 @@ export const SITE_CONFIG = {
   contact: {
     email: "jalanlangitfoundation@gmail.com",
     address: {
-      text: "Jl. Saturnus Tengah I No.1, Manjahlega, Rancasari, Bandung 40286",
+      text: "Jl. Saturnus Tengah I No. 1, Manjahlega, Kec. Rancasari, Kota Bandung, Jawa Barat 40286",
       mapsUrl: "https://maps.app.goo.gl/bPVZ75H55M8tGzzk8",
     },
     instagram: {
