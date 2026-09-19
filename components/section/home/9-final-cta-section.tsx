@@ -27,8 +27,8 @@ export function FinalCtaSection() {
             </span>
           </h2>
 
-          {/* Supporting Copy */}
-          <p className="mt-3 text-sm sm:text-base text-[#555555] font-['Lato',sans-serif] max-w-xl mx-auto leading-relaxed">
+          {/* Supporting Copy (Satu paragraf dengan ganti baris tanpa space antar alinea) */}
+          <p className="mt-3 text-sm sm:text-base text-[#555555] font-['Lato',sans-serif] max-w-xl mx-auto leading-relaxed whitespace-pre-line">
             {FINAL_CTA_CONFIG.description}
           </p>
 

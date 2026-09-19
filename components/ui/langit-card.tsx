@@ -55,8 +55,8 @@ export function LangitCard({
       }}
       className={`group relative flex flex-col items-center justify-center p-2 sm:p-2.5 lg:p-3 rounded-2xl overflow-hidden border transition-all duration-300 select-none cursor-pointer aspect-square w-full bg-[linear-gradient(110deg,#F6FAFD_0%,#FFFFFF_30%,#EDF7FD_50%,#FFFFFF_70%,#F6FAFD_100%)] animate-gradient-flow ${
         isActive
-          ? "border-[#3C95C8] shadow-[0_8px_20px_rgba(0,0,0,0.06)] -translate-y-1 ring-2 ring-[#3C95C8]/20"
-          : "border-slate-200/80 hover:border-[#3C95C8]/50 shadow-none hover:shadow-[0_8px_20px_rgba(60,149,200,0.1)] hover:-translate-y-1"
+          ? "border-[#3C95C8] shadow-[0_10px_24px_rgba(0,0,0,0.07)] -translate-y-1 ring-2 ring-[#3C95C8]/20"
+          : "border-slate-200/80 hover:border-slate-300/90 shadow-none hover:shadow-[0_10px_24px_rgba(0,0,0,0.07)] hover:-translate-y-1"
       } ${className}`}
     >
       {/* 1. Huruf Asli Font Besar Terpotong Asimetris (Bervariasi Tiap Huruf) */}

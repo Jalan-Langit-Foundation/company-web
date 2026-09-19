@@ -106,7 +106,7 @@ export function AboutTeaserSection() {
                 className="inline-flex items-center gap-1.5 font-medium text-[#3C95C8] hover:text-[#2c7ca9] font-['Lato',sans-serif] text-sm sm:text-base transition-colors group cursor-pointer"
               >
                 <span className="leading-none">
-                  {isExpanded ? "Tutup selengkapnya" : ABOUT_TEASER_DATA.cta.label}
+                  {isExpanded ? "Tutup kembali" : ABOUT_TEASER_DATA.cta.label}
                 </span>
                 <ChevronDown
                   className={`w-4 h-4 shrink-0 transition-transform duration-300 ${

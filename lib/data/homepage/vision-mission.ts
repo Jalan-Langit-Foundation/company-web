@@ -6,9 +6,11 @@ export interface MissionPoint {
 
 export const VISION_MISSION_DATA = {
   headline: {
-    prefix: "Visi & Misi",
-    highlight: "Jalan Langit Foundation",
+    prefix: "Kebaikan yang Terarah,",
+    highlight: "Dampak yang Berkelanjutan",
   },
+  description:
+    "Setiap langkah JLF berangkat dari satu komitmen: menghadirkan kebaikan yang dikelola dengan amanah, dijalankan secara profesional, dan memberi manfaat yang nyata bagi masyarakat.",
   vision: {
     label: "Visi Lembaga",
     statement:
@@ -21,25 +23,25 @@ export const VISION_MISSION_DATA = {
         number: "01",
         title: "Pendidikan Inklusif",
         description:
-          "Meningkatkan kualitas pendidikan melalui program edukasi dan pelatihan Islami yang inklusif serta mudah diakses.",
+          "Menghadirkan akses dan kesempatan pendidikan yang lebih luas bagi masyarakat.",
       },
       {
         number: "02",
         title: "Kesejahteraan Sosial",
         description:
-          "Meningkatkan kesejahteraan taraf hidup masyarakat melalui program sosial dan pemberdayaan ekonomi.",
+          "Menghadirkan program yang menjawab kebutuhan sosial dan meningkatkan kualitas hidup masyarakat.",
       },
       {
         number: "03",
         title: "Jejaring Kolaboratif",
         description:
-          "Membangun jejaring kolaboratif multipihak dengan optimalisasi infak, sedekah, dan wakaf.",
+          "Membangun kolaborasi dengan berbagai pihak untuk memperluas jangkauan dan dampak kebaikan.",
       },
       {
         number: "04",
         title: "Inovasi & Teknologi",
         description:
-          "Mendorong inovasi dan pemanfaatan teknologi demi transparansi tata kelola serta edukasi kebaikan massal.",
+          "Memanfaatkan inovasi dan teknologi untuk meningkatkan efektivitas dan keberlanjutan program.",
       },
     ] as MissionPoint[],
   },

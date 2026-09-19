@@ -6,7 +6,7 @@ export const FINAL_CTA_CONFIG = {
     line2: "Langitkan Kebaikan",
   },
   description:
-    "Bersama JLF, kontribusimu dapat menjadi bagian dari dampak nyata bagi lebih banyak penerima manfaat.",
+    "Setiap orang punya cara untuk berbuat baik.\nDana, waktu, tenaga, keahlian, jaringan, atau kepedulian, semuanya dapat menjadi bagian dari sebuah perubahan.\nMari temukan cara kita untuk bergerak bersama dan menghadirkan dampak nyata bagi lebih banyak orang.",
   primaryAction: {
     label: "Donasi Sekarang",
     href: SITE_CONFIG.contact.donationUrl,

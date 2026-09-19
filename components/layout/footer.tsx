@@ -57,9 +57,16 @@ export function Footer() {
               />
             </Link>
 
-            <p className="text-sm leading-relaxed text-[#A0A0A0] max-w-sm">
-              {SITE_CONFIG.description}
-            </p>
+            <div className="flex flex-col gap-2.5 text-sm leading-relaxed text-[#A0A0A0] max-w-sm">
+              <p className="text-sm leading-relaxed text-[#A0A0A0] m-0">
+                Menggerakkan kebaikan menjadi manfaat nyata bagi masyarakat melalui program sosial, pendidikan, kemanusiaan, dan pemberdayaan.
+              </p>
+              <p className="text-sm leading-relaxed text-[#A0A0A0] m-0 not-italic">
+                Jl. Saturnus Tengah I No. 1, Manjahlega,
+                <br />
+                Kec. Rancasari, Kota Bandung, Jawa Barat 40286
+              </p>
+            </div>
 
             {/* Social Media Pill Buttons */}
             <div className="flex flex-wrap items-center gap-2 pt-2">
