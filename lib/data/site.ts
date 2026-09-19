@@ -6,7 +6,7 @@ export const SITE_CONFIG = {
   tagline: "#BergandenganLangitkanKebaikan",
   url: "https://jalanlangitfoundation.id",
   description:
-    "NGO Muslim Indonesia yang menghadirkan program kebaikan bernilai dan berdampak berkelanjutan melalui optimalisasi dana infak, sedekah, dan kemanusiaan.",
+    "Kami menggerakkan kebaikan melalui program sosial, pendidikan, kemanusiaan, dan pemberdayaan untuk menghadirkan manfaat nyata bagi masyarakat.",
   legal: {
     institution: {
       title: "Legalitas Kelembagaan",

@@ -41,11 +41,6 @@ export const HERO_CONFIG = {
     },
     {
       id: "slide-7",
-      src: "/images/hero/hero-04.webp",
-      alt: "Senyum syukur santri binaan Jalan Langit Foundation",
-    },
-    {
-      id: "slide-8",
       src: "/images/hero/hero-05.webp",
       alt: "Kolaborasi hangat relawan bersama santri penerima paket kebaikan Jalan Langit Foundation",
     },

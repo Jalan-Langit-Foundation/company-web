@@ -22,13 +22,10 @@ export function HeroSection() {
     <section
       id="hero"
       aria-label="Hero Utama"
-      className="relative w-full overflow-hidden bg-[#3C95C8] py-12 sm:py-16 lg:py-20 text-white transition-colors duration-300 min-h-[calc(100vh-4rem)] min-h-[calc(100dvh-4rem)] flex items-center"
+      className="relative w-full overflow-hidden bg-neutral-950 py-12 sm:py-16 lg:py-20 text-white transition-colors duration-300 min-h-[calc(100vh-4rem)] min-h-[calc(100dvh-4rem)] flex items-center"
     >
-      {/* Background Slideshow:
-          - Mobile/Tablet (<lg): Full-width cover
-          - Desktop (lg+): Berada di sebelah kanan (52% width) dengan object-center,
-            ditimpa gradien horizontal biru sehingga membaur tanpa batas grid */}
-      <div className="absolute inset-0 lg:left-auto lg:right-0 lg:w-[52%] xl:w-[50%] z-0 overflow-hidden">
+      {/* Background Slideshow: Pure Foto Full-Width (posisi default object-center) */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
         {HERO_CONFIG.slides.map((slide, index) => {
           const isActive = index === currentSlideIndex;
           return (
@@ -36,7 +33,7 @@ export function HeroSection() {
               key={slide.id || index}
               className={cn(
                 "absolute inset-0 transition-opacity duration-1000 ease-in-out",
-                isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                isActive ? "opacity-100 z-0" : "opacity-0 -z-10 pointer-events-none"
               )}
             >
               <Image
@@ -44,85 +41,67 @@ export function HeroSection() {
                 alt={slide.alt}
                 fill
                 priority={index === 0}
-                className="object-cover object-center brightness-95"
-                sizes="(max-width: 1024px) 100vw, 55vw"
+                className="object-cover object-center"
+                sizes="100vw"
               />
             </div>
           );
         })}
 
-        {/* Lapisan Desktop (lg+): Horizontal Fade dari kiri gambar agar membaur seamless dengan background biru */}
-        <div className="hero-overlay-desktop absolute inset-0 hidden lg:block z-20 pointer-events-none" />
-
-        {/* Lapisan Tablet (sm - lg): Horizontal Left-to-Right Fade */}
-        <div className="hero-overlay-tablet absolute inset-0 hidden sm:block lg:hidden z-20 pointer-events-none" />
-
-        {/* Lapisan Mobile (<sm): Vertical Top-to-Bottom Fade Lebih Transparan */}
-        <div className="hero-overlay-mobile absolute inset-0 sm:hidden z-20 pointer-events-none" />
-
+        {/* Lapisan Overlay Gelap Seragam di Semua Ukuran Layar */}
+        <div className="absolute inset-0 bg-black/50 z-10 pointer-events-none" />
       </div>
 
-      {/* Soft Ambient Top Glow Accent (ditaruh di level section kiri atas, bukan di container gambar) */}
-      <div className="absolute -top-20 -left-20 w-96 h-96 bg-[#6EB6D6]/30 rounded-full blur-3xl pointer-events-none z-0" />
-
-      <Container size="xl" className="relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Kolom Kiri: Teks & CTA */}
-          <div className="lg:col-span-7 xl:col-span-6 w-full">
-            <Reveal className="w-full">
-              {/* Kolom Konten: Eyebrow, Headline, Supporting Copy, Dual CTA */}
-              <div className="flex flex-col items-center sm:items-start gap-6 text-center sm:text-left w-full">
-                {/* Header Block: Badge & Headline/Copy */}
-                <div className="flex flex-col items-center sm:items-start gap-3 sm:gap-3.5 w-full">
-                  {/* Eyebrow Badge (Pita Putih / Rope Ribbon) */}
-                  <div className="flex items-center justify-center sm:justify-start sm:-ml-1">
-                    <Badge variant="rope" size="md">
-                      NGO Muslim Indonesia · Est. 2022
-                    </Badge>
-                  </div>
-
-                  {/* Headline & Copy Sesuai HOMEPAGE.md */}
-                  <div className="flex flex-col items-center sm:items-start gap-4">
-                    <h1 className="text-fluid-3xl font-bold tracking-tight text-white font-['Poppins',sans-serif] leading-tight drop-shadow-sm">
-                      Bergandengan,
-                      <br />
-                      Langitkan
-                      <br />
-                      Kebaikan
-                    </h1>
-                    <p className="text-fluid-base leading-relaxed text-white/95 font-['Lato',sans-serif] max-w-[340px] sm:max-w-[440px] lg:max-w-[480px] drop-shadow-xs mx-auto sm:mx-0">
-                      {SITE_CONFIG.description}
-                    </p>
-                  </div>
+      <Container size="xl" className="relative z-20">
+        <div className="max-w-2xl lg:max-w-3xl w-full">
+          <Reveal className="w-full">
+            {/* Kolom Konten: Eyebrow, Headline, Supporting Copy, Dual CTA */}
+            <div className="flex flex-col items-center sm:items-start gap-6 text-center sm:text-left w-full">
+              {/* Header Block: Badge & Headline/Copy */}
+              <div className="flex flex-col items-center sm:items-start gap-3 sm:gap-3.5 w-full">
+                {/* Eyebrow Badge (Pita Putih / Rope Ribbon) */}
+                <div className="flex items-center justify-center sm:justify-start sm:-ml-1">
+                  <Badge variant="rope" size="md">
+                    Jalan Langit Foundation
+                  </Badge>
                 </div>
 
-                {/* Dual CTA Button */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center sm:justify-start gap-3 sm:gap-3.5 pt-0.5 w-full sm:w-auto">
-                  <Button
-                    variant="white"
-                    size="md"
-                    href="/#program"
-                    rightIcon={<ArrowRight className="w-4 h-4 text-[#3C95C8]" />}
-                    className="w-full sm:w-auto text-[15px] sm:text-base py-3 sm:py-3.5 px-6 sm:px-7 min-h-[46px] sm:min-h-[50px] shadow-sm hover:shadow-md transition-all font-semibold"
-                  >
-                    Lihat Program
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="md"
-                    href="/#kolaborasi"
-                    leftIcon={<Handshake className="w-4 h-4 text-white" />}
-                    className="w-full sm:w-auto text-[15px] sm:text-base py-3 sm:py-3.5 px-6 sm:px-7 min-h-[46px] sm:min-h-[50px] font-semibold text-white border-white/70 hover:bg-white/15 hover:border-white hover:text-white"
-                  >
-                    Berkolaborasi
-                  </Button>
+                {/* Headline & Copy Sesuai HOMEPAGE.md */}
+                <div className="flex flex-col items-center sm:items-start gap-4">
+                  <h1 className="text-fluid-3xl font-bold tracking-tight text-white font-['Poppins',sans-serif] leading-tight drop-shadow-sm">
+                    Bergandengan,
+                    <br />
+                    Langitkan Kebaikan
+                  </h1>
+                  <p className="text-fluid-base leading-relaxed text-white/95 font-['Lato',sans-serif] max-w-[340px] sm:max-w-[480px] lg:max-w-[540px] drop-shadow-xs mx-auto sm:mx-0">
+                    {SITE_CONFIG.description}
+                  </p>
                 </div>
               </div>
-            </Reveal>
-          </div>
 
-          {/* Kolom Kanan: Spacer Grid Desktop (diisi background slideshow foto yang terpusat) */}
-          <div className="hidden lg:block lg:col-span-5 xl:col-span-6" aria-hidden="true" />
+              {/* Dual CTA Button */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center sm:justify-start gap-3 sm:gap-3.5 pt-0.5 w-full sm:w-auto">
+                <Button
+                  variant="white"
+                  size="md"
+                  href="/#program"
+                  rightIcon={<ArrowRight className="w-4 h-4 text-[#3C95C8]" />}
+                  className="w-full sm:w-auto text-[15px] sm:text-base py-3 sm:py-3.5 px-6 sm:px-7 min-h-[46px] sm:min-h-[50px] shadow-sm hover:shadow-md transition-all font-semibold"
+                >
+                  Lihat Program
+                </Button>
+                <Button
+                  variant="outline"
+                  size="md"
+                  href="/#kolaborasi"
+                  leftIcon={<Handshake className="w-4 h-4 text-white" />}
+                  className="w-full sm:w-auto text-[15px] sm:text-base py-3 sm:py-3.5 px-6 sm:px-7 min-h-[46px] sm:min-h-[50px] font-semibold text-white border-white/70 hover:bg-white/15 hover:border-white hover:text-white"
+                >
+                  Berkolaborasi
+                </Button>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </Container>
     </section>
