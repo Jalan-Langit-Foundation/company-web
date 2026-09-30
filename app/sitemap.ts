@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
-import { news } from "@/lib/data/news";
+import { getAllNews } from "@/lib/services/news.service";
 import { SITE_CONFIG } from "@/lib/data";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_CONFIG.url;
 
   // Halaman Beranda Utama
@@ -15,8 +15,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Seluruh Halaman Berita & Artikel
-  const newsRoutes: MetadataRoute.Sitemap = news.map((item) => ({
+  // Seluruh Halaman Berita & Artikel dari Service (Sanity CMS dengan fallback lokal)
+  const allNews = await getAllNews();
+  const newsRoutes: MetadataRoute.Sitemap = allNews.map((item) => ({
     url: `${baseUrl}/news/${item.id}`,
     lastModified: new Date(),
     changeFrequency: "monthly",

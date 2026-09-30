@@ -4,15 +4,23 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { SectionHeader } from "@/components/ui/section-header";
 import { LATEST_NEWS_DATA } from "@/lib/data/homepage";
-import { news } from "@/lib/data/news";
+import type { NewsItem } from "@/lib/data/news";
+import { getLatestNews } from "@/lib/services/news.service";
 
-export function LatestNewsSection() {
+interface LatestNewsSectionProps {
+  articles?: NewsItem[];
+}
+
+export async function LatestNewsSection({ articles }: LatestNewsSectionProps = {}) {
   const { headline, supportingCopy } = LATEST_NEWS_DATA;
 
+  // Mengambil berita terbaru dari service layer (Sanity CMS dengan fallback lokal)
+  const newsList = articles && articles.length > 0 ? articles : await getLatestNews(8);
+
   // Menampilkan berita berdasarkan urutan paling terbaru
-  const mainFeatured = news[0];
-  const subFeatured = news.slice(1, 3);
-  const recentList = news.slice(3, 8);
+  const mainFeatured = newsList[0];
+  const subFeatured = newsList.slice(1, 3);
+  const recentList = newsList.slice(3, 8);
 
   return (
     <section

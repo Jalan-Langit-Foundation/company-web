@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/container";
 import { NewsContent, NewsSidebar } from "@/components/section/news";
-import { getNewsById, news } from "@/lib/data/news";
+import { getNewsById, getAllNews, getAllNewsIds } from "@/lib/services/news.service";
 import { SITE_CONFIG } from "@/lib/data";
 
 interface PageProps {
@@ -11,17 +11,18 @@ interface PageProps {
   }>;
 }
 
-// Generate static params untuk pre-rendering seluruh rute berita statis
-export function generateStaticParams() {
-  return news.map((item) => ({
-    id: item.id,
+// Generate static params untuk pre-rendering seluruh rute berita statis / ISR
+export async function generateStaticParams() {
+  const ids = await getAllNewsIds();
+  return ids.map((id) => ({
+    id,
   }));
 }
 
 // Dynamic SEO metadata per halaman berita
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  const detailNews = getNewsById(id);
+  const detailNews = await getNewsById(id);
 
   if (!detailNews) {
     return {
@@ -64,13 +65,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function NewsDetailPage({ params }: PageProps) {
   const { id } = await params;
-  const detailNews = getNewsById(id);
+  const detailNews = await getNewsById(id);
 
   if (!detailNews) {
     notFound();
   }
 
-  const otherNews = news.filter((item) => item.id !== id);
+  const allNews = await getAllNews();
+  const otherNews = allNews.filter((item) => item.id !== id);
 
   const articleJsonLd = {
     "@context": "https://schema.org",
