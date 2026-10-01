@@ -126,7 +126,7 @@ export function Navbar() {
             aria-label="Beranda Yayasan Jalan Langit"
           >
             <Image
-              src="/images/logo/logo-navbar.png"
+              src="/images/brand/logo-navbar.png"
               alt="Logo Yayasan Jalan Langit"
               width={160}
               height={38}

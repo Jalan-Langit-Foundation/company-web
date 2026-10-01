@@ -60,7 +60,7 @@ export function Reveal({
     <div
       ref={ref}
       style={{
-        transitionDuration: "700ms",
+        transitionDuration: "2000ms",
         transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
         transitionDelay: `${delay}ms`,
       }}
