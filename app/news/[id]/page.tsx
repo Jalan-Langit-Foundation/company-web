@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/container";
 import { NewsContent, NewsSidebar } from "@/components/sections/news";
-import { getNewsById, getAllNews, getAllNewsIds } from "@/lib/services/news.service";
+import { getNewsById, getRelatedNews, getAllNewsIds } from "@/lib/services/news.service";
 import { SITE_CONFIG } from "@/lib/data";
 
 interface PageProps {
@@ -65,14 +65,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function NewsDetailPage({ params }: PageProps) {
   const { id } = await params;
-  const detailNews = await getNewsById(id);
+  const [detailNews, otherNews] = await Promise.all([
+    getNewsById(id),
+    getRelatedNews(id, 4),
+  ]);
 
   if (!detailNews) {
     notFound();
   }
-
-  const allNews = await getAllNews();
-  const otherNews = allNews.filter((item) => item.id !== id);
 
   const articleJsonLd = {
     "@context": "https://schema.org",

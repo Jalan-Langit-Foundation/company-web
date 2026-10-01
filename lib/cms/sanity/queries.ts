@@ -24,6 +24,20 @@ const NEWS_PROJECTION = `{
   status
 }`;
 
+// Projection ringan untuk kartu berita di homepage dan sidebar.
+// Content lengkap, tabel distribusi, dan CTA hanya diambil pada halaman detail.
+const NEWS_CARD_PROJECTION = `{
+  _id,
+  _type,
+  title,
+  slug,
+  category,
+  date,
+  location,
+  coverImage,
+  status
+}`;
+
 /**
  * Query untuk mengambil seluruh berita yang berstatus published,
  * diurutkan berdasarkan tanggal terbaru descending.
@@ -38,7 +52,10 @@ export const NEWS_BY_SLUG_OR_ID_QUERY = `*[_type == "news" && (slug.current == $
 /**
  * Query untuk mengambil N berita terbaru (misal untuk homepage section).
  */
-export const LATEST_NEWS_QUERY = `*[_type == "news" && (!defined(status) || status == "published")] | order(date desc)[0...$limit] ${NEWS_PROJECTION}`;
+export const LATEST_NEWS_QUERY = `*[_type == "news" && (!defined(status) || status == "published")] | order(date desc)[0...$limit] ${NEWS_CARD_PROJECTION}`;
+
+/** Query ringan untuk sidebar halaman detail berita. */
+export const RELATED_NEWS_QUERY = `*[_type == "news" && (!defined(status) || status == "published") && slug.current != $id] | order(date desc)[0...$limit] ${NEWS_CARD_PROJECTION}`;
 
 /**
  * Query ringan hanya mengambil daftar ID/slug untuk generateStaticParams & sitemap.

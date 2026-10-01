@@ -5,6 +5,7 @@ import {
   ALL_NEWS_QUERY,
   NEWS_BY_SLUG_OR_ID_QUERY,
   LATEST_NEWS_QUERY,
+  RELATED_NEWS_QUERY,
   ALL_NEWS_SLUGS_QUERY,
   mapSanityDocToNewsItem,
   mapSanityDocsToNewsItems,
@@ -35,7 +36,9 @@ async function fetchNewsFromCMS(): Promise<NewsItem[] | null> {
   });
 
   if (!docs || !Array.isArray(docs)) return null;
-  return mapSanityDocsToNewsItems(docs);
+  return mapSanityDocsToNewsItems(docs, {
+    image: { width: 1200, quality: 80 },
+  });
 }
 
 /**
@@ -52,7 +55,9 @@ async function fetchNewsByIdFromCMS(id: string): Promise<NewsItem | null> {
   });
 
   if (!doc) return null;
-  return mapSanityDocToNewsItem(doc);
+  return mapSanityDocToNewsItem(doc, {
+    image: { width: 1400, quality: 82 },
+  });
 }
 
 /**
@@ -107,12 +112,39 @@ export async function getLatestNews(limit: number = 8): Promise<NewsItem[]> {
       revalidate: 60,
     });
 
-    return docs ? mapSanityDocsToNewsItems(docs) : [];
+    return docs
+      ? mapSanityDocsToNewsItems(docs, {
+          image: { width: 800, quality: 75 },
+        })
+      : [];
   } catch (error) {
     console.warn("[NewsService] Gagal mengambil berita terbaru dari CMS:", error);
   }
 
   return [];
+}
+
+/** Mengambil berita ringkas untuk sidebar tanpa content lengkap. */
+export async function getRelatedNews(id: string, limit: number = 4): Promise<NewsItem[]> {
+  if (!isSanityConfigured) return [];
+
+  try {
+    const docs = await sanityFetch<SanityNewsDocument[]>({
+      query: RELATED_NEWS_QUERY,
+      params: { id, limit },
+      tags: ["news"],
+      revalidate: 60,
+    });
+
+    return docs
+      ? mapSanityDocsToNewsItems(docs, {
+          image: { width: 640, quality: 72 },
+        })
+      : [];
+  } catch (error) {
+    console.warn("[NewsService] Gagal mengambil berita terkait dari CMS:", error);
+    return [];
+  }
 }
 
 /**
