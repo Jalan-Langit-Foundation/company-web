@@ -1,6 +1,6 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
-import { schemaTypes } from "./lib/sanity/schemas";
+import { schemaTypes } from "./lib/cms/sanity/schemas";
 
 export default defineConfig({
   name: "jalan-langit-foundation",

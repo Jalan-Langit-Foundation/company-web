@@ -1,4 +1,4 @@
-import type { NewsItem, NewsTableRow } from "@/lib/data/news";
+import type { NewsItem, NewsTableRow } from "@/lib/domain/news";
 import type { SanityNewsDocument, SanityPortableTextBlock } from "./types";
 import { urlForSanityImage } from "./image";
 
@@ -74,7 +74,11 @@ export function mapSanityDocToNewsItem(doc: SanityNewsDocument): NewsItem {
     ctaButtonLabel: doc.ctaButtonLabel || "Dukung Program Ini",
     image: imageUrl,
     imageAlt:
-      (doc.coverImage && typeof doc.coverImage === "object" && doc.coverImage.alt) ||
+      (doc.coverImage &&
+        typeof doc.coverImage === "object" &&
+        "alt" in doc.coverImage &&
+        typeof doc.coverImage.alt === "string" &&
+        doc.coverImage.alt) ||
       doc.title ||
       "Foto kegiatan Jalan Langit Foundation",
   };

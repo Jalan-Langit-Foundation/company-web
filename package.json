@@ -6,9 +6,7 @@
     "dev": "next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "export:news": "node --experimental-strip-types scripts/migrate-news-to-sanity.ts",
-    "import:news": "node --experimental-strip-types scripts/import-news-to-sanity.ts"
+    "lint": "eslint"
   },
   "dependencies": {
     "@sanity/client": "^8.9.0",
