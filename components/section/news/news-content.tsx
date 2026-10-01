@@ -48,7 +48,7 @@ export function NewsContent({ news }: NewsContentProps) {
         <div className="relative w-full aspect-[16/9] mb-8 rounded-2xl overflow-hidden border border-slate-200/80 bg-slate-100 isolate shadow-xs">
           <Image
             src={news.image}
-            alt={news.title}
+            alt={news.imageAlt || news.title}
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 850px"

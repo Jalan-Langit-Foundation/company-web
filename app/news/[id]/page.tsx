@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     ? [
         {
           url: detailNews.image,
-          alt: detailNews.title,
+          alt: detailNews.imageAlt || detailNews.title,
         },
       ]
     : [];

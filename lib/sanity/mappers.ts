@@ -73,6 +73,10 @@ export function mapSanityDocToNewsItem(doc: SanityNewsDocument): NewsItem {
     ctaText: doc.ctaText || "Terus Langitkan Kebaikan bersama Jalan Langit Foundation.",
     ctaButtonLabel: doc.ctaButtonLabel || "Dukung Program Ini",
     image: imageUrl,
+    imageAlt:
+      (doc.coverImage && typeof doc.coverImage === "object" && doc.coverImage.alt) ||
+      doc.title ||
+      "Foto kegiatan Jalan Langit Foundation",
   };
 }
 

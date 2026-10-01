@@ -21,6 +21,7 @@ export interface NewsItem {
   ctaText: string;
   ctaButtonLabel: string;
   image: string;
+  imageAlt?: string;
 }
 
 export const news: NewsItem[] = [
@@ -330,7 +331,7 @@ export const news: NewsItem[] = [
     ],
     ctaText: "Salurkan zakat Anda melalui Jalan Langit Foundation untuk memuliakan para guru ngaji dan asnaf yang berhak.",
     ctaButtonLabel: "Salurkan Zakat Sekarang",
-    image: "",
+    image: "/images/draft-foto/zakat/zakat-07.webp",
   },
   {
     id: "langit-box-192",
