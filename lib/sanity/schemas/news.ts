@@ -104,8 +104,11 @@ export const newsSchema = {
       name: "content",
       title: "Isi Paragraf Berita",
       type: "array",
-      of: [{ type: "text" }, { type: "block" }],
-      description: "Daftar paragraf berita (tiap baris mewakili 1 paragraf atau rich block)",
+      // Sanity tidak mengizinkan primitive `text` dicampur dengan object `block`
+      // dalam satu array. Portable Text block juga menyediakan editor paragraf
+      // yang dibutuhkan oleh form berita.
+      of: [{ type: "block" }],
+      description: "Isi berita menggunakan editor paragraf dan rich text",
     },
     {
       name: "distributionTable",
