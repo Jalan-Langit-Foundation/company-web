@@ -1,6 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins, Lato, Caveat } from "next/font/google";
-import { Navbar, Footer, FloatingCtaBar, FloatingWhatsappButton } from "@/components/layout";
+import {
+  Navbar,
+  Footer,
+  FloatingCtaBar,
+  FloatingWhatsappButton,
+  ScrollToTopOnRefresh,
+} from "@/components/layout";
 import { PageLoader } from "@/components/ui/page-loader";
 import { SITE_CONFIG } from "@/lib/data";
 import "./fonts.css";
@@ -140,6 +146,7 @@ export default function RootLayout({
       </head>
       <body className="flex min-h-screen flex-col" suppressHydrationWarning>
         <PageLoader />
+        <ScrollToTopOnRefresh />
         <Navbar />
         <div className="flex-1">{children}</div>
         <Footer />
