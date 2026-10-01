@@ -6,7 +6,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/section-header";
-import { PROGRAMS_SECTION_DATA } from "@/lib/data";
+import { PROGRAMS_SECTION_DATA } from "@/content/homepage";
 
 export function ProgramsSection() {
   const [isExpanded, setIsExpanded] = React.useState(false);

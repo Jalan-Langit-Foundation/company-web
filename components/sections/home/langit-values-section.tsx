@@ -6,7 +6,7 @@ import { SectionHeader } from "@/components/ui/section-header";
 import { VectorBox } from "@/components/ui/vector-box";
 import { LangitCard } from "@/components/ui/langit-card";
 import { DoodleArrowHint } from "@/components/ui/doodle-arrow-hint";
-import { LANGIT_VALUES_DATA } from "@/lib/data/homepage";
+import { LANGIT_VALUES_DATA } from "@/content/homepage";
 import { useAboutValues } from "@/hooks";
 
 interface CardVector {

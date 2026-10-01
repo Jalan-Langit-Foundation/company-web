@@ -14,7 +14,7 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/section-header";
 import { useHorizontalScroll } from "@/hooks";
-import { FEATURED_VIDEOS_DATA, FeaturedVideo } from "@/lib/data/homepage";
+import { FEATURED_VIDEOS_DATA, FeaturedVideo } from "@/content/homepage";
 
 const VideoModal = dynamic(
   () => import("@/components/ui/video-modal").then((mod) => mod.VideoModal),

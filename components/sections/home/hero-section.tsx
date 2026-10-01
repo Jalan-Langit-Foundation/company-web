@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { SITE_CONFIG } from "@/lib/data";
-import { HERO_CONFIG } from "@/lib/data/homepage";
+import { HERO_CONFIG } from "@/content/homepage";
 import { useAutoPlay } from "@/hooks";
 import { cn } from "@/lib/utils";
 

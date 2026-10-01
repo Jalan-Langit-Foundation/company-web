@@ -3,19 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { SectionHeader } from "@/components/ui/section-header";
-import { LATEST_NEWS_DATA } from "@/lib/data/homepage";
-import type { NewsItem } from "@/lib/data/news";
+import { LATEST_NEWS_DATA } from "@/content/homepage";
 import { getLatestNews } from "@/lib/services/news.service";
 
-interface LatestNewsSectionProps {
-  articles?: NewsItem[];
-}
-
-export async function LatestNewsSection({ articles }: LatestNewsSectionProps = {}) {
+export async function LatestNewsSection() {
   const { headline, supportingCopy } = LATEST_NEWS_DATA;
 
-  // Mengambil berita terbaru dari service layer (Sanity CMS dengan fallback lokal)
-  const newsList = articles && articles.length > 0 ? articles : await getLatestNews(8);
+  // Berita hanya berasal dari Sanity CMS.
+  const newsList = await getLatestNews(8);
 
   // Menampilkan berita berdasarkan urutan paling terbaru
   const mainFeatured = newsList[0];
@@ -37,6 +32,12 @@ export async function LatestNewsSection({ articles }: LatestNewsSectionProps = {
           multiline
           className="mb-8 sm:mb-12"
         />
+
+        {!newsList.length && (
+          <p className="text-center text-sm text-slate-500 font-['Lato',sans-serif]">
+            Belum ada berita yang dipublikasikan.
+          </p>
+        )}
 
         {/* =========================================================================
             LAYOUT MULTI-BERITA (GRID LENGKAP KRONOLOGIS TERBARU)

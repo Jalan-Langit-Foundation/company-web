@@ -11,17 +11,17 @@ export const HERO_CONFIG = {
   slides: [
     {
       id: "slide-1",
-      src: "/images/draft-foto/hadiah-kebahagiaan/hadiah-kebahagiaan-01.webp",
+      src: "/images/programs/hadiah-kebahagiaan/hadiah-kebahagiaan-01.webp",
       alt: "Apresiasi paket sembako berkah program Hadiah Kebahagiaan bagi pejuang nafkah",
     },
     {
       id: "slide-2",
-      src: "/images/draft-foto/hadiah-kebahagiaan/hadiah-kebahagiaan-02.webp",
+      src: "/images/programs/hadiah-kebahagiaan/hadiah-kebahagiaan-02.webp",
       alt: "Senyum bahagia dan kebersamaan penerima manfaat program Hadiah Kebahagiaan",
     },
     {
       id: "slide-3",
-      src: "/images/draft-foto/hadiah-kebahagiaan/hadiah-kebahagiaan-03.webp",
+      src: "/images/programs/hadiah-kebahagiaan/hadiah-kebahagiaan-03.webp",
       alt: "Penyaluran langsung bingkisan Hadiah Kebahagiaan untuk pejuang jalanan",
     },
     {

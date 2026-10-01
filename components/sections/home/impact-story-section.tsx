@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/section-header";
-import { IMPACT_STORY_DATA } from "@/lib/data/homepage";
+import { IMPACT_STORY_DATA } from "@/content/homepage";
 import { SITE_CONFIG } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 

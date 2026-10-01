@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { NewsItem } from "@/lib/data/news";
+import type { NewsItem } from "@/lib/domain/news";
 import { SITE_CONFIG } from "@/lib/data";
 
 interface NewsSidebarProps {
@@ -22,7 +22,7 @@ export function NewsSidebar({ otherNews = [] }: NewsSidebarProps) {
               className="block w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3C95C8] rounded-lg"
             >
               <Image
-                src="/images/logo/logo-navbar.png"
+                src="/images/brand/logo-navbar.png"
                 alt="Logo Yayasan Jalan Langit"
                 width={320}
                 height={76}

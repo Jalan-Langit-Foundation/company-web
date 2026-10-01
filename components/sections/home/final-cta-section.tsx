@@ -2,7 +2,7 @@ import * as React from "react";
 import { Heart, Handshake } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { FINAL_CTA_CONFIG } from "@/lib/data/homepage";
+import { FINAL_CTA_CONFIG } from "@/content/homepage";
 
 export function FinalCtaSection() {
   return (

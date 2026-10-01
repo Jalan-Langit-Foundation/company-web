@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Container } from "@/components/ui/container";
-import { IMPACT_STATS, ImpactStat } from "@/lib/data/homepage";
+import { IMPACT_STATS, ImpactStat } from "@/content/homepage";
 import { cn } from "@/lib/utils";
 
 function CounterCard({ stat, isVisible }: { stat: ImpactStat; isVisible: boolean }) {

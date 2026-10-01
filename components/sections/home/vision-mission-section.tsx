@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Container } from "@/components/ui/container";
 import { SectionHeader } from "@/components/ui/section-header";
-import { VISION_MISSION_DATA, type MissionPoint } from "@/lib/data/homepage";
+import { VISION_MISSION_DATA, type MissionPoint } from "@/content/homepage";
 import { useAboutValues } from "@/hooks";
 
 export function VisionMissionSection() {

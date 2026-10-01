@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { LangitValue } from "@/lib/data/homepage";
+import { LangitValue } from "@/content/homepage";
 
 export interface LangitCardProps {
   value: LangitValue;

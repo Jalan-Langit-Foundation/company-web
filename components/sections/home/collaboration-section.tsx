@@ -8,24 +8,24 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/section-header";
 import { useAutoPlay } from "@/hooks";
-import { COLLABORATION_DATA } from "@/lib/data/homepage";
+import { COLLABORATION_DATA } from "@/content/homepage";
 
 // Daftar foto slideshow mandiri (berganti otomatis tiap 4 detik)
 const COLLABORATION_SLIDES = [
   {
-    src: "/images/draft-foto/zakat/zakat-07.webp",
+    src: "/images/programs/zakat/zakat-07.webp",
     alt: "Kolaborasi Kemitraan & CSR Jalan Langit Foundation",
   },
   {
-    src: "/images/draft-foto/serasi/serasi-07.webp",
+    src: "/images/programs/serasi/serasi-07.webp",
     alt: "Gerakan Kolaborasi Bersama Komunitas",
   },
   {
-    src: "/images/draft-foto/langit-box/langit-box-01.webp",
+    src: "/images/programs/langit-box/langit-box-01.webp",
     alt: "Aksi Nyata Relawan Jalan Langit Foundation",
   },
   {
-    src: "/images/draft-foto/langit-scholarship/langit-scholarship-01.webp",
+    src: "/images/programs/langit-scholarship/langit-scholarship-01.webp",
     alt: "Program Magang Berdampak & Talenta Muda",
   },
 ];

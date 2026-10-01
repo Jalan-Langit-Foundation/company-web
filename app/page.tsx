@@ -10,7 +10,7 @@ import {
   CollaborationSection,
   LatestNewsSection,
   FinalCtaSection,
-} from "@/components/section/home";
+} from "@/components/sections/home";
 import { Reveal } from "@/components/ui/reveal";
 
 export default function Home() {

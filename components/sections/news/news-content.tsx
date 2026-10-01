@@ -1,6 +1,6 @@
 import * as React from "react";
 import Image from "next/image";
-import { NewsItem } from "@/lib/data/news";
+import type { NewsItem } from "@/lib/domain/news";
 
 interface NewsContentProps {
   news: NewsItem;
@@ -44,7 +44,7 @@ export function NewsContent({ news }: NewsContentProps) {
       </div>
 
       {/* Gambar Utama: Murni Gambar Rasio 16:9 dengan Border Radius Selaras Card Video Section */}
-      {news.image && (
+      {news.image ? (
         <div className="relative w-full aspect-[16/9] mb-8 rounded-2xl overflow-hidden border border-slate-200/80 bg-slate-100 isolate shadow-xs">
           <Image
             src={news.image}
@@ -54,6 +54,14 @@ export function NewsContent({ news }: NewsContentProps) {
             sizes="(max-width: 1024px) 100vw, 850px"
             className="object-cover rounded-2xl"
           />
+        </div>
+      ) : (
+        <div
+          role="img"
+          aria-label={news.imageAlt || news.title}
+          className="flex w-full aspect-[16/9] mb-8 items-center justify-center rounded-2xl border border-slate-200/80 bg-slate-100 px-6 text-center text-sm text-slate-500 font-['Lato',sans-serif]"
+        >
+          {news.imageAlt || news.title}
         </div>
       )}
 
