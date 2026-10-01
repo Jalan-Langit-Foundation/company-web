@@ -32,7 +32,14 @@ export async function POST(request: NextRequest) {
     const providedSecret = bearerSecret || querySecret;
 
     // Validasi token keamanan
-    if (secret && (!providedSecret || providedSecret !== secret)) {
+    if (!secret) {
+      return NextResponse.json(
+        { message: "Revalidation endpoint is not configured" },
+        { status: 503 }
+      );
+    }
+
+    if (!providedSecret || providedSecret !== secret) {
       return NextResponse.json(
         { message: "Invalid revalidation secret token" },
         { status: 401 }
