@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     description: SITE_CONFIG.description,
     images: [
       {
-        url: "/images/logo/logo-navbar.png",
+        url: "/images/brand/logo-navbar.png",
         width: 800,
         height: 200,
         alt: SITE_CONFIG.name,
@@ -84,7 +84,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE_CONFIG.name} | Bergandengan Langitkan Kebaikan`,
     description: SITE_CONFIG.description,
-    images: ["/images/logo/logo-navbar.png"],
+    images: ["/images/brand/logo-navbar.png"],
   },
   robots: {
     index: true,
@@ -105,7 +105,7 @@ const organizationJsonLd = {
   name: SITE_CONFIG.name,
   legalName: SITE_CONFIG.legalName,
   url: SITE_CONFIG.url,
-  logo: `${SITE_CONFIG.url}/images/logo/logo-navbar.png`,
+  logo: `${SITE_CONFIG.url}/images/brand/logo-navbar.png`,
   description: SITE_CONFIG.description,
   email: SITE_CONFIG.contact.email,
   address: {
