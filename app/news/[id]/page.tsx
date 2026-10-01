@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/container";
-import { NewsContent, NewsSidebar } from "@/components/section/news";
+import { NewsContent, NewsSidebar } from "@/components/sections/news";
 import { getNewsById, getAllNews, getAllNewsIds } from "@/lib/services/news.service";
 import { SITE_CONFIG } from "@/lib/data";
 
@@ -92,7 +92,7 @@ export default async function NewsDetailPage({ params }: PageProps) {
       name: SITE_CONFIG.name,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_CONFIG.url}/images/logo/logo-navbar.png`,
+        url: `${SITE_CONFIG.url}/images/brand/logo-navbar.png`,
       },
     },
     mainEntityOfPage: {

@@ -15,7 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Seluruh Halaman Berita & Artikel dari Service (Sanity CMS dengan fallback lokal)
+  // Seluruh Halaman Berita & Artikel dari Sanity CMS
   const allNews = await getAllNews();
   const newsRoutes: MetadataRoute.Sitemap = allNews.map((item) => ({
     url: `${baseUrl}/news/${item.id}`,
