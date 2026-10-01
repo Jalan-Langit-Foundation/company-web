@@ -53,7 +53,7 @@ export async function LatestNewsSection() {
                 {mainFeatured.image ? (
                   <Image
                     src={mainFeatured.image}
-                    alt={mainFeatured.title}
+                    alt={mainFeatured.imageAlt || mainFeatured.title}
                     fill
                     sizes="(max-width: 1024px) 100vw, 650px"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -97,7 +97,7 @@ export async function LatestNewsSection() {
                     {article.image ? (
                       <Image
                         src={article.image}
-                        alt={article.title}
+                        alt={article.imageAlt || article.title}
                         fill
                         sizes="(max-width: 640px) 120px, 320px"
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -139,7 +139,7 @@ export async function LatestNewsSection() {
                   {article.image ? (
                     <Image
                       src={article.image}
-                      alt={article.title}
+                      alt={article.imageAlt || article.title}
                       fill
                       sizes="(max-width: 640px) 120px, 150px"
                       className="object-cover transition-transform duration-300 group-hover:scale-105"

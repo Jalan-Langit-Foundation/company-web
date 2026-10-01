@@ -1,6 +1,10 @@
 import type { NewsItem, NewsTableRow } from "@/lib/domain/news";
 import type { SanityNewsDocument, SanityPortableTextBlock } from "./types";
-import { urlForSanityImage } from "./image";
+import { urlForSanityImage, type SanityImageOptions } from "./image";
+
+export interface NewsMappingOptions {
+  image?: SanityImageOptions;
+}
 
 /**
  * Normalisasi isi konten artikel berita.
@@ -36,8 +40,11 @@ function extractParagraphs(content?: Array<string | SanityPortableTextBlock>): s
 /**
  * Adapter: Mengonversi raw SanityNewsDocument menjadi domain NewsItem yang digunakan oleh aplikasi.
  */
-export function mapSanityDocToNewsItem(doc: SanityNewsDocument): NewsItem {
-  const imageUrl = urlForSanityImage(doc.coverImage) || "";
+export function mapSanityDocToNewsItem(
+  doc: SanityNewsDocument,
+  options: NewsMappingOptions = {}
+): NewsItem {
+  const imageUrl = urlForSanityImage(doc.coverImage, options.image) || "";
   const paragraphs = extractParagraphs(doc.content);
 
   // Normalisasi tabel distribusi jika ada
@@ -87,7 +94,10 @@ export function mapSanityDocToNewsItem(doc: SanityNewsDocument): NewsItem {
 /**
  * Helper untuk mentransformasi array dokumen Sanity menjadi NewsItem[]
  */
-export function mapSanityDocsToNewsItems(docs: SanityNewsDocument[]): NewsItem[] {
+export function mapSanityDocsToNewsItems(
+  docs: SanityNewsDocument[],
+  options: NewsMappingOptions = {}
+): NewsItem[] {
   if (!Array.isArray(docs)) return [];
-  return docs.map(mapSanityDocToNewsItem);
+  return docs.map((doc) => mapSanityDocToNewsItem(doc, options));
 }
