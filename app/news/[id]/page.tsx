@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/container";
-import { NewsContent, NewsSidebar } from "@/components/section/news";
-import { getNewsById, news } from "@/lib/data/news";
+import { NewsContent, NewsSidebar } from "@/components/sections/news";
+import { getNewsById, getRelatedNews, getAllNewsIds } from "@/lib/services/news.service";
 import { SITE_CONFIG } from "@/lib/data";
 
 interface PageProps {
@@ -11,17 +11,18 @@ interface PageProps {
   }>;
 }
 
-// Generate static params untuk pre-rendering seluruh rute berita statis
-export function generateStaticParams() {
-  return news.map((item) => ({
-    id: item.id,
+// Generate static params untuk pre-rendering seluruh rute berita statis / ISR
+export async function generateStaticParams() {
+  const ids = await getAllNewsIds();
+  return ids.map((id) => ({
+    id,
   }));
 }
 
 // Dynamic SEO metadata per halaman berita
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  const detailNews = getNewsById(id);
+  const detailNews = await getNewsById(id);
 
   if (!detailNews) {
     return {
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     ? [
         {
           url: detailNews.image,
-          alt: detailNews.title,
+          alt: detailNews.imageAlt || detailNews.title,
         },
       ]
     : [];
@@ -64,13 +65,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function NewsDetailPage({ params }: PageProps) {
   const { id } = await params;
-  const detailNews = getNewsById(id);
+  const [detailNews, otherNews] = await Promise.all([
+    getNewsById(id),
+    getRelatedNews(id, 4),
+  ]);
 
   if (!detailNews) {
     notFound();
   }
-
-  const otherNews = news.filter((item) => item.id !== id);
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -90,7 +92,7 @@ export default async function NewsDetailPage({ params }: PageProps) {
       name: SITE_CONFIG.name,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_CONFIG.url}/images/logo/logo-navbar.png`,
+        url: `${SITE_CONFIG.url}/images/brand/logo-navbar.png`,
       },
     },
     mainEntityOfPage: {
