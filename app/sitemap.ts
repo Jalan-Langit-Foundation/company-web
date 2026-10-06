@@ -19,7 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const allNews = await getAllNews();
   const newsRoutes: MetadataRoute.Sitemap = allNews.map((item) => ({
     url: `${baseUrl}/news/${item.id}`,
-    lastModified: new Date(),
+    lastModified: item.updatedAt || item.date || undefined,
     changeFrequency: "monthly",
     priority: 0.8,
   }));

@@ -69,6 +69,7 @@ export function mapSanityDocToNewsItem(
   return {
     id: doc.slug?.current || doc._id,
     title: doc.title || "",
+    updatedAt: doc._updatedAt,
     category: doc.category || "Umum",
     date: doc.date || "",
     location: doc.location || "",

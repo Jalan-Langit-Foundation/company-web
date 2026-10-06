@@ -10,6 +10,7 @@ export interface NewsTableRow {
 export interface NewsItem {
   id: string;
   title: string;
+  updatedAt?: string;
   category: string;
   date: string;
   location: string;
