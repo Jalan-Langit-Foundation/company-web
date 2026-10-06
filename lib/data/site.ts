@@ -4,7 +4,7 @@ export const SITE_CONFIG = {
   name: "Jalan Langit Foundation",
   legalName: "Yayasan Jalan Langit",
   tagline: "#BergandenganLangitkanKebaikan",
-  url: "https://jalanlangitfoundation.id",
+  url: "https://www.jalanlangitfoundation.id",
   description:
     "Kami menggerakkan kebaikan melalui program sosial, pendidikan, kemanusiaan, dan pemberdayaan untuk menghadirkan manfaat nyata bagi masyarakat.",
   legal: {

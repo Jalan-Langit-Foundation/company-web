@@ -7,6 +7,7 @@
 const NEWS_PROJECTION = `{
   _id,
   _type,
+  _updatedAt,
   title,
   slug,
   category,

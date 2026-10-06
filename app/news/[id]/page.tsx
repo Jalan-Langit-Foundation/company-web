@@ -79,9 +79,11 @@ export default async function NewsDetailPage({ params }: PageProps) {
     "@type": "NewsArticle",
     headline: detailNews.title,
     description: detailNews.excerpt,
-    datePublished: detailNews.date,
-    dateModified: detailNews.date,
-    image: detailNews.image ? [`${SITE_CONFIG.url}${detailNews.image}`] : undefined,
+    datePublished: detailNews.date || undefined,
+    dateModified: detailNews.updatedAt || detailNews.date || undefined,
+    image: detailNews.image
+      ? [new URL(detailNews.image, SITE_CONFIG.url).toString()]
+      : undefined,
     author: {
       "@type": "Organization",
       name: SITE_CONFIG.name,
