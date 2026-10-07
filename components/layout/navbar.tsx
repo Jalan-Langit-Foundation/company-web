@@ -19,6 +19,9 @@ export function Navbar() {
   const [prevPathname, setPrevPathname] = React.useState(pathname);
   const navRef = React.useRef<HTMLElement | null>(null);
 
+  const isClickScrollingRef = React.useRef(false);
+  const clickTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+
   // Close menus on route change during render
   if (prevPathname !== pathname) {
     setPrevPathname(pathname);
@@ -52,33 +55,110 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Reset lock scroll saat user melakukan scroll manual (wheel atau touch)
+  React.useEffect(() => {
+    const handleUserScroll = () => {
+      if (isClickScrollingRef.current) {
+        isClickScrollingRef.current = false;
+        if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
+      }
+    };
+
+    window.addEventListener("wheel", handleUserScroll, { passive: true });
+    window.addEventListener("touchmove", handleUserScroll, { passive: true });
+    return () => {
+      window.removeEventListener("wheel", handleUserScroll);
+      window.removeEventListener("touchmove", handleUserScroll);
+      if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
+    };
+  }, []);
+
   // Scrollspy: pantau section aktif saat pengunjung scroll di homepage
   React.useEffect(() => {
     if (pathname !== "/") return;
 
     const sectionIds = NAVBAR_LINKS.map((link) => link.href.replace("/#", "")).filter(Boolean);
 
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      const visibleEntries = entries.filter((e) => e.isIntersecting);
-      if (visibleEntries.length > 0) {
-        visibleEntries.sort(
-          (a, b) => Math.abs(a.boundingClientRect.top) - Math.abs(b.boundingClientRect.top)
-        );
-        setActiveSection(visibleEntries[0].target.id);
+    // Cek jika halaman dimuat dengan hash URL tertentu (misal /#cerita-dampak)
+    if (window.location.hash) {
+      const initialHash = window.location.hash.replace("#", "");
+      if (sectionIds.includes(initialHash)) {
+        setActiveSection(initialHash);
+      }
+    }
+
+    let rafId: number | null = null;
+
+    const updateActiveSection = () => {
+      if (isClickScrollingRef.current) return;
+
+      const scrollY = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      // Offset toleransi: 64px tinggi navbar + ~66px batas baca pengguna
+      const offset = 130;
+
+      // 1. Jika masih berada di area Hero / Snapshot paling atas
+      const firstSection = document.getElementById(sectionIds[0]);
+      if (scrollY < 100 || (firstSection && firstSection.getBoundingClientRect().top > offset + 60)) {
+        setActiveSection("");
+        return;
+      }
+
+      // 2. Jika sudah mencapai bagian paling bawah halaman (Footer / Kontak)
+      if (viewportHeight + scrollY >= documentHeight - 50) {
+        setActiveSection(sectionIds[sectionIds.length - 1]);
+        return;
+      }
+
+      // 3. Cari section yang garis pandangnya (offset) sedang berada di dalam section tersebut
+      let foundId = "";
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= offset && rect.bottom > offset) {
+          foundId = id;
+          break;
+        }
+      }
+
+      // 4. Fallback jika berada di sela section (misal video-pilihan di antara program & cerita-dampak)
+      if (!foundId) {
+        for (const id of sectionIds) {
+          const el = document.getElementById(id);
+          if (!el) continue;
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= offset) {
+            foundId = id;
+          }
+        }
+      }
+
+      if (foundId) {
+        setActiveSection(foundId);
       }
     };
 
-    const observer = new IntersectionObserver(observerCallback, {
-      rootMargin: "-10% 0px -45% 0px",
-      threshold: [0, 0.1, 0.25, 0.5],
-    });
+    const handleScroll = () => {
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        updateActiveSection();
+        rafId = null;
+      });
+    };
 
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+    // Jalankan kalkulasi posisi awal setelah render
+    updateActiveSection();
 
-    return () => observer.disconnect();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
+
+    return () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, [pathname]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -87,9 +167,16 @@ export function Navbar() {
       const targetId = href.replace("/#", "");
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
+        isClickScrollingRef.current = true;
+        setActiveSection(targetId);
+
         targetElement.scrollIntoView({ behavior: "smooth" });
         window.history.pushState(null, "", href);
-        setActiveSection(targetId);
+
+        if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
+        clickTimeoutRef.current = setTimeout(() => {
+          isClickScrollingRef.current = false;
+        }, 900);
       }
     }
     setIsOpen(false);
@@ -122,6 +209,12 @@ export function Navbar() {
           {/* Sisi Kiri: Logo */}
           <Link
             href="/"
+            onClick={() => {
+              if (pathname === "/") {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                setActiveSection("");
+              }
+            }}
             className="group flex items-center transition-transform duration-200 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3C95C8] rounded-lg"
             aria-label="Beranda Yayasan Jalan Langit"
           >
