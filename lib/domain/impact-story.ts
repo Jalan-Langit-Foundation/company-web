@@ -15,8 +15,14 @@ export interface ImpactStoryItem {
   story: string;
   impactMetric: string;
   donationUrl: string;
-  featuredImage: string;
-  featuredImageAlt?: string;
   hashtag: string;
+  order?: number;
+}
+
+export interface ImpactStoryPhoto {
+  id: string;
+  title: string;
+  image: string;
+  imageAlt: string;
   order?: number;
 }

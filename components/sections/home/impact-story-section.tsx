@@ -11,12 +11,14 @@ import { SITE_CONFIG } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 
 import type { ImpactStoryItem } from "@/lib/domain/impact-story";
+import type { ImpactStoryPhoto } from "@/lib/domain/impact-story";
 
 interface ImpactStorySectionProps {
   stories: ImpactStoryItem[];
+  photos: ImpactStoryPhoto[];
 }
 
-export function ImpactStorySection({ stories }: ImpactStorySectionProps) {
+export function ImpactStorySection({ stories, photos }: ImpactStorySectionProps) {
   const [currentStoryIndex, setCurrentStoryIndex] = React.useState(0);
   const [isAnimating, setIsAnimating] = React.useState(false);
 
@@ -26,11 +28,9 @@ export function ImpactStorySection({ stories }: ImpactStorySectionProps) {
 
   // Duplikasi foto untuk continuous seamless infinite vertical loop
   const marqueeList = React.useMemo(() => {
-    return [
-      ...IMPACT_STORY_DATA.marqueePhotos,
-      ...IMPACT_STORY_DATA.marqueePhotos,
-    ];
-  }, []);
+    const validPhotos = photos.filter((photo) => photo.image);
+    return [...validPhotos, ...validPhotos];
+  }, [photos]);
 
   if (storyList.length === 0) return null;
 
@@ -92,8 +92,8 @@ export function ImpactStorySection({ stories }: ImpactStorySectionProps) {
                     className="relative w-[calc(100vw-2rem)] sm:w-[calc(100vw-3rem)] aspect-video rounded-2xl overflow-hidden bg-slate-100 shadow-none border border-slate-200/60 shrink-0"
                   >
                     <Image
-                      src={photo.src}
-                      alt={photo.alt}
+                      src={photo.image}
+                      alt={photo.imageAlt}
                       fill
                       sizes="(max-width: 1024px) 100vw, 400px"
                       className="object-cover"
@@ -194,8 +194,8 @@ export function ImpactStorySection({ stories }: ImpactStorySectionProps) {
                     className="relative w-full lg:h-[220px] rounded-2xl overflow-hidden bg-slate-100 shadow-none border border-slate-200/60 shrink-0"
                   >
                     <Image
-                      src={photo.src}
-                      alt={photo.alt}
+                      src={photo.image}
+                      alt={photo.imageAlt}
                       fill
                       sizes="(max-width: 1024px) 100vw, 400px"
                       className="object-cover"

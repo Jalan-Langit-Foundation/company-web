@@ -84,7 +84,6 @@ const IMPACT_STORY_PROJECTION = `{
   hashtag,
   impactMetric,
   donationUrl,
-  featuredImage,
   order,
   status
 }`;
@@ -94,3 +93,16 @@ const IMPACT_STORY_PROJECTION = `{
  * diurutkan berdasarkan field order ascending, lalu tanggal pembuatan descending.
  */
 export const ALL_IMPACT_STORIES_QUERY = `*[_type == "impactStory" && (!defined(status) || status == "published")] | order(order asc, _createdAt desc) ${IMPACT_STORY_PROJECTION}`;
+
+const IMPACT_STORY_PHOTO_PROJECTION = `{
+  _id,
+  _type,
+  _updatedAt,
+  title,
+  image,
+  order,
+  status
+}`;
+
+/** Query untuk mengambil foto marquee Cerita Dampak yang published. */
+export const ALL_IMPACT_STORY_PHOTOS_QUERY = `*[_type == "impactStoryPhoto" && (!defined(status) || status == "published")] | order(order asc, _createdAt desc) ${IMPACT_STORY_PHOTO_PROJECTION}`;

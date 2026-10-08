@@ -103,21 +103,6 @@ export const impactStorySchema = {
       description: "Link donasi program terkait",
     },
     {
-      name: "featuredImage",
-      title: "Foto Dokumentasi",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
-      fields: [
-        {
-          name: "alt",
-          type: "string",
-          title: "Alternative Text (Deskripsi Gambar)",
-        },
-      ],
-    },
-    {
       name: "order",
       title: "Urutan Tampil",
       type: "number",

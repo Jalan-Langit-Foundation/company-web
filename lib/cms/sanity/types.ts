@@ -97,7 +97,17 @@ export interface SanityImpactStoryDocument {
   hashtag?: string;
   impactMetric?: string;
   donationUrl?: string;
-  featuredImage?: SanityImageSource;
+  order?: number;
+  status?: SanityPublicationStatus;
+}
+
+export interface SanityImpactStoryPhotoDocument {
+  _id: string;
+  _type: "impactStoryPhoto";
+  _createdAt?: string;
+  _updatedAt?: string;
+  title: string;
+  image: SanityImageSource;
   order?: number;
   status?: SanityPublicationStatus;
 }

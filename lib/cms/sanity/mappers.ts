@@ -1,8 +1,9 @@
 import type { NewsItem, NewsTableRow } from "@/lib/domain/news";
-import type { ImpactStoryItem } from "@/lib/domain/impact-story";
+import type { ImpactStoryItem, ImpactStoryPhoto } from "@/lib/domain/impact-story";
 import type {
   SanityNewsDocument,
   SanityImpactStoryDocument,
+  SanityImpactStoryPhotoDocument,
   SanityPortableTextBlock,
 } from "./types";
 import { urlForSanityImage, type SanityImageOptions } from "./image";
@@ -115,8 +116,6 @@ export function mapSanityDocToImpactStory(
   doc: SanityImpactStoryDocument,
   options: NewsMappingOptions = {}
 ): ImpactStoryItem {
-  const imageUrl = urlForSanityImage(doc.featuredImage, options.image) || "";
-
   return {
     id: doc.slug?.current || doc._id,
     title: doc.title || "",
@@ -130,15 +129,6 @@ export function mapSanityDocToImpactStory(
     story: doc.story || "",
     impactMetric: doc.impactMetric || "",
     donationUrl: doc.donationUrl || "",
-    featuredImage: imageUrl,
-    featuredImageAlt:
-      (doc.featuredImage &&
-        typeof doc.featuredImage === "object" &&
-        "alt" in doc.featuredImage &&
-        typeof doc.featuredImage.alt === "string" &&
-        doc.featuredImage.alt) ||
-      doc.title ||
-      "Foto dokumentasi cerita dampak Jalan Langit Foundation",
     hashtag: doc.hashtag || "",
     order: doc.order,
   };
@@ -153,4 +143,30 @@ export function mapSanityDocsToImpactStories(
 ): ImpactStoryItem[] {
   if (!Array.isArray(docs)) return [];
   return docs.map((doc) => mapSanityDocToImpactStory(doc, options));
+}
+
+export function mapSanityDocToImpactStoryPhoto(
+  doc: SanityImpactStoryPhotoDocument,
+  options: NewsMappingOptions = {}
+): ImpactStoryPhoto {
+  const image = urlForSanityImage(doc.image, options.image) || "";
+  const imageObject = doc.image && typeof doc.image === "object" ? doc.image : null;
+
+  return {
+    id: doc._id,
+    title: doc.title,
+    image,
+    imageAlt:
+      (imageObject && "alt" in imageObject && typeof imageObject.alt === "string" && imageObject.alt) ||
+      doc.title,
+    order: doc.order,
+  };
+}
+
+export function mapSanityDocsToImpactStoryPhotos(
+  docs: SanityImpactStoryPhotoDocument[],
+  options: NewsMappingOptions = {}
+): ImpactStoryPhoto[] {
+  if (!Array.isArray(docs)) return [];
+  return docs.map((doc) => mapSanityDocToImpactStoryPhoto(doc, options));
 }
