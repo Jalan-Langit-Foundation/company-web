@@ -12,8 +12,11 @@ import {
   FinalCtaSection,
 } from "@/components/sections/home";
 import { Reveal } from "@/components/ui/reveal";
+import { getImpactStories } from "@/lib/services/impact-story.service";
 
-export default function Home() {
+export default async function Home() {
+  const impactStories = await getImpactStories();
+
   return (
     <main className="flex-1 w-full flex flex-col">
       {/* Section 1 — Hero */}
@@ -45,7 +48,7 @@ export default function Home() {
 
       {/* Section 6 — Impact Story */}
       <Reveal>
-        <ImpactStorySection />
+        <ImpactStorySection stories={impactStories} />
       </Reveal>
 
       {/* Section 7 — Kolaborasi */}

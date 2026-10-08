@@ -78,3 +78,26 @@ export interface SanityNewsDocument {
   ctaButtonUrl?: string;
   status?: SanityPublicationStatus;
 }
+
+export interface SanityImpactStoryDocument {
+  _id: string;
+  _type: "impactStory";
+  _createdAt?: string;
+  _updatedAt?: string;
+  title: string;
+  slug: SanitySlug;
+  person: string;
+  role: string;
+  programName?: string;
+  category?: string;
+  badge?: string;
+  location?: string;
+  quote: string;
+  story: string;
+  hashtag?: string;
+  impactMetric?: string;
+  donationUrl?: string;
+  featuredImage?: SanityImageSource;
+  order?: number;
+  status?: SanityPublicationStatus;
+}

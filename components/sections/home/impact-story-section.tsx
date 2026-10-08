@@ -10,12 +10,22 @@ import { IMPACT_STORY_DATA } from "@/content/homepage";
 import { SITE_CONFIG } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 
-export function ImpactStorySection() {
+import type { ImpactStory } from "@/content/homepage";
+import type { ImpactStoryItem } from "@/lib/domain/impact-story";
+
+interface ImpactStorySectionProps {
+  stories?: (ImpactStory | ImpactStoryItem)[];
+}
+
+export function ImpactStorySection({
+  stories = IMPACT_STORY_DATA.stories,
+}: ImpactStorySectionProps = {}) {
   const [currentStoryIndex, setCurrentStoryIndex] = React.useState(0);
   const [isAnimating, setIsAnimating] = React.useState(false);
 
-  const totalStories = IMPACT_STORY_DATA.stories.length;
-  const activeStory = IMPACT_STORY_DATA.stories[currentStoryIndex];
+  const storyList = stories && stories.length > 0 ? stories : IMPACT_STORY_DATA.stories;
+  const totalStories = storyList.length;
+  const activeStory = storyList[currentStoryIndex] || storyList[0];
 
   // Duplikasi foto untuk continuous seamless infinite vertical loop
   const marqueeList = React.useMemo(() => {

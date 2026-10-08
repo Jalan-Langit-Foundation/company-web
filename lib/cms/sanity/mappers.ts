@@ -1,5 +1,10 @@
 import type { NewsItem, NewsTableRow } from "@/lib/domain/news";
-import type { SanityNewsDocument, SanityPortableTextBlock } from "./types";
+import type { ImpactStoryItem } from "@/lib/domain/impact-story";
+import type {
+  SanityNewsDocument,
+  SanityImpactStoryDocument,
+  SanityPortableTextBlock,
+} from "./types";
 import { urlForSanityImage, type SanityImageOptions } from "./image";
 
 export interface NewsMappingOptions {
@@ -101,4 +106,51 @@ export function mapSanityDocsToNewsItems(
 ): NewsItem[] {
   if (!Array.isArray(docs)) return [];
   return docs.map((doc) => mapSanityDocToNewsItem(doc, options));
+}
+
+/**
+ * Adapter: Mengonversi raw SanityImpactStoryDocument menjadi ImpactStoryItem.
+ */
+export function mapSanityDocToImpactStory(
+  doc: SanityImpactStoryDocument,
+  options: NewsMappingOptions = {}
+): ImpactStoryItem {
+  const imageUrl = urlForSanityImage(doc.featuredImage, options.image) || "";
+
+  return {
+    id: doc.slug?.current || doc._id,
+    title: doc.title || "",
+    category: doc.category || "Dampak Kebaikan",
+    badge: doc.badge || doc.programName || "Cerita Dampak",
+    person: doc.person || "",
+    role: doc.role || "",
+    location: doc.location || "",
+    programName: doc.programName || "",
+    quote: doc.quote || "",
+    story: doc.story || "",
+    impactMetric: doc.impactMetric || "",
+    donationUrl: doc.donationUrl || "",
+    featuredImage: imageUrl,
+    featuredImageAlt:
+      (doc.featuredImage &&
+        typeof doc.featuredImage === "object" &&
+        "alt" in doc.featuredImage &&
+        typeof doc.featuredImage.alt === "string" &&
+        doc.featuredImage.alt) ||
+      doc.title ||
+      "Foto dokumentasi cerita dampak Jalan Langit Foundation",
+    hashtag: doc.hashtag || "",
+    order: doc.order,
+  };
+}
+
+/**
+ * Helper untuk mentransformasi array dokumen Sanity menjadi ImpactStoryItem[]
+ */
+export function mapSanityDocsToImpactStories(
+  docs: SanityImpactStoryDocument[],
+  options: NewsMappingOptions = {}
+): ImpactStoryItem[] {
+  if (!Array.isArray(docs)) return [];
+  return docs.map((doc) => mapSanityDocToImpactStory(doc, options));
 }

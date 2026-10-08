@@ -62,3 +62,35 @@ export const RELATED_NEWS_QUERY = `*[_type == "news" && (!defined(status) || sta
  * Query ringan hanya mengambil daftar ID/slug untuk generateStaticParams & sitemap.
  */
 export const ALL_NEWS_SLUGS_QUERY = `*[_type == "news" && (!defined(status) || status == "published")].slug.current`;
+
+// ============================================================================
+// QUERIES CERITA DAMPAK (IMPACT STORIES)
+// ============================================================================
+
+const IMPACT_STORY_PROJECTION = `{
+  _id,
+  _type,
+  _updatedAt,
+  title,
+  slug,
+  person,
+  role,
+  programName,
+  category,
+  badge,
+  location,
+  quote,
+  story,
+  hashtag,
+  impactMetric,
+  donationUrl,
+  featuredImage,
+  order,
+  status
+}`;
+
+/**
+ * Query untuk mengambil seluruh cerita dampak yang published,
+ * diurutkan berdasarkan field order ascending, lalu tanggal pembuatan descending.
+ */
+export const ALL_IMPACT_STORIES_QUERY = `*[_type == "impactStory" && (!defined(status) || status == "published")] | order(order asc, _createdAt desc) ${IMPACT_STORY_PROJECTION}`;
