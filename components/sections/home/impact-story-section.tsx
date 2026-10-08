@@ -10,20 +10,17 @@ import { IMPACT_STORY_DATA } from "@/content/homepage";
 import { SITE_CONFIG } from "@/lib/data/site";
 import { cn } from "@/lib/utils";
 
-import type { ImpactStory } from "@/content/homepage";
 import type { ImpactStoryItem } from "@/lib/domain/impact-story";
 
 interface ImpactStorySectionProps {
-  stories?: (ImpactStory | ImpactStoryItem)[];
+  stories: ImpactStoryItem[];
 }
 
-export function ImpactStorySection({
-  stories = IMPACT_STORY_DATA.stories,
-}: ImpactStorySectionProps = {}) {
+export function ImpactStorySection({ stories }: ImpactStorySectionProps) {
   const [currentStoryIndex, setCurrentStoryIndex] = React.useState(0);
   const [isAnimating, setIsAnimating] = React.useState(false);
 
-  const storyList = stories && stories.length > 0 ? stories : IMPACT_STORY_DATA.stories;
+  const storyList = stories;
   const totalStories = storyList.length;
   const activeStory = storyList[currentStoryIndex] || storyList[0];
 
@@ -34,6 +31,8 @@ export function ImpactStorySection({
       ...IMPACT_STORY_DATA.marqueePhotos,
     ];
   }, []);
+
+  if (storyList.length === 0) return null;
 
   const changeStory = (newIndex: number) => {
     if (isAnimating) return;
