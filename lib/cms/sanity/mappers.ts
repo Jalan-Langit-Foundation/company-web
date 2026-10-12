@@ -1,5 +1,13 @@
 import type { NewsItem, NewsTableRow } from "@/lib/domain/news";
-import type { SanityNewsDocument, SanityPortableTextBlock } from "./types";
+import type { ImpactStoryItem, ImpactStoryPhoto } from "@/lib/domain/impact-story";
+import type { FeaturedVideo } from "@/lib/domain/featured-video";
+import type {
+  SanityNewsDocument,
+  SanityImpactStoryDocument,
+  SanityImpactStoryPhotoDocument,
+  SanityFeaturedVideoDocument,
+  SanityPortableTextBlock,
+} from "./types";
 import { urlForSanityImage, type SanityImageOptions } from "./image";
 
 export interface NewsMappingOptions {
@@ -102,3 +110,105 @@ export function mapSanityDocsToNewsItems(
   if (!Array.isArray(docs)) return [];
   return docs.map((doc) => mapSanityDocToNewsItem(doc, options));
 }
+
+/**
+ * Adapter: Mengonversi raw SanityImpactStoryDocument menjadi ImpactStoryItem.
+ */
+export function mapSanityDocToImpactStory(
+  doc: SanityImpactStoryDocument,
+  _options: NewsMappingOptions = {}
+): ImpactStoryItem {
+  void _options;
+  return {
+    id: doc.slug?.current || doc._id,
+    title: doc.title || "",
+    category: doc.category || "Dampak Kebaikan",
+    badge: doc.badge || doc.programName || "Cerita Dampak",
+    person: doc.person || "",
+    role: doc.role || "",
+    location: doc.location || "",
+    programName: doc.programName || "",
+    quote: doc.quote || "",
+    story: doc.story || "",
+    impactMetric: doc.impactMetric || "",
+    donationUrl: doc.donationUrl || "",
+    hashtag: doc.hashtag || "",
+    order: doc.order,
+  };
+}
+
+/**
+ * Helper untuk mentransformasi array dokumen Sanity menjadi ImpactStoryItem[]
+ */
+export function mapSanityDocsToImpactStories(
+  docs: SanityImpactStoryDocument[],
+  options: NewsMappingOptions = {}
+): ImpactStoryItem[] {
+  if (!Array.isArray(docs)) return [];
+  return docs.map((doc) => mapSanityDocToImpactStory(doc, options));
+}
+
+export function mapSanityDocToImpactStoryPhoto(
+  doc: SanityImpactStoryPhotoDocument,
+  options: NewsMappingOptions = {}
+): ImpactStoryPhoto {
+  const image = urlForSanityImage(doc.image, options.image) || "";
+  const imageObject = doc.image && typeof doc.image === "object" ? doc.image : null;
+
+  return {
+    id: doc._id,
+    title: doc.title,
+    image,
+    imageAlt:
+      (imageObject && "alt" in imageObject && typeof imageObject.alt === "string" && imageObject.alt) ||
+      doc.title,
+    order: doc.order,
+  };
+}
+
+export function mapSanityDocsToImpactStoryPhotos(
+  docs: SanityImpactStoryPhotoDocument[],
+  options: NewsMappingOptions = {}
+): ImpactStoryPhoto[] {
+  if (!Array.isArray(docs)) return [];
+  return docs.map((doc) => mapSanityDocToImpactStoryPhoto(doc, options));
+}
+
+/**
+ * Adapter: Mengonversi raw SanityFeaturedVideoDocument menjadi FeaturedVideo domain model.
+ * Jika thumbnail Sanity tidak diisi, otomatis fallback ke thumbnail resolusi tinggi dari YouTube.
+ */
+export function mapSanityDocToFeaturedVideo(
+  doc: SanityFeaturedVideoDocument,
+  options: NewsMappingOptions = {}
+): FeaturedVideo {
+  const customThumbnail = urlForSanityImage(doc.thumbnail, options.image);
+  const fallbackThumbnail = doc.youtubeId
+    ? `https://i.ytimg.com/vi/${doc.youtubeId}/hqdefault.jpg`
+    : "";
+
+  return {
+    id: doc.slug?.current || doc._id,
+    title: doc.title || "",
+    description: doc.description || "",
+    category: doc.category || "Dokumentasi Program",
+    duration: doc.duration || "",
+    youtubeId: doc.youtubeId || "",
+    thumbnail: customThumbnail || fallbackThumbnail,
+    publishedDate: doc.publishedDate,
+    views: doc.views,
+    order: doc.order,
+  };
+}
+
+/**
+ * Helper untuk mentransformasi array dokumen Sanity menjadi FeaturedVideo[]
+ */
+export function mapSanityDocsToFeaturedVideos(
+  docs: SanityFeaturedVideoDocument[],
+  options: NewsMappingOptions = {}
+): FeaturedVideo[] {
+  if (!Array.isArray(docs)) return [];
+  return docs.map((doc) => mapSanityDocToFeaturedVideo(doc, options));
+}
+

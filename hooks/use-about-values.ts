@@ -4,6 +4,9 @@ import * as React from "react";
 
 // State global tersinkronisasi antar komponen di sisi client tanpa dependensi eksternal
 let isValuesExpanded = false;
+// Keep the first client render identical to the server render. This matters
+// when navigating back to the page while the module-level state is already open.
+let hasHydrated = false;
 const listeners = new Set<() => void>();
 
 function notify() {
@@ -30,7 +33,10 @@ export function useAboutValues() {
     };
   }, []);
 
-  const getSnapshot = React.useCallback(() => isValuesExpanded, []);
+  const getSnapshot = React.useCallback(
+    () => (hasHydrated ? isValuesExpanded : false),
+    []
+  );
   const getServerSnapshot = React.useCallback(() => false, []);
 
   const isExpanded = React.useSyncExternalStore(
@@ -41,6 +47,9 @@ export function useAboutValues() {
 
   // Auto-expand jika URL hash memuat '#nilai-langit' atau '#visi-misi' saat dimuat pertama kali atau berpindah hash
   React.useEffect(() => {
+    hasHydrated = true;
+    notify();
+
     const checkHash = () => {
       if (
         typeof window !== "undefined" &&

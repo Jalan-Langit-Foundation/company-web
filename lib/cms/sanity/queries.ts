@@ -62,3 +62,75 @@ export const RELATED_NEWS_QUERY = `*[_type == "news" && (!defined(status) || sta
  * Query ringan hanya mengambil daftar ID/slug untuk generateStaticParams & sitemap.
  */
 export const ALL_NEWS_SLUGS_QUERY = `*[_type == "news" && (!defined(status) || status == "published")].slug.current`;
+
+// ============================================================================
+// QUERIES CERITA DAMPAK (IMPACT STORIES)
+// ============================================================================
+
+const IMPACT_STORY_PROJECTION = `{
+  _id,
+  _type,
+  _updatedAt,
+  title,
+  slug,
+  person,
+  role,
+  programName,
+  category,
+  badge,
+  location,
+  quote,
+  story,
+  hashtag,
+  impactMetric,
+  donationUrl,
+  order,
+  status
+}`;
+
+/**
+ * Query untuk mengambil seluruh cerita dampak yang published,
+ * diurutkan berdasarkan field order ascending, lalu tanggal pembuatan descending.
+ */
+export const ALL_IMPACT_STORIES_QUERY = `*[_type == "impactStory" && (!defined(status) || status == "published")] | order(order asc, _createdAt desc) ${IMPACT_STORY_PROJECTION}`;
+
+const IMPACT_STORY_PHOTO_PROJECTION = `{
+  _id,
+  _type,
+  _updatedAt,
+  title,
+  image,
+  order,
+  status
+}`;
+
+/** Query untuk mengambil foto marquee Cerita Dampak yang published. */
+export const ALL_IMPACT_STORY_PHOTOS_QUERY = `*[_type == "impactStoryPhoto" && (!defined(status) || status == "published")] | order(order asc, _createdAt desc) ${IMPACT_STORY_PHOTO_PROJECTION}`;
+
+// ============================================================================
+// QUERIES VIDEO PILIHAN (FEATURED VIDEOS)
+// ============================================================================
+
+const FEATURED_VIDEO_PROJECTION = `{
+  _id,
+  _type,
+  _updatedAt,
+  title,
+  slug,
+  youtubeId,
+  description,
+  category,
+  duration,
+  thumbnail,
+  publishedDate,
+  views,
+  order,
+  status
+}`;
+
+/**
+ * Query untuk mengambil seluruh video pilihan yang published,
+ * diurutkan berdasarkan field order ascending, lalu tanggal pembuatan descending.
+ */
+export const ALL_FEATURED_VIDEOS_QUERY = `*[_type == "featuredVideo" && (!defined(status) || status == "published")] | order(order asc, _createdAt desc) ${FEATURED_VIDEO_PROJECTION}`;
+

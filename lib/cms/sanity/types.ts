@@ -78,3 +78,55 @@ export interface SanityNewsDocument {
   ctaButtonUrl?: string;
   status?: SanityPublicationStatus;
 }
+
+export interface SanityImpactStoryDocument {
+  _id: string;
+  _type: "impactStory";
+  _createdAt?: string;
+  _updatedAt?: string;
+  title: string;
+  slug: SanitySlug;
+  person: string;
+  role: string;
+  programName?: string;
+  category?: string;
+  badge?: string;
+  location?: string;
+  quote: string;
+  story: string;
+  hashtag?: string;
+  impactMetric?: string;
+  donationUrl?: string;
+  order?: number;
+  status?: SanityPublicationStatus;
+}
+
+export interface SanityImpactStoryPhotoDocument {
+  _id: string;
+  _type: "impactStoryPhoto";
+  _createdAt?: string;
+  _updatedAt?: string;
+  title: string;
+  image: SanityImageSource;
+  order?: number;
+  status?: SanityPublicationStatus;
+}
+
+export interface SanityFeaturedVideoDocument {
+  _id: string;
+  _type: "featuredVideo";
+  _createdAt?: string;
+  _updatedAt?: string;
+  title: string;
+  slug?: SanitySlug;
+  youtubeId: string;
+  description?: string;
+  category?: string;
+  duration?: string;
+  thumbnail?: SanityImageSource;
+  publishedDate?: string;
+  views?: string;
+  order?: number;
+  status?: SanityPublicationStatus;
+}
+

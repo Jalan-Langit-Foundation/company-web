@@ -12,8 +12,19 @@ import {
   FinalCtaSection,
 } from "@/components/sections/home";
 import { Reveal } from "@/components/ui/reveal";
+import {
+  getImpactStories,
+  getImpactStoryPhotos,
+} from "@/lib/services/impact-story.service";
+import { getFeaturedVideos } from "@/lib/services/featured-video.service";
 
-export default function Home() {
+export default async function Home() {
+  const [impactStories, impactStoryPhotos, featuredVideos] = await Promise.all([
+    getImpactStories(),
+    getImpactStoryPhotos(),
+    getFeaturedVideos(),
+  ]);
+
   return (
     <main className="flex-1 w-full flex flex-col">
       {/* Section 1 — Hero */}
@@ -40,12 +51,12 @@ export default function Home() {
 
       {/* Section 5 — Video Pilihan (Showcase YouTube JLF) */}
       <Reveal>
-        <FeaturedVideosSection />
+        <FeaturedVideosSection videos={featuredVideos} />
       </Reveal>
 
       {/* Section 6 — Impact Story */}
       <Reveal>
-        <ImpactStorySection />
+        <ImpactStorySection stories={impactStories} photos={impactStoryPhotos} />
       </Reveal>
 
       {/* Section 7 — Kolaborasi */}

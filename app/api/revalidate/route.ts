@@ -58,10 +58,14 @@ export async function POST(request: NextRequest) {
     const slug =
       typeof payload?.slug === "string" ? payload.slug : payload?.slug?.current || null;
 
-    // 1. Revalidasi cache data tag "news"
+    // 1. Revalidasi cache data tag "news", "impact-stories", dan "featured-videos"
     revalidateTag("news", "max");
+    revalidateTag("impact-stories", "max");
+    revalidateTag("featured-videos", "max");
     if (slug) {
       revalidateTag(`news-${slug}`, "max");
+      revalidateTag(`impact-${slug}`, "max");
+      revalidateTag(`video-${slug}`, "max");
     }
 
     // 2. Revalidasi halaman frontend
@@ -72,7 +76,7 @@ export async function POST(request: NextRequest) {
       revalidated: true,
       now: Date.now(),
       slug,
-      message: "Cache berita berhasil direvalidasi secara on-demand.",
+      message: "Cache konten (berita, cerita dampak & video pilihan) berhasil direvalidasi secara on-demand.",
     });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : String(error);
