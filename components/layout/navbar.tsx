@@ -83,7 +83,9 @@ export function Navbar() {
     if (window.location.hash) {
       const initialHash = window.location.hash.replace("#", "");
       if (sectionIds.includes(initialHash)) {
-        setActiveSection(initialHash);
+        requestAnimationFrame(() => {
+          setActiveSection(initialHash);
+        });
       }
     }
 

@@ -16,11 +16,13 @@ import {
   getImpactStories,
   getImpactStoryPhotos,
 } from "@/lib/services/impact-story.service";
+import { getFeaturedVideos } from "@/lib/services/featured-video.service";
 
 export default async function Home() {
-  const [impactStories, impactStoryPhotos] = await Promise.all([
+  const [impactStories, impactStoryPhotos, featuredVideos] = await Promise.all([
     getImpactStories(),
     getImpactStoryPhotos(),
+    getFeaturedVideos(),
   ]);
 
   return (
@@ -49,7 +51,7 @@ export default async function Home() {
 
       {/* Section 5 — Video Pilihan (Showcase YouTube JLF) */}
       <Reveal>
-        <FeaturedVideosSection />
+        <FeaturedVideosSection videos={featuredVideos} />
       </Reveal>
 
       {/* Section 6 — Impact Story */}

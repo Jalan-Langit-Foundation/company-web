@@ -21,9 +21,18 @@ const VideoModal = dynamic(
   { ssr: false }
 );
 
-export function FeaturedVideosSection() {
+interface FeaturedVideosSectionProps {
+  videos?: FeaturedVideo[];
+}
+
+export function FeaturedVideosSection({
+  videos = FEATURED_VIDEOS_DATA.videos,
+}: FeaturedVideosSectionProps) {
+  const displayVideos = videos && videos.length > 0 ? videos : FEATURED_VIDEOS_DATA.videos;
   const [activeModalVideo, setActiveModalVideo] = React.useState<FeaturedVideo | null>(null);
   const { scrollRef: sliderRef, scroll: scrollSlider } = useHorizontalScroll();
+
+  if (displayVideos.length === 0) return null;
 
   return (
     <section
@@ -49,7 +58,7 @@ export function FeaturedVideosSection() {
             ref={sliderRef}
             className="flex items-stretch gap-6 lg:gap-8 overflow-x-auto pt-3 pb-5 no-scrollbar scroll-smooth snap-x snap-mandatory"
           >
-            {FEATURED_VIDEOS_DATA.videos.map((video) => (
+            {displayVideos.map((video) => (
               <div
                 key={video.id}
                 onClick={() => setActiveModalVideo(video)}

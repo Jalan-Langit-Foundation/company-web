@@ -106,3 +106,31 @@ const IMPACT_STORY_PHOTO_PROJECTION = `{
 
 /** Query untuk mengambil foto marquee Cerita Dampak yang published. */
 export const ALL_IMPACT_STORY_PHOTOS_QUERY = `*[_type == "impactStoryPhoto" && (!defined(status) || status == "published")] | order(order asc, _createdAt desc) ${IMPACT_STORY_PHOTO_PROJECTION}`;
+
+// ============================================================================
+// QUERIES VIDEO PILIHAN (FEATURED VIDEOS)
+// ============================================================================
+
+const FEATURED_VIDEO_PROJECTION = `{
+  _id,
+  _type,
+  _updatedAt,
+  title,
+  slug,
+  youtubeId,
+  description,
+  category,
+  duration,
+  thumbnail,
+  publishedDate,
+  views,
+  order,
+  status
+}`;
+
+/**
+ * Query untuk mengambil seluruh video pilihan yang published,
+ * diurutkan berdasarkan field order ascending, lalu tanggal pembuatan descending.
+ */
+export const ALL_FEATURED_VIDEOS_QUERY = `*[_type == "featuredVideo" && (!defined(status) || status == "published")] | order(order asc, _createdAt desc) ${FEATURED_VIDEO_PROJECTION}`;
+

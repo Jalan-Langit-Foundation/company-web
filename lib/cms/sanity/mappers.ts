@@ -1,9 +1,11 @@
 import type { NewsItem, NewsTableRow } from "@/lib/domain/news";
 import type { ImpactStoryItem, ImpactStoryPhoto } from "@/lib/domain/impact-story";
+import type { FeaturedVideo } from "@/lib/domain/featured-video";
 import type {
   SanityNewsDocument,
   SanityImpactStoryDocument,
   SanityImpactStoryPhotoDocument,
+  SanityFeaturedVideoDocument,
   SanityPortableTextBlock,
 } from "./types";
 import { urlForSanityImage, type SanityImageOptions } from "./image";
@@ -114,8 +116,9 @@ export function mapSanityDocsToNewsItems(
  */
 export function mapSanityDocToImpactStory(
   doc: SanityImpactStoryDocument,
-  options: NewsMappingOptions = {}
+  _options: NewsMappingOptions = {}
 ): ImpactStoryItem {
+  void _options;
   return {
     id: doc.slug?.current || doc._id,
     title: doc.title || "",
@@ -170,3 +173,42 @@ export function mapSanityDocsToImpactStoryPhotos(
   if (!Array.isArray(docs)) return [];
   return docs.map((doc) => mapSanityDocToImpactStoryPhoto(doc, options));
 }
+
+/**
+ * Adapter: Mengonversi raw SanityFeaturedVideoDocument menjadi FeaturedVideo domain model.
+ * Jika thumbnail Sanity tidak diisi, otomatis fallback ke thumbnail resolusi tinggi dari YouTube.
+ */
+export function mapSanityDocToFeaturedVideo(
+  doc: SanityFeaturedVideoDocument,
+  options: NewsMappingOptions = {}
+): FeaturedVideo {
+  const customThumbnail = urlForSanityImage(doc.thumbnail, options.image);
+  const fallbackThumbnail = doc.youtubeId
+    ? `https://i.ytimg.com/vi/${doc.youtubeId}/hqdefault.jpg`
+    : "";
+
+  return {
+    id: doc.slug?.current || doc._id,
+    title: doc.title || "",
+    description: doc.description || "",
+    category: doc.category || "Dokumentasi Program",
+    duration: doc.duration || "",
+    youtubeId: doc.youtubeId || "",
+    thumbnail: customThumbnail || fallbackThumbnail,
+    publishedDate: doc.publishedDate,
+    views: doc.views,
+    order: doc.order,
+  };
+}
+
+/**
+ * Helper untuk mentransformasi array dokumen Sanity menjadi FeaturedVideo[]
+ */
+export function mapSanityDocsToFeaturedVideos(
+  docs: SanityFeaturedVideoDocument[],
+  options: NewsMappingOptions = {}
+): FeaturedVideo[] {
+  if (!Array.isArray(docs)) return [];
+  return docs.map((doc) => mapSanityDocToFeaturedVideo(doc, options));
+}
+

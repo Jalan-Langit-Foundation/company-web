@@ -1,14 +1,5 @@
-export interface FeaturedVideo {
-  id: string;
-  title: string;
-  description: string;
-  category: "Semua" | "Dokumentasi Program" | "Pendidikan Santri" | "Aksi Relawan" | "Kisah Nyata";
-  duration: string;
-  youtubeId: string;
-  thumbnail: string;
-  publishedDate?: string;
-  views?: string;
-}
+import type { FeaturedVideo } from "@/lib/domain/featured-video";
+export type { FeaturedVideo };
 
 export const FEATURED_VIDEOS_DATA: {
   eyebrow: string;

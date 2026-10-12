@@ -111,3 +111,22 @@ export interface SanityImpactStoryPhotoDocument {
   order?: number;
   status?: SanityPublicationStatus;
 }
+
+export interface SanityFeaturedVideoDocument {
+  _id: string;
+  _type: "featuredVideo";
+  _createdAt?: string;
+  _updatedAt?: string;
+  title: string;
+  slug?: SanitySlug;
+  youtubeId: string;
+  description?: string;
+  category?: string;
+  duration?: string;
+  thumbnail?: SanityImageSource;
+  publishedDate?: string;
+  views?: string;
+  order?: number;
+  status?: SanityPublicationStatus;
+}
+
