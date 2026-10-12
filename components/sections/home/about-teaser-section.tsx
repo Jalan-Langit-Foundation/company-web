@@ -103,15 +103,13 @@ export function AboutTeaserSection() {
                 onClick={handleToggle}
                 aria-expanded={isExpanded}
                 aria-controls="visi-misi nilai-langit"
-                className="inline-flex items-center gap-1.5 font-medium text-[#3C95C8] hover:text-[#2c7ca9] font-['Lato',sans-serif] text-sm sm:text-base transition-colors group cursor-pointer"
+                className="inline-flex items-center gap-1.5 font-medium text-[#3C95C8] hover:text-[#2c7ca9] font-['Lato',sans-serif] text-sm sm:text-base transition-colors cursor-pointer"
               >
                 <span className="leading-none">
                   {isExpanded ? "Tutup kembali" : ABOUT_TEASER_DATA.cta.label}
                 </span>
                 <ChevronDown
-                  className={`w-4 h-4 shrink-0 transition-transform duration-300 ${
-                    isExpanded ? "rotate-180" : "group-hover:translate-y-0.5"
-                  }`}
+                  className={`w-4 h-4 shrink-0 ${isExpanded ? "rotate-180" : ""}`}
                 />
               </button>
             </div>
