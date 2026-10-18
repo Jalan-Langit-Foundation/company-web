@@ -55,6 +55,19 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Tutup menu drawer otomatis jika layar di-resize ke ukuran desktop (>= 1024px)
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsOpen(false);
+        setActiveDropdown(null);
+      }
+    };
+
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   // Reset lock scroll saat user melakukan scroll manual (wheel atau touch)
   React.useEffect(() => {
     const handleUserScroll = () => {
@@ -340,8 +353,8 @@ export function Navbar() {
 
           {/* Sisi Kanan: Action CTA & Mobile Toggle */}
           <div className="flex items-center gap-3">
-            {/* Desktop / Tablet CTA Button */}
-            <div className="hidden sm:block">
+            {/* Desktop CTA Button (Hanya tampil di desktop saat hamburger menu tidak aktif) */}
+            <div className="hidden lg:block">
               <Button
                 variant="primary"
                 size="md"
@@ -380,8 +393,8 @@ export function Navbar() {
         className={cn(
           "absolute left-0 top-full w-full bg-white shadow-xl border-b border-slate-100 lg:hidden transition-all duration-200 ease-in-out z-50",
           isOpen
-            ? "opacity-100 translate-y-0 pointer-events-auto visible"
-            : "opacity-0 -translate-y-2 pointer-events-none invisible"
+            ? "opacity-100 translate-y-0 pointer-events-auto visible block"
+            : "opacity-0 -translate-y-2 pointer-events-none invisible hidden"
         )}
       >
         <div className="w-full px-4 py-4 max-h-[calc(100vh-4rem)] overflow-y-auto">
